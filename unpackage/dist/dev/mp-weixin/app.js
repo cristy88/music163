@@ -8,7 +8,11 @@ if (!Math) {
   "./pages/attention/attention.js";
   "./pages/community/community.js";
   "./pages/login/login.js";
+<<<<<<< HEAD
   "./pages/daily/daily.js";
+=======
+  "./pages/testApi/testApi.js";
+>>>>>>> test
 }
 const _sfc_main = {
   onLaunch: function() {

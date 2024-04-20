@@ -45,7 +45,8 @@
 			"enablePullDownRefresh" : false
 		}
 	},
-	{	"path" : "pages/daily/daily",
+	{
+		"path" : "pages/daily/daily",
 		"style" : 
 		{
 			"navigationBarTitleText" : "每日推荐",

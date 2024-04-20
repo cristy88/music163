@@ -6,7 +6,11 @@
     "pages/attention/attention",
     "pages/community/community",
     "pages/login/login",
+<<<<<<< HEAD
     "pages/daily/daily"
+=======
+    "pages/testApi/testApi"
+>>>>>>> test
   ],
   "window": {
     "navigationBarTextStyle": "black",

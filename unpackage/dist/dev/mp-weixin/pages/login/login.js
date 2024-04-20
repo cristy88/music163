@@ -15,6 +15,16 @@ if (!Math) {
 const _sfc_main = {
   __name: "login",
   setup(__props) {
+    const getLoginStatu = async () => {
+      const status = await services_index.loginStatusApi();
+      if (status.data.code === 200) {
+        common_vendor.index.switchTab({
+          url: "/pages/index/index"
+        });
+      }
+      console.log("登陆状态", status);
+    };
+    getLoginStatu();
     const valiFormData = common_vendor.ref({
       email: "",
       password: ""
@@ -34,13 +44,43 @@ const _sfc_main = {
         }]
       }
     };
+<<<<<<< HEAD
     const submit = async () => {
       valiForm.validate().then((res) => {
+=======
+    const isLogin = async () => {
+      console.log("登录", valiFormData);
+      const res = await services_index.loginApi(valiFormData.value);
+      console.log("是否登录成功", res);
+      if (res.code !== 200) {
+        common_vendor.index.showToast({
+          title: `账号或密码错误`,
+          icon: "error"
+        });
+        return;
+      }
+      common_vendor.index.showToast({
+        title: `登录成功`,
+        icon: "success"
+      });
+      common_vendor.index.setStorageSync("curCookie", res.cookie);
+      common_vendor.index.setStorageSync("token", res.token);
+      common_vendor.index.switchTab({
+        url: "/pages/index/index"
+      });
+    };
+    const submit = () => {
+      valiForm.value.validate().then((res) => {
+>>>>>>> test
         console.log("success", res);
         common_vendor.index.showToast({
           title: `校验通过`
         });
+<<<<<<< HEAD
         console.log("登录", valiFormData);
+=======
+        isLogin();
+>>>>>>> test
       }).catch((err) => {
         console.log("err", err);
       });
@@ -67,13 +107,20 @@ const _sfc_main = {
           required: true,
           name: "password"
         }),
+<<<<<<< HEAD
         g: common_vendor.sr(valiForm.value, "e4e4508d-0"),
         h: valiForm.value,
         i: common_vendor.p({
+=======
+        g: common_vendor.sr(valiForm, "e4e4508d-0", {
+          "k": "valiForm"
+        }),
+        h: common_vendor.p({
+>>>>>>> test
           rules,
           modelValue: valiFormData.value
         }),
-        j: common_vendor.o(($event) => submit())
+        i: common_vendor.o(($event) => submit())
       };
     };
   }

@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "歌单广场",
-  "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "tab": "../../components/Tab"
+  }
 }

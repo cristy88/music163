@@ -1,21 +1,18 @@
 {
   "pages": [
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    "pages/daily/daily",
->>>>>>> liu
     "pages/index/index",
     "pages/podcast/podcast",
     "pages/mine/mine",
     "pages/attention/attention",
     "pages/community/community",
     "pages/login/login",
-    "pages/player/player"
+    "pages/daily/daily",
+    "pages/player/player",
+    "pages/songs/songs"
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
+    "navigationBarTitleText": "music",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
@@ -46,16 +43,5 @@
       }
     ]
   },
-=======
-    "pages/songs/songs",
-    "pages/index/index"
-  ],
-  "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "music",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
-  },
->>>>>>> wbh
   "usingComponents": {}
 }

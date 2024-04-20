@@ -1,11 +1,11 @@
 {
-	"pages": [{
-		"path" : "pages/daily/daily",
+	"pages": [
+	{
+		"path" : "pages/index/index",
 		"style" : 
 		{
-			"navigationBarTitleText" : "每日推荐",
-			"enablePullDownRefresh" : false,
-			"navigationStyle": "custom"
+			"navigationBarTitleText" : "index",
+			"enablePullDownRefresh" : false
 		}
 	}],
 	"globalStyle": {
@@ -17,5 +17,4 @@
 			"background": "#efeff4"
 		}
 	},
-	"component": true
 }

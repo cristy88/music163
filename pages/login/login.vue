@@ -1,24 +1,26 @@
 <script setup>
 	import { ref } from 'vue'
-	import { loginApi, getCodeApi, isCodeApi, loginStatusApi } from '../../services'
+	import { loginApi, loginStatusApi } from '../../services'
 	
 	
 	const valiFormData = ref({
-		phone: '',
-		captcha: '',
+		email: '',
+		password: '',
 	})
-	 
+	
+	const valiForm = ref(null)
+	
 	const rules = {
-		phone: {
+		email: {
 			rules: [{
 				required: true,
-				errorMessage: '姓名不能为空'
+				errorMessage: '邮箱不能为空'
 			}]
 		},
 		password: {
 			rules: [{
 				required: true,
-				errorMessage: '验证码'
+				errorMessage: '密码'
 			}]
 		}
 	}
@@ -29,18 +31,28 @@
 	}
 	
 	const submit = async () => {
-		console.log('登录', valiFormData)
-		const code = await isCodeApi(valiFormData.value)
-		console.log(code)
-		if (code.data === true) {
-			const status = await loginStatusApi()
-			console.log('登陆状态', status)
+		valiForm.validate().then(res => {
+			console.log('success', res)
+			uni.showToast({
+				title: `校验通过`
+			})
+			console.log('登录', valiFormData)
 			// const res = await loginApi(valiFormData.value)
 			// console.log('是否登录成功',res)
-			uni.switchTab({
-				url:'/pages/index/index'
-			})
-		}
+			// if (res.code !== 200) {
+			// 	return
+			// }
+			
+			// uni.setStorageSync('curCookie', res.cookie)
+			// uni.setStorageSync('token', res.token)
+			// const status = await loginStatusApi()
+			// console.log('登陆状态', status)
+			// uni.switchTab({
+			// 	url:'/pages/index/index'
+			// })
+		}).catch(err => {
+			console.log('err', err)
+		})
 	}
 	
 </script>
@@ -50,15 +62,14 @@
 		<view class="example">
 						<!-- 基础表单校验 -->
 			<uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
-				<uni-forms-item label="手机号" required name="phone">
-					<uni-easyinput v-model="valiFormData.phone" placeholder="请输入手机号" />
+				<uni-forms-item label="邮箱" required name="email">
+					<uni-easyinput v-model="valiFormData.email" placeholder="请输入邮箱" />
 				</uni-forms-item>
-				<uni-forms-item label="验证码" required name="captcha">
-					<uni-easyinput v-model="valiFormData.captcha" placeholder="请输入验证码" />
-					<button @click="getCode">获取验证码</button>
+				<uni-forms-item label="密码" required name="password">
+					<uni-easyinput v-model="valiFormData.password" placeholder="请输入密码" />
 				</uni-forms-item>
 			</uni-forms>
-			<button type="primary" @click="submit('valiForm')">提交</button>
+			<button type="primary" @click="submit()">提交</button>
 		</view>
 	</view>
 </template>

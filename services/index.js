@@ -1,13 +1,13 @@
 import { request } from './request.js'
 
 // 登录
-export const loginApi = ({ phone, captcha }) => {
+export const loginApi = ({ email, password }) => {
   return request({
-    url: '/login/cellphone',
+    url: '/login',
     method: 'GET',
     data: {
-      phone,
-      captcha
+      email,
+      password
     }
   })
 }
@@ -19,24 +19,24 @@ export const loginStatusApi = () => {
   })
 }
 
-export const getCodeApi = ({phone}) => {
-	return request({
-		url: '/captcha/sent',
-		data: {
-			phone
-		}
-	})
-}
+// export const getCodeApi = ({phone}) => {
+// 	return request({
+// 		url: '/captcha/sent',
+// 		data: {
+// 			phone
+// 		}
+// 	})
+// }
 
-export const isCodeApi = ({phone, captcha}) => {
-	return request({
-		url: '/captcha/verify',
-		data: {
-			phone,
-			captcha
-		}
-	})
-}
+// export const isCodeApi = ({phone, captcha}) => {
+// 	return request({
+// 		url: '/captcha/verify',
+// 		data: {
+// 			phone,
+// 			captcha
+// 		}
+// 	})
+// }
 
 
 // 轮播图

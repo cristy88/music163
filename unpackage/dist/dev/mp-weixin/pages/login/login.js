@@ -1,7 +1,5 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
-const services_index = require("../../services/index.js");
-require("../../services/request.js");
 if (!Array) {
   const _easycom_uni_easyinput2 = common_vendor.resolveComponent("uni-easyinput");
   const _easycom_uni_forms_item2 = common_vendor.resolveComponent("uni-forms-item");
@@ -18,62 +16,59 @@ const _sfc_main = {
   __name: "login",
   setup(__props) {
     const valiFormData = common_vendor.ref({
-      phone: "",
-      captcha: ""
+      email: "",
+      password: ""
     });
+    const valiForm = common_vendor.ref(null);
     const rules = {
-      phone: {
+      email: {
         rules: [{
           required: true,
-          errorMessage: "姓名不能为空"
+          errorMessage: "邮箱不能为空"
         }]
       },
       password: {
         rules: [{
           required: true,
-          errorMessage: "验证码"
+          errorMessage: "密码"
         }]
       }
     };
-    const getCode = async () => {
-      const res = await services_index.getCodeApi({ phone: valiFormData.value.phone });
-      console.log(res);
-    };
     const submit = async () => {
-      console.log("登录", valiFormData);
-      const code = await services_index.isCodeApi(valiFormData.value);
-      console.log(code);
-      if (code.data === true) {
-        const status = await services_index.loginStatusApi();
-        console.log("登陆状态", status);
-        const res = await services_index.loginApi(valiFormData.value);
-        console.log("是否登录成功", res);
-      }
+      valiForm.validate().then((res) => {
+        console.log("success", res);
+        common_vendor.index.showToast({
+          title: `校验通过`
+        });
+        console.log("登录", valiFormData);
+      }).catch((err) => {
+        console.log("err", err);
+      });
     };
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.o(($event) => valiFormData.value.phone = $event),
+        a: common_vendor.o(($event) => valiFormData.value.email = $event),
         b: common_vendor.p({
-          placeholder: "请输入手机号",
-          modelValue: valiFormData.value.phone
+          placeholder: "请输入邮箱",
+          modelValue: valiFormData.value.email
         }),
         c: common_vendor.p({
-          label: "手机号",
+          label: "邮箱",
           required: true,
-          name: "phone"
+          name: "email"
         }),
-        d: common_vendor.o(($event) => valiFormData.value.captcha = $event),
+        d: common_vendor.o(($event) => valiFormData.value.password = $event),
         e: common_vendor.p({
-          placeholder: "请输入验证码",
-          modelValue: valiFormData.value.captcha
+          placeholder: "请输入密码",
+          modelValue: valiFormData.value.password
         }),
-        f: common_vendor.o(getCode),
-        g: common_vendor.p({
-          label: "验证码",
+        f: common_vendor.p({
+          label: "密码",
           required: true,
-          name: "captcha"
+          name: "password"
         }),
-        h: common_vendor.sr("valiForm", "e4e4508d-0"),
+        g: common_vendor.sr(valiForm.value, "e4e4508d-0"),
+        h: valiForm.value,
         i: common_vendor.p({
           rules,
           modelValue: valiFormData.value
@@ -83,5 +78,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-e4e4508d"], ["__file", "E:/qianduan/37203_1/Music/music/pages/login/login.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-e4e4508d"], ["__file", "C:/Users/13116/Desktop/music163/pages/login/login.vue"]]);
 wx.createPage(MiniProgramPage);

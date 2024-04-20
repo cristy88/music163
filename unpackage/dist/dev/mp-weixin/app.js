@@ -8,6 +8,7 @@ if (!Math) {
   "./pages/attention/attention.js";
   "./pages/community/community.js";
   "./pages/login/login.js";
+  "./pages/daily/daily.js";
 }
 const _sfc_main = {
   onLaunch: function() {
@@ -21,11 +22,13 @@ const _sfc_main = {
     console.log("App Hide");
   }
 };
-const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/qianduan/37203_1/Music/music/App.vue"]]);
+const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "C:/Users/13116/Desktop/music163/App.vue"]]);
 function createApp() {
   const app = common_vendor.createSSRApp(App);
+  app.use(common_vendor.createPinia());
   return {
-    app
+    app,
+    Pinia: common_vendor.Pinia
   };
 }
 createApp().app.mount("#app");

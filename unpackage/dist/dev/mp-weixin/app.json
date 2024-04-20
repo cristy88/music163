@@ -5,7 +5,8 @@
     "pages/mine/mine",
     "pages/attention/attention",
     "pages/community/community",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/daily/daily"
   ],
   "window": {
     "navigationBarTextStyle": "black",

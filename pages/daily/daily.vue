@@ -1,8 +1,11 @@
 <script setup>
 	import { ref } from 'vue'
-	// #ifdef H5
-	import recommend from './wxcomponents/recommend/recommend.vue'
-	// #endif
+	// import recommend from './wxcomponents/recommend/recommend.vue'
+	import { useDailyStore } from '../../store/daily.js'
+	
+	const dailyStore = useDailyStore()
+	dailyStore.getSongList()
+	
 	const title = ['每日推荐', '风格推荐']
 	const curIndex = ref(0)
 	const changeIndex = (index) => {
@@ -19,7 +22,7 @@
 </script>
 <template>
 	<view class="daily">
-		<uni-icons class="back" type="arrow-left" size="40" color="#ffffff"></uni-icons>
+		<uni-icons class="back" type="arrow-left" size="40" @click=""></uni-icons>
 		<view class="tab">
 			<view
 				class="tab-item"
@@ -39,7 +42,22 @@
 				@touchmove="move(index)"
 			>
 				<view class="swiper-item" :class="'swiper-item' + index">
-					<recommend name="每日推荐"></recommend>
+					<!-- 每日推荐主页面 -->
+					<view class="recommend">
+						<view class="header">
+							
+						</view>
+						<view class="main">
+							<view class="nav">
+								<img src="" alt="" />
+							</view>
+							<view class="songsList">
+								<ul>
+									<li>1</li>
+								</ul>
+							</view>
+						</view>
+					</view>
 				</view>
 			</swiper-item>
 		</swiper>
@@ -55,6 +73,7 @@
 			top: 20rpx;
 			left: 18rpx;
 			z-index: 1;
+			color: "#ffffff";
 		}
 		.tab{
 			height: 70rpx;
@@ -87,6 +106,38 @@
 	}
 	.swiper-item {
 		height: 100%;
+	}
+	.recommend{
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		.header{
+			height: 355rpx;
+			background: rgba(0, 0, 0, .3);
+		}
+		.main{
+			flex: 1;
+			overflow: hidden;
+			background: #ffffff;
+			display: flex;
+			flex-direction: column;
+			.nav{
+				height: 80rpx;
+				background: pink;
+				flex-shrink: 0;
+			}
+			.songsList{
+				flex: 1;
+				overflow: auto;
+				ul{
+					
+					li{
+						height: 80rpx;
+					}
+				}
+			}
+		}
 	}
 
 </style>

@@ -44,6 +44,14 @@
 			"navigationBarTitleText" : "登录",
 			"enablePullDownRefresh" : false
 		}
+	},
+	{
+		"path" : "pages/testApi/testApi",
+		"style" : 
+		{
+			"navigationBarTitleText" : "测试接口页面",
+			"enablePullDownRefresh" : false
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

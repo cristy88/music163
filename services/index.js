@@ -19,31 +19,12 @@ export const loginStatusApi = () => {
   })
 }
 
-// export const getCodeApi = ({phone}) => {
-// 	return request({
-// 		url: '/captcha/sent',
-// 		data: {
-// 			phone
-// 		}
-// 	})
-// }
-
-// export const isCodeApi = ({phone, captcha}) => {
-// 	return request({
-// 		url: '/captcha/verify',
-// 		data: {
-// 			phone,
-// 			captcha
-// 		}
-// 	})
-// }
-
-
 // 轮播图
 export const getBannerApi = () => {
 	return request({ url: '/banner' })
 }
 
+// 获取首页图标
 export const getHomeIconApi = () => {
 	return request({url: '/homepage/dragon/ball'})
 }

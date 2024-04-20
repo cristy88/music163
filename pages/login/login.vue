@@ -2,6 +2,17 @@
 	import { ref } from 'vue'
 	import { loginApi, loginStatusApi } from '../../services'
 	
+	const getLoginStatu = async () => {
+		const status = await loginStatusApi()
+		if (status.data.code === 200) {
+			uni.switchTab({
+				url: '/pages/index/index'
+			})
+		}
+		console.log('登陆状态', status)
+	}
+	
+	getLoginStatu()
 	
 	const valiFormData = ref({
 		email: '',
@@ -25,31 +36,36 @@
 		}
 	}
 	
-	const getCode = async () => {
-		const res = await getCodeApi({phone: valiFormData.value.phone})
-		console.log(res)
+	// 是否登录
+	const isLogin = async () => {
+		console.log('登录', valiFormData)
+		const res = await loginApi(valiFormData.value)
+		console.log('是否登录成功',res)
+		if (res.code !== 200) {
+			uni.showToast({
+				title: `账号或密码错误`,
+				icon: 'error'
+			})
+			return
+		}
+		uni.showToast({
+			title: `登录成功`,
+			icon: 'success'
+		})
+		uni.setStorageSync('curCookie', res.cookie)
+		uni.setStorageSync('token', res.token)
+		uni.switchTab({
+			url:'/pages/index/index'
+		})
 	}
 	
-	const submit = async () => {
-		valiForm.validate().then(res => {
+	const submit = () => {
+		valiForm.value.validate().then(res => {
 			console.log('success', res)
 			uni.showToast({
 				title: `校验通过`
 			})
-			console.log('登录', valiFormData)
-			// const res = await loginApi(valiFormData.value)
-			// console.log('是否登录成功',res)
-			// if (res.code !== 200) {
-			// 	return
-			// }
-			
-			// uni.setStorageSync('curCookie', res.cookie)
-			// uni.setStorageSync('token', res.token)
-			// const status = await loginStatusApi()
-			// console.log('登陆状态', status)
-			// uni.switchTab({
-			// 	url:'/pages/index/index'
-			// })
+			isLogin()
 		}).catch(err => {
 			console.log('err', err)
 		})
@@ -61,7 +77,7 @@
 	<view>
 		<view class="example">
 						<!-- 基础表单校验 -->
-			<uni-forms :ref="valiForm" :rules="rules" :modelValue="valiFormData">
+			<uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
 				<uni-forms-item label="邮箱" required name="email">
 					<uni-easyinput v-model="valiFormData.email" placeholder="请输入邮箱" />
 				</uni-forms-item>

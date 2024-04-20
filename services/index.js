@@ -19,6 +19,8 @@ export const loginStatusApi = () => {
   })
 }
 
+// 退出登录状态
+
 // 轮播图
 export const getBannerApi = () => {
 	return request({ url: '/banner' })

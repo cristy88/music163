@@ -1,5 +1,6 @@
 {
   "pages": [
+<<<<<<< HEAD
     "pages/index/index",
     "pages/podcast/podcast",
     "pages/mine/mine",
@@ -40,5 +41,16 @@
       }
     ]
   },
+=======
+    "pages/songs/songs",
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "music",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+>>>>>>> wbh
   "usingComponents": {}
 }

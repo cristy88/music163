@@ -2,12 +2,17 @@
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const common_vendor = require("./common/vendor.js");
 if (!Math) {
+<<<<<<< HEAD
   "./pages/index/index.js";
   "./pages/podcast/podcast.js";
   "./pages/mine/mine.js";
   "./pages/attention/attention.js";
   "./pages/community/community.js";
   "./pages/login/login.js";
+=======
+  "./pages/songs/songs.js";
+  "./pages/index/index.js";
+>>>>>>> wbh
 }
 const _sfc_main = {
   onLaunch: function() {
@@ -21,7 +26,11 @@ const _sfc_main = {
     console.log("App Hide");
   }
 };
+<<<<<<< HEAD
 const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/qianduan/37203_1/Music/music/App.vue"]]);
+=======
+const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/2-前端工程化/weixinxcx/Uni_music/newMusic/App.vue"]]);
+>>>>>>> wbh
 function createApp() {
   const app = common_vendor.createSSRApp(App);
   return {

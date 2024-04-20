@@ -74,8 +74,13 @@ const capitalize = cacheStringFunction((str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 });
 const toHandlerKey = cacheStringFunction((str) => {
+<<<<<<< HEAD
   const s2 = str ? `on${capitalize(str)}` : ``;
   return s2;
+=======
+  const s = str ? `on${capitalize(str)}` : ``;
+  return s;
+>>>>>>> wbh
 });
 const hasChanged = (value, oldValue) => !Object.is(value, oldValue);
 const invokeArrayFns$1 = (fns, arg) => {
@@ -91,6 +96,7 @@ const def = (obj, key, value) => {
   });
 };
 const looseToNumber = (val) => {
+<<<<<<< HEAD
   const n2 = parseFloat(val);
   return isNaN(n2) ? val : n2;
 };
@@ -174,6 +180,10 @@ const replacer = (_key, val) => {
 const stringifySymbol = (v, i = "") => {
   var _a2;
   return isSymbol(v) ? `Symbol(${(_a2 = v.description) != null ? _a2 : i})` : v;
+=======
+  const n = parseFloat(val);
+  return isNaN(n) ? val : n;
+>>>>>>> wbh
 };
 const LINEFEED = "\n";
 const SLOT_DEFAULT_NAME = "d";
@@ -361,8 +371,13 @@ const E = function() {
 };
 E.prototype = {
   on: function(name, callback, ctx) {
+<<<<<<< HEAD
     var e2 = this.e || (this.e = {});
     (e2[name] || (e2[name] = [])).push({
+=======
+    var e = this.e || (this.e = {});
+    (e[name] || (e[name] = [])).push({
+>>>>>>> wbh
       fn: callback,
       ctx
     });
@@ -388,8 +403,13 @@ E.prototype = {
     return this;
   },
   off: function(name, callback) {
+<<<<<<< HEAD
     var e2 = this.e || (this.e = {});
     var evts = e2[name];
+=======
+    var e = this.e || (this.e = {});
+    var evts = e[name];
+>>>>>>> wbh
     var liveEvents = [];
     if (evts && callback) {
       for (var i = evts.length - 1; i >= 0; i--) {
@@ -400,7 +420,11 @@ E.prototype = {
       }
       liveEvents = evts;
     }
+<<<<<<< HEAD
     liveEvents.length ? e2[name] = liveEvents : delete e2[name];
+=======
+    liveEvents.length ? e[name] = liveEvents : delete e[name];
+>>>>>>> wbh
     return this;
   }
 };
@@ -517,9 +541,15 @@ function assertType$1(value, type) {
   let valid;
   const expectedType = getType$1(type);
   if (isSimpleType$1(expectedType)) {
+<<<<<<< HEAD
     const t2 = typeof value;
     valid = t2 === expectedType.toLowerCase();
     if (!valid && t2 === "object") {
+=======
+    const t = typeof value;
+    valid = t === expectedType.toLowerCase();
+    if (!valid && t === "object") {
+>>>>>>> wbh
       valid = value instanceof type;
     }
   } else if (expectedType === "Object") {
@@ -575,8 +605,13 @@ function tryCatch(fn) {
   return function() {
     try {
       return fn.apply(fn, arguments);
+<<<<<<< HEAD
     } catch (e2) {
       console.error(e2);
+=======
+    } catch (e) {
+      console.error(e);
+>>>>>>> wbh
     }
   };
 }
@@ -758,8 +793,13 @@ function promisify$1(name, fn) {
     if (hasCallback(args)) {
       return wrapperReturnValue(name, invokeApi(name, fn, args, rest));
     }
+<<<<<<< HEAD
     return wrapperReturnValue(name, handlePromise(new Promise((resolve2, reject) => {
       invokeApi(name, fn, extend(args, { success: resolve2, fail: reject }), rest);
+=======
+    return wrapperReturnValue(name, handlePromise(new Promise((resolve, reject) => {
+      invokeApi(name, fn, extend(args, { success: resolve, fail: reject }), rest);
+>>>>>>> wbh
     })));
   };
 }
@@ -1005,7 +1045,11 @@ const $off = defineSyncApi(API_OFF, (name, callback) => {
   }
   if (!isArray(name))
     name = [name];
+<<<<<<< HEAD
   name.forEach((n2) => emitter.off(n2, callback));
+=======
+  name.forEach((n) => emitter.off(n, callback));
+>>>>>>> wbh
 }, OffProtocol);
 const $emit = defineSyncApi(API_EMIT, (name, ...args) => {
   emitter.emit(name, ...args);
@@ -1016,7 +1060,11 @@ let enabled;
 function normalizePushMessage(message) {
   try {
     return JSON.parse(message);
+<<<<<<< HEAD
   } catch (e2) {
+=======
+  } catch (e) {
+>>>>>>> wbh
   }
   return message;
 }
@@ -1056,7 +1104,11 @@ function invokeGetPushCidCallbacks(cid2, errMsg) {
   getPushCidCallbacks.length = 0;
 }
 const API_GET_PUSH_CLIENT_ID = "getPushClientId";
+<<<<<<< HEAD
 const getPushClientId = defineAsyncApi(API_GET_PUSH_CLIENT_ID, (_, { resolve: resolve2, reject }) => {
+=======
+const getPushClientId = defineAsyncApi(API_GET_PUSH_CLIENT_ID, (_, { resolve, reject }) => {
+>>>>>>> wbh
   Promise.resolve().then(() => {
     if (typeof enabled === "undefined") {
       enabled = false;
@@ -1065,7 +1117,11 @@ const getPushClientId = defineAsyncApi(API_GET_PUSH_CLIENT_ID, (_, { resolve: re
     }
     getPushCidCallbacks.push((cid2, errMsg) => {
       if (cid2) {
+<<<<<<< HEAD
         resolve2({ cid: cid2 });
+=======
+        resolve({ cid: cid2 });
+>>>>>>> wbh
       } else {
         reject(errMsg);
       }
@@ -1130,9 +1186,15 @@ function promisify(name, api) {
     if (isFunction(options.success) || isFunction(options.fail) || isFunction(options.complete)) {
       return wrapperReturnValue(name, invokeApi(name, api, options, rest));
     }
+<<<<<<< HEAD
     return wrapperReturnValue(name, handlePromise(new Promise((resolve2, reject) => {
       invokeApi(name, api, extend({}, options, {
         success: resolve2,
+=======
+    return wrapperReturnValue(name, handlePromise(new Promise((resolve, reject) => {
+      invokeApi(name, api, extend({}, options, {
+        success: resolve,
+>>>>>>> wbh
         fail: reject
       }), rest);
     })));
@@ -2462,9 +2524,12 @@ function isShallow(value) {
     /* ReactiveFlags.IS_SHALLOW */
   ]);
 }
+<<<<<<< HEAD
 function isProxy(value) {
   return isReactive(value) || isReadonly(value);
 }
+=======
+>>>>>>> wbh
 function toRaw(observed) {
   const raw = observed && observed[
     "__v_raw"
@@ -2900,8 +2965,13 @@ const resolvedPromise = /* @__PURE__ */ Promise.resolve();
 let currentFlushPromise = null;
 const RECURSION_LIMIT = 100;
 function nextTick$1(fn) {
+<<<<<<< HEAD
   const p2 = currentFlushPromise || resolvedPromise;
   return fn ? p2.then(this ? fn.bind(this) : fn) : p2;
+=======
+  const p = currentFlushPromise || resolvedPromise;
+  return fn ? p.then(this ? fn.bind(this) : fn) : p;
+>>>>>>> wbh
 }
 function findInsertionIndex(id) {
   let start = flushIndex + 1;
@@ -3314,8 +3384,13 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
       warn(`watch() "deep" option is only respected when using the watch(source, callback, options?) signature.`);
     }
   }
+<<<<<<< HEAD
   const warnInvalidSource = (s2) => {
     warn(`Invalid watch source: `, s2, `A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.`);
+=======
+  const warnInvalidSource = (s) => {
+    warn(`Invalid watch source: `, s, `A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.`);
+>>>>>>> wbh
   };
   const instance = getCurrentScope() === (currentInstance === null || currentInstance === void 0 ? void 0 : currentInstance.scope) ? currentInstance : null;
   let getter;
@@ -3329,6 +3404,7 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
     deep = true;
   } else if (isArray(source)) {
     isMultiSource = true;
+<<<<<<< HEAD
     forceTrigger = source.some((s2) => isReactive(s2) || isShallow(s2));
     getter = () => source.map((s2) => {
       if (isRef(s2)) {
@@ -3338,12 +3414,27 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
       } else if (isFunction(s2)) {
         return callWithErrorHandling(
           s2,
+=======
+    forceTrigger = source.some((s) => isReactive(s) || isShallow(s));
+    getter = () => source.map((s) => {
+      if (isRef(s)) {
+        return s.value;
+      } else if (isReactive(s)) {
+        return traverse(s);
+      } else if (isFunction(s)) {
+        return callWithErrorHandling(
+          s,
+>>>>>>> wbh
           instance,
           2
           /* ErrorCodes.WATCH_GETTER */
         );
       } else {
+<<<<<<< HEAD
         warnInvalidSource(s2);
+=======
+        warnInvalidSource(s);
+>>>>>>> wbh
       }
     });
   } else if (isFunction(source)) {
@@ -3619,6 +3710,7 @@ function validateDirectiveName(name) {
     warn("Do not use built-in directive ids as custom directive id: " + name);
   }
 }
+<<<<<<< HEAD
 const COMPONENTS = "components";
 function resolveComponent(name, maybeSelfReference) {
   return resolveAsset(COMPONENTS, name, true, maybeSelfReference) || name;
@@ -3659,6 +3751,8 @@ If this is a native custom element, make sure to exclude it from component resol
 function resolve(registry, name) {
   return registry && (registry[name] || registry[camelize(name)] || registry[capitalize(camelize(name))]);
 }
+=======
+>>>>>>> wbh
 const getPublicInstance = (i) => {
   if (!i)
     return null;
@@ -3698,9 +3792,15 @@ const PublicInstanceProxyHandlers = {
     }
     let normalizedProps;
     if (key[0] !== "$") {
+<<<<<<< HEAD
       const n2 = accessCache[key];
       if (n2 !== void 0) {
         switch (n2) {
+=======
+      const n = accessCache[key];
+      if (n !== void 0) {
+        switch (n) {
+>>>>>>> wbh
           case 1:
             return setupState[key];
           case 2:
@@ -4543,7 +4643,11 @@ function isSameType(a, b) {
 }
 function getTypeIndex(type, expectedTypes) {
   if (isArray(expectedTypes)) {
+<<<<<<< HEAD
     return expectedTypes.findIndex((t2) => isSameType(t2, type));
+=======
+    return expectedTypes.findIndex((t) => isSameType(t, type));
+>>>>>>> wbh
   } else if (isFunction(expectedTypes)) {
     return isSameType(expectedTypes, type) ? 0 : -1;
   }
@@ -4591,9 +4695,15 @@ function assertType(value, type) {
   let valid;
   const expectedType = getType(type);
   if (isSimpleType(expectedType)) {
+<<<<<<< HEAD
     const t2 = typeof value;
     valid = t2 === expectedType.toLowerCase();
     if (!valid && t2 === "object") {
+=======
+    const t = typeof value;
+    valid = t === expectedType.toLowerCase();
+    if (!valid && t === "object") {
+>>>>>>> wbh
       valid = value instanceof type;
     }
   } else if (expectedType === "Object") {
@@ -4800,12 +4910,15 @@ const Static = Symbol("Static");
 function isVNode(value) {
   return value ? value.__v_isVNode === true : false;
 }
+<<<<<<< HEAD
 const InternalObjectKey = `__vInternal`;
 function guardReactiveProps(props) {
   if (!props)
     return null;
   return isProxy(props) || InternalObjectKey in props ? extend({}, props) : props;
 }
+=======
+>>>>>>> wbh
 const emptyAppContext = createAppContext();
 let uid = 0;
 function createComponentInstance(vnode, parent, suspense) {
@@ -4892,7 +5005,10 @@ function createComponentInstance(vnode, parent, suspense) {
   return instance;
 }
 let currentInstance = null;
+<<<<<<< HEAD
 const getCurrentInstance = () => currentInstance || currentRenderingInstance;
+=======
+>>>>>>> wbh
 const setCurrentInstance = (instance) => {
   currentInstance = instance;
   instance.scope.on();
@@ -5248,8 +5364,13 @@ function nextTick(instance, fn) {
       _resolve(instance.proxy);
     }
   });
+<<<<<<< HEAD
   return new Promise((resolve2) => {
     _resolve = resolve2;
+=======
+  return new Promise((resolve) => {
+    _resolve = resolve;
+>>>>>>> wbh
   });
 }
 function clone(src, seen) {
@@ -5395,14 +5516,22 @@ function findComponentPublicInstance(mpComponents, id) {
   }
   return null;
 }
+<<<<<<< HEAD
 function setTemplateRef({ r, f: f2 }, refValue, setupState) {
+=======
+function setTemplateRef({ r, f }, refValue, setupState) {
+>>>>>>> wbh
   if (isFunction(r)) {
     r(refValue, {});
   } else {
     const _isString = isString(r);
     const _isRef = isRef(r);
     if (_isString || _isRef) {
+<<<<<<< HEAD
       if (f2) {
+=======
+      if (f) {
+>>>>>>> wbh
         if (!_isRef) {
           return;
         }
@@ -5627,8 +5756,13 @@ function setupRenderEffect(instance) {
   update.id = instance.uid;
   toggleRecurse(instance, true);
   {
+<<<<<<< HEAD
     effect.onTrack = instance.rtc ? (e2) => invokeArrayFns$1(instance.rtc, e2) : void 0;
     effect.onTrigger = instance.rtg ? (e2) => invokeArrayFns$1(instance.rtg, e2) : void 0;
+=======
+    effect.onTrack = instance.rtc ? (e) => invokeArrayFns$1(instance.rtc, e) : void 0;
+    effect.onTrigger = instance.rtg ? (e) => invokeArrayFns$1(instance.rtg, e) : void 0;
+>>>>>>> wbh
     update.ownerInstance = instance;
   }
   update();
@@ -5851,11 +5985,14 @@ function initApp(app) {
   }
 }
 const propsCaches = /* @__PURE__ */ Object.create(null);
+<<<<<<< HEAD
 function renderProps(props) {
   const { uid: uid2, __counter } = getCurrentInstance();
   const propsId = (propsCaches[uid2] || (propsCaches[uid2] = [])).push(guardReactiveProps(props)) - 1;
   return uid2 + "," + propsId + "," + __counter;
 }
+=======
+>>>>>>> wbh
 function pruneComponentPropsCache(uid2) {
   delete propsCaches[uid2];
 }
@@ -5896,6 +6033,7 @@ function getCreateApp() {
     return my[method];
   }
 }
+<<<<<<< HEAD
 function vOn(value, key) {
   const instance = getCurrentInstance();
   const ctx = instance.ctx;
@@ -6045,6 +6183,8 @@ const n = (value) => normalizeClass(value);
 const t = (val) => toDisplayString(val);
 const p = (props) => renderProps(props);
 const sr = (ref2, id, opts) => setRef(ref2, id, opts);
+=======
+>>>>>>> wbh
 function createApp$1(rootComponent, rootProps = null) {
   rootComponent && (rootComponent.mpType = "app");
   return createVueApp(rootComponent, rootProps).use(plugin);
@@ -6876,6 +7016,7 @@ const createSubpackageApp = initCreateSubpackageApp();
 }
 exports._export_sfc = _export_sfc;
 exports.createSSRApp = createSSRApp;
+<<<<<<< HEAD
 exports.e = e;
 exports.f = f;
 exports.index = index;
@@ -6887,3 +7028,5 @@ exports.resolveComponent = resolveComponent;
 exports.s = s;
 exports.sr = sr;
 exports.t = t;
+=======
+>>>>>>> wbh

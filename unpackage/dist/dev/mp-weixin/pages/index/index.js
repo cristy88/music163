@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+<<<<<<< HEAD
 const services_index = require("../../services/index.js");
 require("../../services/request.js");
 const _sfc_main = {
@@ -47,4 +48,15 @@ const _sfc_main = {
   }
 };
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "E:/qianduan/37203_1/Music/music/pages/index/index.vue"]]);
+=======
+const _sfc_main = {
+  data() {
+    return {};
+  }
+};
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return {};
+}
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/2-前端工程化/weixinxcx/Uni_music/newMusic/pages/index/index.vue"]]);
+>>>>>>> wbh
 wx.createPage(MiniProgramPage);

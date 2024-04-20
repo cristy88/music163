@@ -1,13 +1,17 @@
 {
   "pages": [
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "pages/daily/daily",
+>>>>>>> liu
     "pages/index/index",
     "pages/podcast/podcast",
     "pages/mine/mine",
     "pages/attention/attention",
     "pages/community/community",
     "pages/login/login",
-    "pages/testApi/testApi"
+    "pages/player/player"
   ],
   "window": {
     "navigationBarTextStyle": "black",

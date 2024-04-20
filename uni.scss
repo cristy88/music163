@@ -1,8 +1,5 @@
 @import '@/uni_modules/uni-scss/variables.scss';
-// *{
-// 	margin: 0;
-// 	padding: 0;
-// 	list-style: none;
-// 	text-decoration: none;
-// 	box-sizing: border-box;
-// }
+
+@function rpx($px) {
+	@return $px * 2rpx;
+}

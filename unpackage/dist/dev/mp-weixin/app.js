@@ -10,6 +10,7 @@ if (!Math) {
   "./pages/community/community.js";
   "./pages/login/login.js";
 <<<<<<< HEAD
+<<<<<<< HEAD
   "./pages/testApi/testApi.js";
 =======
 =======
@@ -17,6 +18,10 @@ if (!Math) {
   "./pages/index/index.js";
 >>>>>>> wbh
 >>>>>>> 3ac61d262a724f80d94756e41433e6d1b131fe06
+=======
+  "./pages/daily/daily.js";
+  "./pages/player/player.js";
+>>>>>>> liu
 }
 const _sfc_main = {
   onLaunch: function() {

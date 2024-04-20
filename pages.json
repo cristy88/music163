@@ -1,61 +1,10 @@
 {
-	"pages": [{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "首页"
-		}
-	},
-	{
-		"path" : "pages/podcast/podcast",
-		"style" : 
-		{
-			"navigationBarTitleText" : "播客",
-			"enablePullDownRefresh" : false
-		}
-	},
-	{
-		"path" : "pages/mine/mine",
-		"style" : 
-		{
-			"navigationBarTitleText" : "我的",
-			"enablePullDownRefresh" : false
-		}
-	},
-	{
-		"path" : "pages/attention/attention",
-		"style" : 
-		{
-			"navigationBarTitleText" : "关注",
-			"enablePullDownRefresh" : false
-		}
-	},
-	{
-		"path" : "pages/community/community",
-		"style" : 
-		{
-			"navigationBarTitleText" : "社区",
-			"enablePullDownRefresh" : false
-		}
-	},
-	{
-		"path" : "pages/login/login",
-		"style" : 
-		{
-			"navigationBarTitleText" : "登录",
-			"enablePullDownRefresh" : false
-		}
-	},
-	{
-		"path" : "pages/testApi/testApi",
-		"style" : 
-		{
-			"navigationBarTitleText" : "测试接口页面",
-			"enablePullDownRefresh" : false
-		}
-	}],
+	"pages": [
+	
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "music",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {

@@ -18,7 +18,11 @@
     }
   },
   "compileType": "miniprogram",
+<<<<<<< HEAD
   "libVersion": "3.4.1",
+=======
+  "libVersion": "3.4.2",
+>>>>>>> wbh
   "appid": "touristappid",
   "projectname": "music",
   "condition": {},

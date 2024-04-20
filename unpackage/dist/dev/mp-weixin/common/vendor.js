@@ -7697,7 +7697,6 @@ exports.Pinia = Pinia;
 exports._export_sfc = _export_sfc;
 exports.createPinia = createPinia;
 exports.createSSRApp = createSSRApp;
-exports.defineStore = defineStore;
 exports.e = e;
 exports.f = f;
 exports.index = index;

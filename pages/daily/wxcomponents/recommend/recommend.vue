@@ -1,8 +1,14 @@
 <script setup>
-	import { useDailyStore } from '../../../../store/daily.js'
-	
-	const dailyStore = useDailyStore()
-	dailyStore.getSongList()
+	// import { getRrecommendApi } from '../../services'
+	// const getRrecommend = async () => {
+	// 	try {
+	// 		const res = await getRrecommendApi()
+	// 		console.log(res)
+	// 	} catch (e) {
+	// 		console.log(e)
+	// 	}
+	// } 
+	// getRrecommend()
 	
 </script>
 
@@ -13,14 +19,23 @@
 			
 		</view>
 		<view class="main">
-			<view class="nav">播放全部</view>
+			<view class="nav">
+				<img class="playicon" src="../../static/play.png" alt="" />
+				<text>播放全部</text>
+				<img class="refreshicon" src="../../static/refresh.png" alt="" />
+				<img class="selecticon" src="../../static/selecticon.png" alt="" />
+			</view>
 			<view class="songsList">
 				<ul>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
 					<li>1</li>
 				</ul>
 			</view>
 		</view>
-	</view>
 </template>
 
 

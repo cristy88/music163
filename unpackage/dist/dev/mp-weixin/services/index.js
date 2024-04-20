@@ -1,7 +1,5 @@
 "use strict";
 const services_request = require("./request.js");
-<<<<<<< HEAD
-=======
 const loginApi = ({ email, password }) => {
   return services_request.request({
     url: "/login",
@@ -17,7 +15,6 @@ const loginStatusApi = () => {
     url: "/login/status"
   });
 };
->>>>>>> test
 const getBannerApi = () => {
   return services_request.request({ url: "/banner" });
 };
@@ -30,8 +27,5 @@ const getRrecommendApi = () => {
 exports.getBannerApi = getBannerApi;
 exports.getHomeIconApi = getHomeIconApi;
 exports.getRrecommendApi = getRrecommendApi;
-<<<<<<< HEAD
-=======
 exports.loginApi = loginApi;
 exports.loginStatusApi = loginStatusApi;
->>>>>>> test

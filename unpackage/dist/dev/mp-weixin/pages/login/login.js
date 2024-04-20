@@ -1,5 +1,7 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const services_index = require("../../services/index.js");
+require("../../services/request.js");
 if (!Array) {
   const _easycom_uni_easyinput2 = common_vendor.resolveComponent("uni-easyinput");
   const _easycom_uni_forms_item2 = common_vendor.resolveComponent("uni-forms-item");
@@ -44,10 +46,6 @@ const _sfc_main = {
         }]
       }
     };
-<<<<<<< HEAD
-    const submit = async () => {
-      valiForm.validate().then((res) => {
-=======
     const isLogin = async () => {
       console.log("登录", valiFormData);
       const res = await services_index.loginApi(valiFormData.value);
@@ -71,16 +69,11 @@ const _sfc_main = {
     };
     const submit = () => {
       valiForm.value.validate().then((res) => {
->>>>>>> test
         console.log("success", res);
         common_vendor.index.showToast({
           title: `校验通过`
         });
-<<<<<<< HEAD
-        console.log("登录", valiFormData);
-=======
         isLogin();
->>>>>>> test
       }).catch((err) => {
         console.log("err", err);
       });
@@ -107,16 +100,10 @@ const _sfc_main = {
           required: true,
           name: "password"
         }),
-<<<<<<< HEAD
-        g: common_vendor.sr(valiForm.value, "e4e4508d-0"),
-        h: valiForm.value,
-        i: common_vendor.p({
-=======
         g: common_vendor.sr(valiForm, "e4e4508d-0", {
           "k": "valiForm"
         }),
         h: common_vendor.p({
->>>>>>> test
           rules,
           modelValue: valiFormData.value
         }),

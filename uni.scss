@@ -1,1 +1,5 @@
 @import '@/uni_modules/uni-scss/variables.scss';
+
+@function rpx($px) {
+	@return $px * 2rpx;
+}

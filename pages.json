@@ -4,8 +4,7 @@
 			"path" : "pages/songs/songs",
 			"style" : 
 			{
-				"navigationBarTitleText" : "歌单广场",
-				"enablePullDownRefresh" : false
+				"navigationBarTitleText" : "歌单广场"
 			}
 		}
 	],

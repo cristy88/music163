@@ -9,8 +9,7 @@
 
 <template>
 	<view class="recommend">
-		<view class="header">
-			
+		<view class="header">	
 		</view>
 		<view class="main">
 			<view class="nav">播放全部</view>

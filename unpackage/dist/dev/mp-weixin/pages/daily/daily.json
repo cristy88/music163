@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "每日推荐",
-  "enablePullDownRefresh": false,
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "recommend": "../../wxcomponents/recommend/resommend",
-    "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons"
-  }
-}

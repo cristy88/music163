@@ -18,12 +18,12 @@
     }
   },
   "compileType": "miniprogram",
-  "libVersion": "3.4.2",
+  "libVersion": "3.4.1",
   "appid": "touristappid",
   "projectname": "music",
   "condition": {},
   "editorSetting": {
-    "tabIndent": "auto",
+    "tabIndent": "insertSpaces",
     "tabSize": 2
   }
 }

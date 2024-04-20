@@ -1,0 +1,10 @@
+/* 水平间距 */
+/* 水平间距 */
+.example.data-v-e4e4508d {
+  position: fixed;
+  width: 546rpx;
+  height: 592rpx;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,16 +1,56 @@
 {
 	"pages": [{
-		"path" : "pages/daily/daily",
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": "首页"
+		}
+	},
+	{
+		"path" : "pages/podcast/podcast",
 		"style" : 
 		{
-			"navigationBarTitleText" : "每日推荐",
-			"enablePullDownRefresh" : false,
-			"navigationStyle": "custom",
-			// #ifdef MP-WEIXIN 
-			"usingComponents": {
-				"recommend": "/wxcomponents/recommend/resommend"
-			}
-			// #endif
+			"navigationBarTitleText" : "播客",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/mine/mine",
+		"style" : 
+		{
+			"navigationBarTitleText" : "我的",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/attention/attention",
+		"style" : 
+		{
+			"navigationBarTitleText" : "关注",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/community/community",
+		"style" : 
+		{
+			"navigationBarTitleText" : "社区",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/login/login",
+		"style" : 
+		{
+			"navigationBarTitleText" : "登录",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/testApi/testApi",
+		"style" : 
+		{
+			"navigationBarTitleText" : "测试接口页面",
+			"enablePullDownRefresh" : false
 		}
 	}],
 	"globalStyle": {
@@ -22,5 +62,27 @@
 			"background": "#efeff4"
 		}
 	},
-	"component": true
+	"tabBar": {
+		"color": "#9498A1",
+		"selectedColor": "#F8214D",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"text": "发现",
+				"pagePath": "pages/index/index"
+			},{
+				"text": "播客",
+				"pagePath": "pages/podcast/podcast"
+			},{
+				"text": "我的",
+				"pagePath": "pages/mine/mine"
+			},{
+				"text": "关注",
+				"pagePath": "pages/attention/attention"
+			},{
+				"text": "社区",
+				"pagePath": "pages/community/community"
+			}
+		]
+	}
 }

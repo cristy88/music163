@@ -61,6 +61,13 @@
 			"navigationBarTitleText" : "播放",
 			"enablePullDownRefresh" : false
 		}
+	},
+	{
+		"path" : "pages/songs/songs",
+		"style" : 
+		{
+			"navigationBarTitleText" : "歌单广场"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

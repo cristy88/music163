@@ -5,12 +5,7 @@
 		{
 			"navigationBarTitleText" : "每日推荐",
 			"enablePullDownRefresh" : false,
-			"navigationStyle": "custom",
-			// #ifdef MP-WEIXIN 
-			"usingComponents": {
-				"recommend": "/wxcomponents/recommend/resommend"
-			}
-			// #endif
+			"navigationStyle": "custom"
 		}
 	}],
 	"globalStyle": {

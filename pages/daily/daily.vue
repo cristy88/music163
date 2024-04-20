@@ -1,7 +1,7 @@
 <script setup>
 	import { ref } from 'vue'
 	// #ifdef H5
-	import recommend from '../../wxcomponents/recommend/recommend.vue'
+	import recommend from './wxcomponents/recommend/recommend.vue'
 	// #endif
 	const title = ['每日推荐', '风格推荐']
 	const curIndex = ref(0)

@@ -1,5 +1,5 @@
 <script setup>
-	import { useDailyStore } from '../../store/daily.js'
+	import { useDailyStore } from '../../../../store/daily.js'
 	
 	const dailyStore = useDailyStore()
 	dailyStore.getSongList()

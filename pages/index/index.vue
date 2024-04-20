@@ -1,6 +1,14 @@
 <script setup>
 	import { ref } from 'vue'
 	import { getBannerApi, getHomeIconApi, getRrecommendApi } from '../../services/index.js'
+	import { useUserInfo } from '../../store/userInfo.js';
+	
+	const user = useUserInfo()
+	console.log('用户信息', user.profile, user.musicSum)
+	if (!user.profile || !user.musicSum) {
+		// 登录成功后调用  获取用户详细信息,保存为全局数据
+		user.getUserInfo()
+	}
 	
 	const icons = ref([])
 	// 获取轮播图

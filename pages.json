@@ -1,5 +1,13 @@
 {
 	"pages": [{
+		"path" : "pages/login/login",
+		"style" : 
+		{
+			"navigationBarTitleText" : "登录",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
 		"path": "pages/index/index",
 		"style": {
 			"navigationBarTitleText": "首页"
@@ -38,18 +46,10 @@
 		}
 	},
 	{
-		"path" : "pages/login/login",
-		"style" : 
-		{
-			"navigationBarTitleText" : "登录",
-			"enablePullDownRefresh" : false
-		}
-	},
-	{
 		"path" : "pages/testApi/testApi",
 		"style" : 
 		{
-			"navigationBarTitleText" : "测试接口页面",
+			"navigationBarTitleText" : "测试接口",
 			"enablePullDownRefresh" : false
 		}
 	}],

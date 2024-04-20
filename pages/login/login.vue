@@ -61,7 +61,7 @@
 	<view>
 		<view class="example">
 						<!-- 基础表单校验 -->
-			<uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
+			<uni-forms :ref="valiForm" :rules="rules" :modelValue="valiFormData">
 				<uni-forms-item label="邮箱" required name="email">
 					<uni-easyinput v-model="valiFormData.email" placeholder="请输入邮箱" />
 				</uni-forms-item>

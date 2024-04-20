@@ -13,9 +13,7 @@
 			
 		</view>
 		<view class="main">
-			<view class="nav">
-				<img src="" alt="" />
-			</view>
+			<view class="nav">播放全部</view>
 			<view class="songsList">
 				<ul>
 					<li>1</li>

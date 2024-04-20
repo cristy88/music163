@@ -1,8 +1,11 @@
 {
 	"pages": [{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "uni-app"
+		"path" : "pages/daily/daily",
+		"style" : 
+		{
+			"navigationBarTitleText" : "每日推荐",
+			"enablePullDownRefresh" : false,
+			"navigationStyle": "custom"
 		}
 	}],
 	"globalStyle": {
@@ -13,5 +16,6 @@
 		"app-plus": {
 			"background": "#efeff4"
 		}
-	}
+	},
+	"component": true
 }

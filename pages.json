@@ -1,5 +1,6 @@
 {
 	"pages": [{
+<<<<<<< HEAD
 		"path": "pages/index/index",
 		"style": {
 			"navigationBarTitleText": "首页"
@@ -43,6 +44,14 @@
 		{
 			"navigationBarTitleText" : "登录",
 			"enablePullDownRefresh" : false
+=======
+		"path" : "pages/daily/daily",
+		"style" : 
+		{
+			"navigationBarTitleText" : "每日推荐",
+			"enablePullDownRefresh" : false,
+			"navigationStyle": "custom"
+>>>>>>> ed30753da613c5bfced37c6efb78da813a3cf2fe
 		}
 	}],
 	"globalStyle": {
@@ -54,6 +63,7 @@
 			"background": "#efeff4"
 		}
 	},
+<<<<<<< HEAD
 	"tabBar": {
 		"color": "#9498A1",
 		"selectedColor": "#F8214D",
@@ -77,4 +87,7 @@
 			}
 		]
 	}
+=======
+	"component": true
+>>>>>>> ed30753da613c5bfced37c6efb78da813a3cf2fe
 }

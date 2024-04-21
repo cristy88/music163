@@ -11,4 +11,3 @@ export function createApp() {
 		Pinia,
   };
 }
-// #endif

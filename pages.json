@@ -1,5 +1,14 @@
 {
-	"pages": [{
+	"pages": [
+	{
+		"path" : "pages/login/login",
+		"style" : 
+		{
+			"navigationBarTitleText" : "登录",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
 		"path": "pages/index/index",
 		"style": {
 			"navigationBarTitleText": "首页"
@@ -37,19 +46,36 @@
 			"enablePullDownRefresh" : false
 		}
 	},
-	{
-		"path" : "pages/login/login",
-		"style" : 
-		{
-			"navigationBarTitleText" : "登录",
-			"enablePullDownRefresh" : false
-		}
-	},
+	
 	{
 		"path" : "pages/testApi/testApi",
 		"style" : 
 		{
 			"navigationBarTitleText" : "测试接口页面",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/toplist/toplist",
+		"style" : 
+		{
+			"navigationBarTitleText" : "排行榜",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/songlist/songlist",
+		"style" : 
+		{
+			"navigationBarTitleText" : "歌单",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/player/player",
+		"style" : 
+		{
+			"navigationBarTitleText" : "播放",
 			"enablePullDownRefresh" : false
 		}
 	}],

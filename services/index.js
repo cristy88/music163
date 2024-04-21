@@ -35,3 +35,13 @@ export const getHomeIconApi = () => {
 export const getRrecommendApi = () => {
 	return request({'url': '/recommend/resource'})
 }
+
+//排行榜接口
+export const toplistApi=()=>{
+	return request({url:'/toplist/detail'})
+}
+
+//歌单详情接口
+export const playlistDetailApi = (id) => {
+	return request({url:'/playlist/detail',data:{id} })
+}

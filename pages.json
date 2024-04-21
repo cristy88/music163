@@ -108,7 +108,7 @@
 			"navigationBarTitleText" : "歌单",
 			"enablePullDownRefresh" : false
 		}
-	},
+	}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

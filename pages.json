@@ -67,11 +67,34 @@
 		"path" : "pages/songs/songs",
 		"style" : 
 		{
+			"navigationBarTitleText" : "歌单广场",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/search/search",
+		"style" : 
+		{
+			"navigationBarTitleText" : "搜索",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/songs/songs",
+		"style" : 
+		{
 			"navigationBarTitleText" : "歌单广场"
 		}
 	},
 	{
-		"path" : "pages/toplist/toplist",
+		"path" : "pages/search/search",
+		"style" : 
+		{
+			"navigationBarTitleText" : "搜索",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{"path" : "pages/toplist/toplist",
 		"style" : 
 		{
 			"navigationBarTitleText" : "排行榜",

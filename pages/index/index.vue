@@ -1,6 +1,14 @@
 <script setup>
 	import { ref } from 'vue'
 	import { getBannerApi, getHomeIconApi, getRrecommendApi } from '../../services/index.js'
+	import { useUserInfo } from '../../store/userInfo.js';
+	
+	const user = useUserInfo()
+	console.log('用户信息', user.profile, user.musicSum)
+	if (!user.profile || !user.musicSum) {
+		// 登录成功后调用  获取用户详细信息,保存为全局数据
+		user.getUserInfo()
+	}
 	
 	const icons = ref([])
 	// 获取轮播图
@@ -11,6 +19,7 @@
 			banners.value = res.banners
 			console.log(res)
 			const resIcon = await getHomeIconApi()
+			console.log('获得icon', resIcon)
 			if (resIcon.code === 200) {
 				icons.value = resIcon.data
 			}
@@ -50,7 +59,12 @@
 			<view class="info_top">我喜欢的音乐</view>
 			<view class="info_buttom"></view>
 		</view>
-		<view class="Play"></view>
+		<view class="Play">
+			<view class="songsheet">
+				<view class="">推荐歌单</view>
+				<view class="">...</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -71,9 +85,6 @@
 			height: 100%;
 		}
 	}
-
-	
-
 	.Icons {
 		width: rpx(342);
 		height: rpx(90);
@@ -112,5 +123,18 @@
 			height: rpx(60);
 		}
 	}
+	
+	.Play {
+		width: rpx(342);
+		margin: 0 auto;
+	}
+	
+	.songsheet {
+		height: rpx(54);
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	
 
 </style>

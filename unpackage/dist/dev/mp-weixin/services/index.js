@@ -1,35 +1,18 @@
 "use strict";
 const services_request = require("./request.js");
-const loginApi = ({ phone, captcha }) => {
+const loginApi = ({ email, password }) => {
   return services_request.request({
-    url: "/login/cellphone",
+    url: "/login",
     method: "GET",
     data: {
-      phone,
-      captcha
+      email,
+      password
     }
   });
 };
 const loginStatusApi = () => {
   return services_request.request({
     url: "/login/status"
-  });
-};
-const getCodeApi = ({ phone }) => {
-  return services_request.request({
-    url: "/captcha/sent",
-    data: {
-      phone
-    }
-  });
-};
-const isCodeApi = ({ phone, captcha }) => {
-  return services_request.request({
-    url: "/captcha/verify",
-    data: {
-      phone,
-      captcha
-    }
   });
 };
 const getBannerApi = () => {
@@ -42,9 +25,7 @@ const getRrecommendApi = () => {
   return services_request.request({ "url": "/recommend/resource" });
 };
 exports.getBannerApi = getBannerApi;
-exports.getCodeApi = getCodeApi;
 exports.getHomeIconApi = getHomeIconApi;
 exports.getRrecommendApi = getRrecommendApi;
-exports.isCodeApi = isCodeApi;
 exports.loginApi = loginApi;
 exports.loginStatusApi = loginStatusApi;

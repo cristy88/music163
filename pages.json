@@ -1,6 +1,5 @@
 {
-	"pages": [
-	{
+	"pages": [{
 		"path" : "pages/login/login",
 		"style" : 
 		{
@@ -46,13 +45,29 @@
 			"enablePullDownRefresh" : false
 		}
 	},
-	
 	{
-		"path" : "pages/testApi/testApi",
+		"path" : "pages/daily/daily",
 		"style" : 
 		{
-			"navigationBarTitleText" : "测试接口页面",
+			"navigationBarTitleText" : "每日推荐",
+			"enablePullDownRefresh" : false,
+			"navigationStyle": "custom"
+		}
+	},
+	{
+		"path" : "pages/player/player",
+		"style" : 
+		{
+			"navigationBarTitleText" : "播放",
 			"enablePullDownRefresh" : false
+		}
+	},
+	
+	{
+		"path" : "pages/songs/songs",
+		"style" : 
+		{
+			"navigationBarTitleText" : "歌单广场"
 		}
 	},
 	{
@@ -81,7 +96,7 @@
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "music",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {

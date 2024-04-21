@@ -46,7 +46,7 @@ const toTypeString = (value) => objectToString.call(value);
 const toRawType = (value) => {
   return toTypeString(value).slice(8, -1);
 };
-const isPlainObject = (val) => toTypeString(val) === "[object Object]";
+const isPlainObject$1 = (val) => toTypeString(val) === "[object Object]";
 const isIntegerKey = (key) => isString(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
 const isReservedProp = /* @__PURE__ */ makeMap(
   // the leading comma is intentional so empty string "" is also included
@@ -74,8 +74,13 @@ const capitalize = cacheStringFunction((str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 });
 const toHandlerKey = cacheStringFunction((str) => {
+<<<<<<< HEAD
   const s2 = str ? `on${capitalize(str)}` : ``;
   return s2;
+=======
+  const s = str ? `on${capitalize(str)}` : ``;
+  return s;
+>>>>>>> wbh
 });
 const hasChanged = (value, oldValue) => !Object.is(value, oldValue);
 const invokeArrayFns$1 = (fns, arg) => {
@@ -91,6 +96,7 @@ const def = (obj, key, value) => {
   });
 };
 const looseToNumber = (val) => {
+<<<<<<< HEAD
   const n2 = parseFloat(val);
   return isNaN(n2) ? val : n2;
 };
@@ -166,7 +172,7 @@ const replacer = (_key, val) => {
     };
   } else if (isSymbol(val)) {
     return stringifySymbol(val);
-  } else if (isObject(val) && !isArray(val) && !isPlainObject(val)) {
+  } else if (isObject(val) && !isArray(val) && !isPlainObject$1(val)) {
     return String(val);
   }
   return val;
@@ -174,6 +180,10 @@ const replacer = (_key, val) => {
 const stringifySymbol = (v, i = "") => {
   var _a2;
   return isSymbol(v) ? `Symbol(${(_a2 = v.description) != null ? _a2 : i})` : v;
+=======
+  const n = parseFloat(val);
+  return isNaN(n) ? val : n;
+>>>>>>> wbh
 };
 const LINEFEED = "\n";
 const SLOT_DEFAULT_NAME = "d";
@@ -248,7 +258,7 @@ function getValueByDataPath(obj, path) {
 }
 function sortObject(obj) {
   let sortObj = {};
-  if (isPlainObject(obj)) {
+  if (isPlainObject$1(obj)) {
     Object.keys(obj).sort().forEach((key) => {
       const _key = key;
       sortObj[_key] = obj[_key];
@@ -262,7 +272,7 @@ function stringifyQuery(obj, encodeStr = encode) {
     let val = obj[key];
     if (typeof val === void 0 || val === null) {
       val = "";
-    } else if (isPlainObject(val)) {
+    } else if (isPlainObject$1(val)) {
       val = JSON.stringify(val);
     }
     return encodeStr(key) + "=" + encodeStr(val);
@@ -361,8 +371,13 @@ const E = function() {
 };
 E.prototype = {
   on: function(name, callback, ctx) {
+<<<<<<< HEAD
     var e2 = this.e || (this.e = {});
     (e2[name] || (e2[name] = [])).push({
+=======
+    var e = this.e || (this.e = {});
+    (e[name] || (e[name] = [])).push({
+>>>>>>> wbh
       fn: callback,
       ctx
     });
@@ -388,8 +403,13 @@ E.prototype = {
     return this;
   },
   off: function(name, callback) {
+<<<<<<< HEAD
     var e2 = this.e || (this.e = {});
     var evts = e2[name];
+=======
+    var e = this.e || (this.e = {});
+    var evts = e[name];
+>>>>>>> wbh
     var liveEvents = [];
     if (evts && callback) {
       for (var i = evts.length - 1; i >= 0; i--) {
@@ -400,7 +420,11 @@ E.prototype = {
       }
       liveEvents = evts;
     }
+<<<<<<< HEAD
     liveEvents.length ? e2[name] = liveEvents : delete e2[name];
+=======
+    liveEvents.length ? e[name] = liveEvents : delete e[name];
+>>>>>>> wbh
     return this;
   }
 };
@@ -485,7 +509,7 @@ function validateProtocols(name, args, protocol, onFail) {
   }
 }
 function validateProp$1(name, value, prop, isAbsent) {
-  if (!isPlainObject(prop)) {
+  if (!isPlainObject$1(prop)) {
     prop = { type: prop };
   }
   const { type, required, validator } = prop;
@@ -517,9 +541,15 @@ function assertType$1(value, type) {
   let valid;
   const expectedType = getType$1(type);
   if (isSimpleType$1(expectedType)) {
+<<<<<<< HEAD
     const t2 = typeof value;
     valid = t2 === expectedType.toLowerCase();
     if (!valid && t2 === "object") {
+=======
+    const t = typeof value;
+    valid = t === expectedType.toLowerCase();
+    if (!valid && t === "object") {
+>>>>>>> wbh
       valid = value instanceof type;
     }
   } else if (expectedType === "Object") {
@@ -575,8 +605,13 @@ function tryCatch(fn) {
   return function() {
     try {
       return fn.apply(fn, arguments);
+<<<<<<< HEAD
     } catch (e2) {
       console.error(e2);
+=======
+    } catch (e) {
+      console.error(e);
+>>>>>>> wbh
     }
   };
 }
@@ -623,7 +658,7 @@ function normalizeErrMsg$1(errMsg, name) {
   return name + errMsg.substring(errMsg.indexOf(":fail"));
 }
 function createAsyncApiCallback(name, args = {}, { beforeAll, beforeSuccess } = {}) {
-  if (!isPlainObject(args)) {
+  if (!isPlainObject$1(args)) {
     args = {};
   }
   const { success, fail, complete } = getApiCallbacks(args);
@@ -745,7 +780,7 @@ function invokeApi(method, api, options, params) {
   return api(options, ...params);
 }
 function hasCallback(args) {
-  if (isPlainObject(args) && [API_SUCCESS, API_FAIL, API_COMPLETE].find((cb) => isFunction(args[cb]))) {
+  if (isPlainObject$1(args) && [API_SUCCESS, API_FAIL, API_COMPLETE].find((cb) => isFunction(args[cb]))) {
     return true;
   }
   return false;
@@ -758,14 +793,19 @@ function promisify$1(name, fn) {
     if (hasCallback(args)) {
       return wrapperReturnValue(name, invokeApi(name, fn, args, rest));
     }
+<<<<<<< HEAD
     return wrapperReturnValue(name, handlePromise(new Promise((resolve2, reject) => {
       invokeApi(name, fn, extend(args, { success: resolve2, fail: reject }), rest);
+=======
+    return wrapperReturnValue(name, handlePromise(new Promise((resolve, reject) => {
+      invokeApi(name, fn, extend(args, { success: resolve, fail: reject }), rest);
+>>>>>>> wbh
     })));
   };
 }
 function formatApiArgs(args, options) {
   const params = args[0];
-  if (!options || !isPlainObject(options.formatArgs) && isPlainObject(params)) {
+  if (!options || !isPlainObject$1(options.formatArgs) && isPlainObject$1(params)) {
     return;
   }
   const formatArgs = options.formatArgs;
@@ -937,20 +977,20 @@ function dedupeHooks(hooks) {
   return res;
 }
 const addInterceptor = defineSyncApi(API_ADD_INTERCEPTOR, (method, interceptor) => {
-  if (isString(method) && isPlainObject(interceptor)) {
+  if (isString(method) && isPlainObject$1(interceptor)) {
     mergeInterceptorHook(scopedInterceptors[method] || (scopedInterceptors[method] = {}), interceptor);
-  } else if (isPlainObject(method)) {
+  } else if (isPlainObject$1(method)) {
     mergeInterceptorHook(globalInterceptors, method);
   }
 }, AddInterceptorProtocol);
 const removeInterceptor = defineSyncApi(API_REMOVE_INTERCEPTOR, (method, interceptor) => {
   if (isString(method)) {
-    if (isPlainObject(interceptor)) {
+    if (isPlainObject$1(interceptor)) {
       removeInterceptorHook(scopedInterceptors[method], interceptor);
     } else {
       delete scopedInterceptors[method];
     }
-  } else if (isPlainObject(method)) {
+  } else if (isPlainObject$1(method)) {
     removeInterceptorHook(globalInterceptors, method);
   }
 }, RemoveInterceptorProtocol);
@@ -1005,7 +1045,11 @@ const $off = defineSyncApi(API_OFF, (name, callback) => {
   }
   if (!isArray(name))
     name = [name];
+<<<<<<< HEAD
   name.forEach((n2) => emitter.off(n2, callback));
+=======
+  name.forEach((n) => emitter.off(n, callback));
+>>>>>>> wbh
 }, OffProtocol);
 const $emit = defineSyncApi(API_EMIT, (name, ...args) => {
   emitter.emit(name, ...args);
@@ -1016,7 +1060,11 @@ let enabled;
 function normalizePushMessage(message) {
   try {
     return JSON.parse(message);
+<<<<<<< HEAD
   } catch (e2) {
+=======
+  } catch (e) {
+>>>>>>> wbh
   }
   return message;
 }
@@ -1056,7 +1104,11 @@ function invokeGetPushCidCallbacks(cid2, errMsg) {
   getPushCidCallbacks.length = 0;
 }
 const API_GET_PUSH_CLIENT_ID = "getPushClientId";
+<<<<<<< HEAD
 const getPushClientId = defineAsyncApi(API_GET_PUSH_CLIENT_ID, (_, { resolve: resolve2, reject }) => {
+=======
+const getPushClientId = defineAsyncApi(API_GET_PUSH_CLIENT_ID, (_, { resolve, reject }) => {
+>>>>>>> wbh
   Promise.resolve().then(() => {
     if (typeof enabled === "undefined") {
       enabled = false;
@@ -1065,7 +1117,11 @@ const getPushClientId = defineAsyncApi(API_GET_PUSH_CLIENT_ID, (_, { resolve: re
     }
     getPushCidCallbacks.push((cid2, errMsg) => {
       if (cid2) {
+<<<<<<< HEAD
         resolve2({ cid: cid2 });
+=======
+        resolve({ cid: cid2 });
+>>>>>>> wbh
       } else {
         reject(errMsg);
       }
@@ -1130,9 +1186,15 @@ function promisify(name, api) {
     if (isFunction(options.success) || isFunction(options.fail) || isFunction(options.complete)) {
       return wrapperReturnValue(name, invokeApi(name, api, options, rest));
     }
+<<<<<<< HEAD
     return wrapperReturnValue(name, handlePromise(new Promise((resolve2, reject) => {
       invokeApi(name, api, extend({}, options, {
         success: resolve2,
+=======
+    return wrapperReturnValue(name, handlePromise(new Promise((resolve, reject) => {
+      invokeApi(name, api, extend({}, options, {
+        success: resolve,
+>>>>>>> wbh
         fail: reject
       }), rest);
     })));
@@ -1146,7 +1208,7 @@ function initWrapper(protocols2) {
     };
   }
   function processArgs(methodName, fromArgs, argsOption = {}, returnValue = {}, keepFromArgs = false) {
-    if (isPlainObject(fromArgs)) {
+    if (isPlainObject$1(fromArgs)) {
       const toArgs = keepFromArgs === true ? fromArgs : {};
       if (isFunction(argsOption)) {
         argsOption = argsOption(fromArgs, toArgs) || {};
@@ -1161,7 +1223,7 @@ function initWrapper(protocols2) {
             console.warn(`微信小程序 ${methodName} 暂不支持 ${key}`);
           } else if (isString(keyOption)) {
             toArgs[keyOption] = fromArgs[key];
-          } else if (isPlainObject(keyOption)) {
+          } else if (isPlainObject$1(keyOption)) {
             toArgs[keyOption.name ? keyOption.name : key] = keyOption.value;
           }
         } else if (CALLBACKS.indexOf(key) !== -1) {
@@ -1678,6 +1740,9 @@ class EffectScope {
     }
   }
 }
+function effectScope(detached) {
+  return new EffectScope(detached);
+}
 function recordEffectScope(effect, scope = activeEffectScope) {
   if (scope && scope.active) {
     scope.effects.push(effect);
@@ -1685,6 +1750,13 @@ function recordEffectScope(effect, scope = activeEffectScope) {
 }
 function getCurrentScope() {
   return activeEffectScope;
+}
+function onScopeDispose(fn) {
+  if (activeEffectScope) {
+    activeEffectScope.cleanups.push(fn);
+  } else {
+    warn$1(`onScopeDispose() is called when there is no active effect scope to be associated with.`);
+  }
 }
 const createDep = (effects) => {
   const dep = new Set(effects);
@@ -1921,6 +1993,10 @@ function triggerEffect(effect, debuggerEventExtraInfo) {
       effect.run();
     }
   }
+}
+function getDepFromReactive(object, key) {
+  var _a2;
+  return (_a2 = targetMap.get(object)) === null || _a2 === void 0 ? void 0 : _a2.get(key);
 }
 const isNonTrackableKeys = /* @__PURE__ */ makeMap(`__proto__,__v_isRef,__isVue`);
 const builtInSymbols = new Set(
@@ -2462,9 +2538,12 @@ function isShallow(value) {
     /* ReactiveFlags.IS_SHALLOW */
   ]);
 }
+<<<<<<< HEAD
 function isProxy(value) {
   return isReactive(value) || isReadonly(value);
 }
+=======
+>>>>>>> wbh
 function toRaw(observed) {
   const raw = observed && observed[
     "__v_raw"
@@ -2555,6 +2634,38 @@ const shallowUnwrapHandlers = {
 };
 function proxyRefs(objectWithRefs) {
   return isReactive(objectWithRefs) ? objectWithRefs : new Proxy(objectWithRefs, shallowUnwrapHandlers);
+}
+function toRefs(object) {
+  if (!isProxy(object)) {
+    console.warn(`toRefs() expects a reactive object but received a plain one.`);
+  }
+  const ret = isArray(object) ? new Array(object.length) : {};
+  for (const key in object) {
+    ret[key] = toRef(object, key);
+  }
+  return ret;
+}
+class ObjectRefImpl {
+  constructor(_object, _key, _defaultValue) {
+    this._object = _object;
+    this._key = _key;
+    this._defaultValue = _defaultValue;
+    this.__v_isRef = true;
+  }
+  get value() {
+    const val = this._object[this._key];
+    return val === void 0 ? this._defaultValue : val;
+  }
+  set value(newVal) {
+    this._object[this._key] = newVal;
+  }
+  get dep() {
+    return getDepFromReactive(toRaw(this._object), this._key);
+  }
+}
+function toRef(object, key, defaultValue) {
+  const val = object[key];
+  return isRef(val) ? val : new ObjectRefImpl(object, key, defaultValue);
 }
 var _a;
 class ComputedRefImpl {
@@ -2900,8 +3011,13 @@ const resolvedPromise = /* @__PURE__ */ Promise.resolve();
 let currentFlushPromise = null;
 const RECURSION_LIMIT = 100;
 function nextTick$1(fn) {
+<<<<<<< HEAD
   const p2 = currentFlushPromise || resolvedPromise;
   return fn ? p2.then(this ? fn.bind(this) : fn) : p2;
+=======
+  const p = currentFlushPromise || resolvedPromise;
+  return fn ? p.then(this ? fn.bind(this) : fn) : p;
+>>>>>>> wbh
 }
 function findInsertionIndex(id) {
   let start = flushIndex + 1;
@@ -3314,8 +3430,13 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
       warn(`watch() "deep" option is only respected when using the watch(source, callback, options?) signature.`);
     }
   }
+<<<<<<< HEAD
   const warnInvalidSource = (s2) => {
     warn(`Invalid watch source: `, s2, `A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.`);
+=======
+  const warnInvalidSource = (s) => {
+    warn(`Invalid watch source: `, s, `A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.`);
+>>>>>>> wbh
   };
   const instance = getCurrentScope() === (currentInstance === null || currentInstance === void 0 ? void 0 : currentInstance.scope) ? currentInstance : null;
   let getter;
@@ -3329,6 +3450,7 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
     deep = true;
   } else if (isArray(source)) {
     isMultiSource = true;
+<<<<<<< HEAD
     forceTrigger = source.some((s2) => isReactive(s2) || isShallow(s2));
     getter = () => source.map((s2) => {
       if (isRef(s2)) {
@@ -3338,12 +3460,27 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
       } else if (isFunction(s2)) {
         return callWithErrorHandling(
           s2,
+=======
+    forceTrigger = source.some((s) => isReactive(s) || isShallow(s));
+    getter = () => source.map((s) => {
+      if (isRef(s)) {
+        return s.value;
+      } else if (isReactive(s)) {
+        return traverse(s);
+      } else if (isFunction(s)) {
+        return callWithErrorHandling(
+          s,
+>>>>>>> wbh
           instance,
           2
           /* ErrorCodes.WATCH_GETTER */
         );
       } else {
+<<<<<<< HEAD
         warnInvalidSource(s2);
+=======
+        warnInvalidSource(s);
+>>>>>>> wbh
       }
     });
   } else if (isFunction(source)) {
@@ -3495,7 +3632,7 @@ function traverse(value, seen) {
     value.forEach((v) => {
       traverse(v, seen);
     });
-  } else if (isPlainObject(value)) {
+  } else if (isPlainObject$1(value)) {
     for (const key in value) {
       traverse(value[key], seen);
     }
@@ -3619,6 +3756,7 @@ function validateDirectiveName(name) {
     warn("Do not use built-in directive ids as custom directive id: " + name);
   }
 }
+<<<<<<< HEAD
 const COMPONENTS = "components";
 function resolveComponent(name, maybeSelfReference) {
   return resolveAsset(COMPONENTS, name, true, maybeSelfReference) || name;
@@ -3659,6 +3797,8 @@ If this is a native custom element, make sure to exclude it from component resol
 function resolve(registry, name) {
   return registry && (registry[name] || registry[camelize(name)] || registry[capitalize(camelize(name))]);
 }
+=======
+>>>>>>> wbh
 const getPublicInstance = (i) => {
   if (!i)
     return null;
@@ -3698,9 +3838,15 @@ const PublicInstanceProxyHandlers = {
     }
     let normalizedProps;
     if (key[0] !== "$") {
+<<<<<<< HEAD
       const n2 = accessCache[key];
       if (n2 !== void 0) {
         switch (n2) {
+=======
+      const n = accessCache[key];
+      if (n !== void 0) {
+        switch (n) {
+>>>>>>> wbh
           case 1:
             return setupState[key];
           case 2:
@@ -4543,7 +4689,11 @@ function isSameType(a, b) {
 }
 function getTypeIndex(type, expectedTypes) {
   if (isArray(expectedTypes)) {
+<<<<<<< HEAD
     return expectedTypes.findIndex((t2) => isSameType(t2, type));
+=======
+    return expectedTypes.findIndex((t) => isSameType(t, type));
+>>>>>>> wbh
   } else if (isFunction(expectedTypes)) {
     return isSameType(expectedTypes, type) ? 0 : -1;
   }
@@ -4591,9 +4741,15 @@ function assertType(value, type) {
   let valid;
   const expectedType = getType(type);
   if (isSimpleType(expectedType)) {
+<<<<<<< HEAD
     const t2 = typeof value;
     valid = t2 === expectedType.toLowerCase();
     if (!valid && t2 === "object") {
+=======
+    const t = typeof value;
+    valid = t === expectedType.toLowerCase();
+    if (!valid && t === "object") {
+>>>>>>> wbh
       valid = value instanceof type;
     }
   } else if (expectedType === "Object") {
@@ -4800,12 +4956,15 @@ const Static = Symbol("Static");
 function isVNode(value) {
   return value ? value.__v_isVNode === true : false;
 }
+<<<<<<< HEAD
 const InternalObjectKey = `__vInternal`;
 function guardReactiveProps(props) {
   if (!props)
     return null;
   return isProxy(props) || InternalObjectKey in props ? extend({}, props) : props;
 }
+=======
+>>>>>>> wbh
 const emptyAppContext = createAppContext();
 let uid = 0;
 function createComponentInstance(vnode, parent, suspense) {
@@ -4892,7 +5051,10 @@ function createComponentInstance(vnode, parent, suspense) {
   return instance;
 }
 let currentInstance = null;
+<<<<<<< HEAD
 const getCurrentInstance = () => currentInstance || currentRenderingInstance;
+=======
+>>>>>>> wbh
 const setCurrentInstance = (instance) => {
   currentInstance = instance;
   instance.scope.on();
@@ -5248,8 +5410,13 @@ function nextTick(instance, fn) {
       _resolve(instance.proxy);
     }
   });
+<<<<<<< HEAD
   return new Promise((resolve2) => {
     _resolve = resolve2;
+=======
+  return new Promise((resolve) => {
+    _resolve = resolve;
+>>>>>>> wbh
   });
 }
 function clone(src, seen) {
@@ -5395,14 +5562,22 @@ function findComponentPublicInstance(mpComponents, id) {
   }
   return null;
 }
+<<<<<<< HEAD
 function setTemplateRef({ r, f: f2 }, refValue, setupState) {
+=======
+function setTemplateRef({ r, f }, refValue, setupState) {
+>>>>>>> wbh
   if (isFunction(r)) {
     r(refValue, {});
   } else {
     const _isString = isString(r);
     const _isRef = isRef(r);
     if (_isString || _isRef) {
+<<<<<<< HEAD
       if (f2) {
+=======
+      if (f) {
+>>>>>>> wbh
         if (!_isRef) {
           return;
         }
@@ -5627,8 +5802,13 @@ function setupRenderEffect(instance) {
   update.id = instance.uid;
   toggleRecurse(instance, true);
   {
+<<<<<<< HEAD
     effect.onTrack = instance.rtc ? (e2) => invokeArrayFns$1(instance.rtc, e2) : void 0;
     effect.onTrigger = instance.rtg ? (e2) => invokeArrayFns$1(instance.rtg, e2) : void 0;
+=======
+    effect.onTrack = instance.rtc ? (e) => invokeArrayFns$1(instance.rtc, e) : void 0;
+    effect.onTrigger = instance.rtg ? (e) => invokeArrayFns$1(instance.rtg, e) : void 0;
+>>>>>>> wbh
     update.ownerInstance = instance;
   }
   update();
@@ -5735,7 +5915,7 @@ function initHooks$1(options, instance, publicThis) {
 function applyOptions$2(options, instance, publicThis) {
   initHooks$1(options, instance, publicThis);
 }
-function set(target, key, val) {
+function set$3(target, key, val) {
   return target[key] = val;
 }
 function $callMethod(method, ...args) {
@@ -5842,7 +6022,7 @@ function initApp(app) {
     uniIdMixin(globalProperties);
   }
   {
-    globalProperties.$set = set;
+    globalProperties.$set = set$3;
     globalProperties.$applyOptions = applyOptions$2;
     globalProperties.$callMethod = $callMethod;
   }
@@ -5851,11 +6031,14 @@ function initApp(app) {
   }
 }
 const propsCaches = /* @__PURE__ */ Object.create(null);
+<<<<<<< HEAD
 function renderProps(props) {
   const { uid: uid2, __counter } = getCurrentInstance();
   const propsId = (propsCaches[uid2] || (propsCaches[uid2] = [])).push(guardReactiveProps(props)) - 1;
   return uid2 + "," + propsId + "," + __counter;
 }
+=======
+>>>>>>> wbh
 function pruneComponentPropsCache(uid2) {
   delete propsCaches[uid2];
 }
@@ -5896,6 +6079,7 @@ function getCreateApp() {
     return my[method];
   }
 }
+<<<<<<< HEAD
 function vOn(value, key) {
   const instance = getCurrentInstance();
   const ctx = instance.ctx;
@@ -5965,10 +6149,10 @@ function patchMPEvent(event) {
       event.detail = typeof event.detail === "object" ? event.detail : {};
       event.detail.markerId = event.markerId;
     }
-    if (isPlainObject(event.detail) && hasOwn(event.detail, "checked") && !hasOwn(event.detail, "value")) {
+    if (isPlainObject$1(event.detail) && hasOwn(event.detail, "checked") && !hasOwn(event.detail, "value")) {
       event.detail.value = event.detail.checked;
     }
-    if (isPlainObject(event.detail)) {
+    if (isPlainObject$1(event.detail)) {
       event.target = extend({}, event.target, event.detail);
     }
   }
@@ -6045,6 +6229,8 @@ const n = (value) => normalizeClass(value);
 const t = (val) => toDisplayString(val);
 const p = (props) => renderProps(props);
 const sr = (ref2, id, opts) => setRef(ref2, id, opts);
+=======
+>>>>>>> wbh
 function createApp$1(rootComponent, rootProps = null) {
   rootComponent && (rootComponent.mpType = "app");
   return createVueApp(rootComponent, rootProps).use(plugin);
@@ -6502,10 +6688,10 @@ function initPageProps({ properties }, rawProps) {
         value: ""
       };
     });
-  } else if (isPlainObject(rawProps)) {
+  } else if (isPlainObject$1(rawProps)) {
     Object.keys(rawProps).forEach((key) => {
       const opts = rawProps[key];
-      if (isPlainObject(opts)) {
+      if (isPlainObject$1(opts)) {
         let value = opts.default;
         if (isFunction(value)) {
           value = value();
@@ -6529,7 +6715,7 @@ function findPropsData(properties, isPage2) {
 }
 function findPagePropsData(properties) {
   const propsData = {};
-  if (isPlainObject(properties)) {
+  if (isPlainObject$1(properties)) {
     Object.keys(properties).forEach((name) => {
       if (builtInProps.indexOf(name) === -1) {
         propsData[name] = properties[name];
@@ -6874,8 +7060,784 @@ const createSubpackageApp = initCreateSubpackageApp();
   wx.createPluginApp = global.createPluginApp = createPluginApp;
   wx.createSubpackageApp = global.createSubpackageApp = createSubpackageApp;
 }
+var isVue2 = false;
+function set(target, key, val) {
+  if (Array.isArray(target)) {
+    target.length = Math.max(target.length, key);
+    target.splice(key, 1, val);
+    return val;
+  }
+  target[key] = val;
+  return val;
+}
+function del(target, key) {
+  if (Array.isArray(target)) {
+    target.splice(key, 1);
+    return;
+  }
+  delete target[key];
+}
+/*!
+  * pinia v2.0.33
+  * (c) 2023 Eduardo San Martin Morote
+  * @license MIT
+  */
+let activePinia;
+const setActivePinia = (pinia) => activePinia = pinia;
+const getActivePinia = () => getCurrentInstance() && inject(piniaSymbol) || activePinia;
+const piniaSymbol = Symbol("pinia");
+function isPlainObject(o2) {
+  return o2 && typeof o2 === "object" && Object.prototype.toString.call(o2) === "[object Object]" && typeof o2.toJSON !== "function";
+}
+var MutationType;
+(function(MutationType2) {
+  MutationType2["direct"] = "direct";
+  MutationType2["patchObject"] = "patch object";
+  MutationType2["patchFunction"] = "patch function";
+})(MutationType || (MutationType = {}));
+const IS_CLIENT = typeof window !== "undefined";
+const USE_DEVTOOLS = IS_CLIENT;
+const componentStateTypes = [];
+const getStoreType = (id) => "🍍 " + id;
+function registerPiniaDevtools(app, pinia) {
+}
+function addStoreToDevtools(app, store) {
+  if (!componentStateTypes.includes(getStoreType(store.$id))) {
+    componentStateTypes.push(getStoreType(store.$id));
+  }
+}
+function patchActionForGrouping(store, actionNames) {
+  const actions = actionNames.reduce((storeActions, actionName) => {
+    storeActions[actionName] = toRaw(store)[actionName];
+    return storeActions;
+  }, {});
+  for (const actionName in actions) {
+    store[actionName] = function() {
+      const trackedStore = new Proxy(store, {
+        get(...args) {
+          return Reflect.get(...args);
+        },
+        set(...args) {
+          return Reflect.set(...args);
+        }
+      });
+      return actions[actionName].apply(trackedStore, arguments);
+    };
+  }
+}
+function devtoolsPlugin({ app, store, options }) {
+  if (store.$id.startsWith("__hot:")) {
+    return;
+  }
+  if (options.state) {
+    store._isOptionsAPI = true;
+  }
+  if (typeof options.state === "function") {
+    patchActionForGrouping(
+      // @ts-expect-error: can cast the store...
+      store,
+      Object.keys(options.actions)
+    );
+    const originalHotUpdate = store._hotUpdate;
+    toRaw(store)._hotUpdate = function(newStore) {
+      originalHotUpdate.apply(this, arguments);
+      patchActionForGrouping(store, Object.keys(newStore._hmrPayload.actions));
+    };
+  }
+  addStoreToDevtools(
+    app,
+    // FIXME: is there a way to allow the assignment from Store<Id, S, G, A> to StoreGeneric?
+    store
+  );
+}
+function createPinia() {
+  const scope = effectScope(true);
+  const state = scope.run(() => ref({}));
+  let _p = [];
+  let toBeInstalled = [];
+  const pinia = markRaw({
+    install(app) {
+      setActivePinia(pinia);
+      {
+        pinia._a = app;
+        app.provide(piniaSymbol, pinia);
+        app.config.globalProperties.$pinia = pinia;
+        toBeInstalled.forEach((plugin2) => _p.push(plugin2));
+        toBeInstalled = [];
+      }
+    },
+    use(plugin2) {
+      if (!this._a && !isVue2) {
+        toBeInstalled.push(plugin2);
+      } else {
+        _p.push(plugin2);
+      }
+      return this;
+    },
+    _p,
+    // it's actually undefined here
+    // @ts-expect-error
+    _a: null,
+    _e: scope,
+    _s: /* @__PURE__ */ new Map(),
+    state
+  });
+  if (USE_DEVTOOLS && typeof Proxy !== "undefined") {
+    pinia.use(devtoolsPlugin);
+  }
+  return pinia;
+}
+const isUseStore = (fn) => {
+  return typeof fn === "function" && typeof fn.$id === "string";
+};
+function patchObject(newState, oldState) {
+  for (const key in oldState) {
+    const subPatch = oldState[key];
+    if (!(key in newState)) {
+      continue;
+    }
+    const targetValue = newState[key];
+    if (isPlainObject(targetValue) && isPlainObject(subPatch) && !isRef(subPatch) && !isReactive(subPatch)) {
+      newState[key] = patchObject(targetValue, subPatch);
+    } else {
+      {
+        newState[key] = subPatch;
+      }
+    }
+  }
+  return newState;
+}
+function acceptHMRUpdate(initialUseStore, hot) {
+  return (newModule) => {
+    const pinia = hot.data.pinia || initialUseStore._pinia;
+    if (!pinia) {
+      return;
+    }
+    hot.data.pinia = pinia;
+    for (const exportName in newModule) {
+      const useStore = newModule[exportName];
+      if (isUseStore(useStore) && pinia._s.has(useStore.$id)) {
+        const id = useStore.$id;
+        if (id !== initialUseStore.$id) {
+          console.warn(`The id of the store changed from "${initialUseStore.$id}" to "${id}". Reloading.`);
+          return hot.invalidate();
+        }
+        const existingStore = pinia._s.get(id);
+        if (!existingStore) {
+          console.log(`[Pinia]: skipping hmr because store doesn't exist yet`);
+          return;
+        }
+        useStore(pinia, existingStore);
+      }
+    }
+  };
+}
+const noop = () => {
+};
+function addSubscription(subscriptions, callback, detached, onCleanup = noop) {
+  subscriptions.push(callback);
+  const removeSubscription = () => {
+    const idx = subscriptions.indexOf(callback);
+    if (idx > -1) {
+      subscriptions.splice(idx, 1);
+      onCleanup();
+    }
+  };
+  if (!detached && getCurrentScope()) {
+    onScopeDispose(removeSubscription);
+  }
+  return removeSubscription;
+}
+function triggerSubscriptions(subscriptions, ...args) {
+  subscriptions.slice().forEach((callback) => {
+    callback(...args);
+  });
+}
+function mergeReactiveObjects(target, patchToApply) {
+  if (target instanceof Map && patchToApply instanceof Map) {
+    patchToApply.forEach((value, key) => target.set(key, value));
+  }
+  if (target instanceof Set && patchToApply instanceof Set) {
+    patchToApply.forEach(target.add, target);
+  }
+  for (const key in patchToApply) {
+    if (!patchToApply.hasOwnProperty(key))
+      continue;
+    const subPatch = patchToApply[key];
+    const targetValue = target[key];
+    if (isPlainObject(targetValue) && isPlainObject(subPatch) && target.hasOwnProperty(key) && !isRef(subPatch) && !isReactive(subPatch)) {
+      target[key] = mergeReactiveObjects(targetValue, subPatch);
+    } else {
+      target[key] = subPatch;
+    }
+  }
+  return target;
+}
+const skipHydrateSymbol = Symbol("pinia:skipHydration");
+function skipHydrate(obj) {
+  return Object.defineProperty(obj, skipHydrateSymbol, {});
+}
+function shouldHydrate(obj) {
+  return !isPlainObject(obj) || !obj.hasOwnProperty(skipHydrateSymbol);
+}
+const { assign } = Object;
+function isComputed(o2) {
+  return !!(isRef(o2) && o2.effect);
+}
+function createOptionsStore(id, options, pinia, hot) {
+  const { state, actions, getters } = options;
+  const initialState = pinia.state.value[id];
+  let store;
+  function setup() {
+    if (!initialState && !hot) {
+      {
+        pinia.state.value[id] = state ? state() : {};
+      }
+    }
+    const localState = hot ? (
+      // use ref() to unwrap refs inside state TODO: check if this is still necessary
+      toRefs(ref(state ? state() : {}).value)
+    ) : toRefs(pinia.state.value[id]);
+    return assign(localState, actions, Object.keys(getters || {}).reduce((computedGetters, name) => {
+      if (name in localState) {
+        console.warn(`[🍍]: A getter cannot have the same name as another state property. Rename one of them. Found with "${name}" in store "${id}".`);
+      }
+      computedGetters[name] = markRaw(computed(() => {
+        setActivePinia(pinia);
+        const store2 = pinia._s.get(id);
+        return getters[name].call(store2, store2);
+      }));
+      return computedGetters;
+    }, {}));
+  }
+  store = createSetupStore(id, setup, options, pinia, hot, true);
+  return store;
+}
+function createSetupStore($id, setup, options = {}, pinia, hot, isOptionsStore) {
+  let scope;
+  const optionsForPlugin = assign({ actions: {} }, options);
+  if (!pinia._e.active) {
+    throw new Error("Pinia destroyed");
+  }
+  const $subscribeOptions = {
+    deep: true
+    // flush: 'post',
+  };
+  {
+    $subscribeOptions.onTrigger = (event) => {
+      if (isListening) {
+        debuggerEvents = event;
+      } else if (isListening == false && !store._hotUpdating) {
+        if (Array.isArray(debuggerEvents)) {
+          debuggerEvents.push(event);
+        } else {
+          console.error("🍍 debuggerEvents should be an array. This is most likely an internal Pinia bug.");
+        }
+      }
+    };
+  }
+  let isListening;
+  let isSyncListening;
+  let subscriptions = markRaw([]);
+  let actionSubscriptions = markRaw([]);
+  let debuggerEvents;
+  const initialState = pinia.state.value[$id];
+  if (!isOptionsStore && !initialState && !hot) {
+    {
+      pinia.state.value[$id] = {};
+    }
+  }
+  const hotState = ref({});
+  let activeListener;
+  function $patch(partialStateOrMutator) {
+    let subscriptionMutation;
+    isListening = isSyncListening = false;
+    {
+      debuggerEvents = [];
+    }
+    if (typeof partialStateOrMutator === "function") {
+      partialStateOrMutator(pinia.state.value[$id]);
+      subscriptionMutation = {
+        type: MutationType.patchFunction,
+        storeId: $id,
+        events: debuggerEvents
+      };
+    } else {
+      mergeReactiveObjects(pinia.state.value[$id], partialStateOrMutator);
+      subscriptionMutation = {
+        type: MutationType.patchObject,
+        payload: partialStateOrMutator,
+        storeId: $id,
+        events: debuggerEvents
+      };
+    }
+    const myListenerId = activeListener = Symbol();
+    nextTick$1().then(() => {
+      if (activeListener === myListenerId) {
+        isListening = true;
+      }
+    });
+    isSyncListening = true;
+    triggerSubscriptions(subscriptions, subscriptionMutation, pinia.state.value[$id]);
+  }
+  const $reset = isOptionsStore ? function $reset2() {
+    const { state } = options;
+    const newState = state ? state() : {};
+    this.$patch(($state) => {
+      assign($state, newState);
+    });
+  } : (
+    /* istanbul ignore next */
+    () => {
+      throw new Error(`🍍: Store "${$id}" is built using the setup syntax and does not implement $reset().`);
+    }
+  );
+  function $dispose() {
+    scope.stop();
+    subscriptions = [];
+    actionSubscriptions = [];
+    pinia._s.delete($id);
+  }
+  function wrapAction(name, action) {
+    return function() {
+      setActivePinia(pinia);
+      const args = Array.from(arguments);
+      const afterCallbackList = [];
+      const onErrorCallbackList = [];
+      function after(callback) {
+        afterCallbackList.push(callback);
+      }
+      function onError(callback) {
+        onErrorCallbackList.push(callback);
+      }
+      triggerSubscriptions(actionSubscriptions, {
+        args,
+        name,
+        store,
+        after,
+        onError
+      });
+      let ret;
+      try {
+        ret = action.apply(this && this.$id === $id ? this : store, args);
+      } catch (error) {
+        triggerSubscriptions(onErrorCallbackList, error);
+        throw error;
+      }
+      if (ret instanceof Promise) {
+        return ret.then((value) => {
+          triggerSubscriptions(afterCallbackList, value);
+          return value;
+        }).catch((error) => {
+          triggerSubscriptions(onErrorCallbackList, error);
+          return Promise.reject(error);
+        });
+      }
+      triggerSubscriptions(afterCallbackList, ret);
+      return ret;
+    };
+  }
+  const _hmrPayload = /* @__PURE__ */ markRaw({
+    actions: {},
+    getters: {},
+    state: [],
+    hotState
+  });
+  const partialStore = {
+    _p: pinia,
+    // _s: scope,
+    $id,
+    $onAction: addSubscription.bind(null, actionSubscriptions),
+    $patch,
+    $reset,
+    $subscribe(callback, options2 = {}) {
+      const removeSubscription = addSubscription(subscriptions, callback, options2.detached, () => stopWatcher());
+      const stopWatcher = scope.run(() => watch(() => pinia.state.value[$id], (state) => {
+        if (options2.flush === "sync" ? isSyncListening : isListening) {
+          callback({
+            storeId: $id,
+            type: MutationType.direct,
+            events: debuggerEvents
+          }, state);
+        }
+      }, assign({}, $subscribeOptions, options2)));
+      return removeSubscription;
+    },
+    $dispose
+  };
+  const store = reactive(
+    assign(
+      {
+        _hmrPayload,
+        _customProperties: markRaw(/* @__PURE__ */ new Set())
+        // devtools custom properties
+      },
+      partialStore
+      // must be added later
+      // setupStore
+    )
+  );
+  pinia._s.set($id, store);
+  const setupStore = pinia._e.run(() => {
+    scope = effectScope();
+    return scope.run(() => setup());
+  });
+  for (const key in setupStore) {
+    const prop = setupStore[key];
+    if (isRef(prop) && !isComputed(prop) || isReactive(prop)) {
+      if (hot) {
+        set(hotState.value, key, toRef(setupStore, key));
+      } else if (!isOptionsStore) {
+        if (initialState && shouldHydrate(prop)) {
+          if (isRef(prop)) {
+            prop.value = initialState[key];
+          } else {
+            mergeReactiveObjects(prop, initialState[key]);
+          }
+        }
+        {
+          pinia.state.value[$id][key] = prop;
+        }
+      }
+      {
+        _hmrPayload.state.push(key);
+      }
+    } else if (typeof prop === "function") {
+      const actionValue = hot ? prop : wrapAction(key, prop);
+      {
+        setupStore[key] = actionValue;
+      }
+      {
+        _hmrPayload.actions[key] = prop;
+      }
+      optionsForPlugin.actions[key] = prop;
+    } else {
+      if (isComputed(prop)) {
+        _hmrPayload.getters[key] = isOptionsStore ? (
+          // @ts-expect-error
+          options.getters[key]
+        ) : prop;
+        if (IS_CLIENT) {
+          const getters = setupStore._getters || // @ts-expect-error: same
+          (setupStore._getters = markRaw([]));
+          getters.push(key);
+        }
+      }
+    }
+  }
+  {
+    assign(store, setupStore);
+    assign(toRaw(store), setupStore);
+  }
+  Object.defineProperty(store, "$state", {
+    get: () => hot ? hotState.value : pinia.state.value[$id],
+    set: (state) => {
+      if (hot) {
+        throw new Error("cannot set hotState");
+      }
+      $patch(($state) => {
+        assign($state, state);
+      });
+    }
+  });
+  {
+    store._hotUpdate = markRaw((newStore) => {
+      store._hotUpdating = true;
+      newStore._hmrPayload.state.forEach((stateKey) => {
+        if (stateKey in store.$state) {
+          const newStateTarget = newStore.$state[stateKey];
+          const oldStateSource = store.$state[stateKey];
+          if (typeof newStateTarget === "object" && isPlainObject(newStateTarget) && isPlainObject(oldStateSource)) {
+            patchObject(newStateTarget, oldStateSource);
+          } else {
+            newStore.$state[stateKey] = oldStateSource;
+          }
+        }
+        set(store, stateKey, toRef(newStore.$state, stateKey));
+      });
+      Object.keys(store.$state).forEach((stateKey) => {
+        if (!(stateKey in newStore.$state)) {
+          del(store, stateKey);
+        }
+      });
+      isListening = false;
+      isSyncListening = false;
+      pinia.state.value[$id] = toRef(newStore._hmrPayload, "hotState");
+      isSyncListening = true;
+      nextTick$1().then(() => {
+        isListening = true;
+      });
+      for (const actionName in newStore._hmrPayload.actions) {
+        const action = newStore[actionName];
+        set(store, actionName, wrapAction(actionName, action));
+      }
+      for (const getterName in newStore._hmrPayload.getters) {
+        const getter = newStore._hmrPayload.getters[getterName];
+        const getterValue = isOptionsStore ? (
+          // special handling of options api
+          computed(() => {
+            setActivePinia(pinia);
+            return getter.call(store, store);
+          })
+        ) : getter;
+        set(store, getterName, getterValue);
+      }
+      Object.keys(store._hmrPayload.getters).forEach((key) => {
+        if (!(key in newStore._hmrPayload.getters)) {
+          del(store, key);
+        }
+      });
+      Object.keys(store._hmrPayload.actions).forEach((key) => {
+        if (!(key in newStore._hmrPayload.actions)) {
+          del(store, key);
+        }
+      });
+      store._hmrPayload = newStore._hmrPayload;
+      store._getters = newStore._getters;
+      store._hotUpdating = false;
+    });
+  }
+  if (USE_DEVTOOLS) {
+    const nonEnumerable = {
+      writable: true,
+      configurable: true,
+      // avoid warning on devtools trying to display this property
+      enumerable: false
+    };
+    ["_p", "_hmrPayload", "_getters", "_customProperties"].forEach((p2) => {
+      Object.defineProperty(store, p2, assign({ value: store[p2] }, nonEnumerable));
+    });
+  }
+  pinia._p.forEach((extender) => {
+    if (USE_DEVTOOLS) {
+      const extensions = scope.run(() => extender({
+        store,
+        app: pinia._a,
+        pinia,
+        options: optionsForPlugin
+      }));
+      Object.keys(extensions || {}).forEach((key) => store._customProperties.add(key));
+      assign(store, extensions);
+    } else {
+      assign(store, scope.run(() => extender({
+        store,
+        app: pinia._a,
+        pinia,
+        options: optionsForPlugin
+      })));
+    }
+  });
+  if (store.$state && typeof store.$state === "object" && typeof store.$state.constructor === "function" && !store.$state.constructor.toString().includes("[native code]")) {
+    console.warn(`[🍍]: The "state" must be a plain object. It cannot be
+	state: () => new MyClass()
+Found in store "${store.$id}".`);
+  }
+  if (initialState && isOptionsStore && options.hydrate) {
+    options.hydrate(store.$state, initialState);
+  }
+  isListening = true;
+  isSyncListening = true;
+  return store;
+}
+function defineStore(idOrOptions, setup, setupOptions) {
+  let id;
+  let options;
+  const isSetupStore = typeof setup === "function";
+  if (typeof idOrOptions === "string") {
+    id = idOrOptions;
+    options = isSetupStore ? setupOptions : setup;
+  } else {
+    options = idOrOptions;
+    id = idOrOptions.id;
+  }
+  function useStore(pinia, hot) {
+    const currentInstance2 = getCurrentInstance();
+    pinia = // in test mode, ignore the argument provided as we can always retrieve a
+    // pinia instance with getActivePinia()
+    pinia || currentInstance2 && inject(piniaSymbol, null);
+    if (pinia)
+      setActivePinia(pinia);
+    if (!activePinia) {
+      throw new Error(`[🍍]: getActivePinia was called with no active Pinia. Did you forget to install pinia?
+	const pinia = createPinia()
+	app.use(pinia)
+This will fail in production.`);
+    }
+    pinia = activePinia;
+    if (!pinia._s.has(id)) {
+      if (isSetupStore) {
+        createSetupStore(id, setup, options, pinia);
+      } else {
+        createOptionsStore(id, options, pinia);
+      }
+      {
+        useStore._pinia = pinia;
+      }
+    }
+    const store = pinia._s.get(id);
+    if (hot) {
+      const hotId = "__hot:" + id;
+      const newStore = isSetupStore ? createSetupStore(hotId, setup, options, pinia, true) : createOptionsStore(hotId, assign({}, options), pinia, true);
+      hot._hotUpdate(newStore);
+      delete pinia.state.value[hotId];
+      pinia._s.delete(hotId);
+    }
+    if (IS_CLIENT && currentInstance2 && currentInstance2.proxy && // avoid adding stores that are just built for hot module replacement
+    !hot) {
+      const vm = currentInstance2.proxy;
+      const cache = "_pStores" in vm ? vm._pStores : vm._pStores = {};
+      cache[id] = store;
+    }
+    return store;
+  }
+  useStore.$id = id;
+  return useStore;
+}
+let mapStoreSuffix = "Store";
+function setMapStoreSuffix(suffix) {
+  mapStoreSuffix = suffix;
+}
+function mapStores(...stores) {
+  if (Array.isArray(stores[0])) {
+    console.warn(`[🍍]: Directly pass all stores to "mapStores()" without putting them in an array:
+Replace
+	mapStores([useAuthStore, useCartStore])
+with
+	mapStores(useAuthStore, useCartStore)
+This will fail in production if not fixed.`);
+    stores = stores[0];
+  }
+  return stores.reduce((reduced, useStore) => {
+    reduced[useStore.$id + mapStoreSuffix] = function() {
+      return useStore(this.$pinia);
+    };
+    return reduced;
+  }, {});
+}
+function mapState(useStore, keysOrMapper) {
+  return Array.isArray(keysOrMapper) ? keysOrMapper.reduce((reduced, key) => {
+    reduced[key] = function() {
+      return useStore(this.$pinia)[key];
+    };
+    return reduced;
+  }, {}) : Object.keys(keysOrMapper).reduce((reduced, key) => {
+    reduced[key] = function() {
+      const store = useStore(this.$pinia);
+      const storeKey = keysOrMapper[key];
+      return typeof storeKey === "function" ? storeKey.call(this, store) : store[storeKey];
+    };
+    return reduced;
+  }, {});
+}
+const mapGetters = mapState;
+function mapActions(useStore, keysOrMapper) {
+  return Array.isArray(keysOrMapper) ? keysOrMapper.reduce((reduced, key) => {
+    reduced[key] = function(...args) {
+      return useStore(this.$pinia)[key](...args);
+    };
+    return reduced;
+  }, {}) : Object.keys(keysOrMapper).reduce((reduced, key) => {
+    reduced[key] = function(...args) {
+      return useStore(this.$pinia)[keysOrMapper[key]](...args);
+    };
+    return reduced;
+  }, {});
+}
+function mapWritableState(useStore, keysOrMapper) {
+  return Array.isArray(keysOrMapper) ? keysOrMapper.reduce((reduced, key) => {
+    reduced[key] = {
+      get() {
+        return useStore(this.$pinia)[key];
+      },
+      set(value) {
+        return useStore(this.$pinia)[key] = value;
+      }
+    };
+    return reduced;
+  }, {}) : Object.keys(keysOrMapper).reduce((reduced, key) => {
+    reduced[key] = {
+      get() {
+        return useStore(this.$pinia)[keysOrMapper[key]];
+      },
+      set(value) {
+        return useStore(this.$pinia)[keysOrMapper[key]] = value;
+      }
+    };
+    return reduced;
+  }, {});
+}
+function storeToRefs(store) {
+  {
+    store = toRaw(store);
+    const refs = {};
+    for (const key in store) {
+      const value = store[key];
+      if (isRef(value) || isReactive(value)) {
+        refs[key] = // ---
+        toRef(store, key);
+      }
+    }
+    return refs;
+  }
+}
+const PiniaVuePlugin = function(_Vue) {
+  _Vue.mixin({
+    beforeCreate() {
+      const options = this.$options;
+      if (options.pinia) {
+        const pinia = options.pinia;
+        if (!this._provided) {
+          const provideCache = {};
+          Object.defineProperty(this, "_provided", {
+            get: () => provideCache,
+            set: (v) => Object.assign(provideCache, v)
+          });
+        }
+        this._provided[piniaSymbol] = pinia;
+        if (!this.$pinia) {
+          this.$pinia = pinia;
+        }
+        pinia._a = this;
+        if (IS_CLIENT) {
+          setActivePinia(pinia);
+        }
+        if (USE_DEVTOOLS) {
+          registerPiniaDevtools(pinia._a);
+        }
+      } else if (!this.$pinia && options.parent && options.parent.$pinia) {
+        this.$pinia = options.parent.$pinia;
+      }
+    },
+    destroyed() {
+      delete this._pStores;
+    }
+  });
+};
+const Pinia = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  get MutationType() {
+    return MutationType;
+  },
+  PiniaVuePlugin,
+  acceptHMRUpdate,
+  createPinia,
+  defineStore,
+  getActivePinia,
+  mapActions,
+  mapGetters,
+  mapState,
+  mapStores,
+  mapWritableState,
+  setActivePinia,
+  setMapStoreSuffix,
+  skipHydrate,
+  storeToRefs
+}, Symbol.toStringTag, { value: "Module" }));
+exports.Pinia = Pinia;
 exports._export_sfc = _export_sfc;
+exports.createPinia = createPinia;
 exports.createSSRApp = createSSRApp;
+<<<<<<< HEAD
 exports.e = e;
 exports.f = f;
 exports.index = index;
@@ -6887,3 +7849,5 @@ exports.resolveComponent = resolveComponent;
 exports.s = s;
 exports.sr = sr;
 exports.t = t;
+=======
+>>>>>>> wbh

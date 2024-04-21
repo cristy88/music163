@@ -1,10 +1,14 @@
 <script setup>
 	import { ref } from 'vue'
 	import { loginApi, loginStatusApi } from '../../services'
+	import { useUserInfo } from '../../store/userInfo'
+	
+	const userInfo = useUserInfo()
 	
 	const getLoginStatu = async () => {
 		const status = await loginStatusApi()
-		if (status.data.code === 200) {
+		if (status.data.account) {
+			uni.setStorageSync('id', String(status.data.account.id))
 			uni.switchTab({
 				url: '/pages/index/index'
 			})
@@ -54,6 +58,8 @@
 		})
 		uni.setStorageSync('curCookie', res.cookie)
 		uni.setStorageSync('token', res.token)
+		// 调用登陆状态,记录用户id
+		getLoginStatu()
 		uni.switchTab({
 			url:'/pages/index/index'
 		})

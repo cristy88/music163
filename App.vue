@@ -36,4 +36,19 @@
 		color: #333;
 		padding: 10px;
 	}
+	
+	/* #ifdef H5 */
+	*{
+		padding: 0;
+		margin: 0;
+		text-decoration: none;
+		list-style: none;
+		box-sizing: border-box;
+	}
+	html, body{
+		width: 100vw;
+		height: 100vh;
+	}
+	/* #endif */
+
 </style>

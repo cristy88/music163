@@ -19,6 +19,7 @@
 			banners.value = res.banners
 			console.log(res)
 			const resIcon = await getHomeIconApi()
+			console.log('获得icon', resIcon)
 			if (resIcon.code === 200) {
 				icons.value = resIcon.data
 			}
@@ -58,7 +59,12 @@
 			<view class="info_top">我喜欢的音乐</view>
 			<view class="info_buttom"></view>
 		</view>
-		<view class="Play"></view>
+		<view class="Play">
+			<view class="songsheet">
+				<view class="">推荐歌单</view>
+				<view class="">...</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -79,9 +85,6 @@
 			height: 100%;
 		}
 	}
-
-	
-
 	.Icons {
 		width: rpx(342);
 		height: rpx(90);
@@ -120,5 +123,18 @@
 			height: rpx(60);
 		}
 	}
+	
+	.Play {
+		width: rpx(342);
+		margin: 0 auto;
+	}
+	
+	.songsheet {
+		height: rpx(54);
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	
 
 </style>

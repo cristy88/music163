@@ -1,0 +1,14 @@
+/services/index  实现接口
+登录   loginApi
+登录状态   loginStatusApi
+轮播图  getBannerApi
+获得首页图标   getHomeIconApi
+获得每日推荐歌单 getRrecommendApi
+
+
+
+/services/userApi   用户相关接口
+获取用户歌单   getUserSongSheetApi
+相关歌单推荐   isLikeSongSheet
+获取用户详细信息  getUserInfoApi
+获取用户信息 , 歌单，收藏，mv, dj 数量  getUserSUMApi

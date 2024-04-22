@@ -85,15 +85,8 @@
 			"navigationBarTitleText" : "歌单",
 			"enablePullDownRefresh" : false
 		}
-	},
-	{
-		"path" : "pages/player/player",
-		"style" : 
-		{
-			"navigationBarTitleText" : "播放",
-			"enablePullDownRefresh" : false
-		}
-	}],
+	}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "music",

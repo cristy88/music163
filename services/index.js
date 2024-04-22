@@ -45,3 +45,10 @@ export const toplistApi=()=>{
 export const playlistDetailApi = (id) => {
 	return request({url:'/playlist/detail',data:{id} })
 }
+
+export const commentApi = (type,id) =>{
+	return request({
+		url:`/comment/${type}`,
+		data:{id}
+	})
+}

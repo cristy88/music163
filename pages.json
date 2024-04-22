@@ -63,12 +63,29 @@
 		}
 	},
 	{
-		"path" : "pages/songs/songs",
+		"path" : "pages/search/search",
 		"style" : 
 		{
-			"navigationBarTitleText" : "歌单广场"
+			"navigationBarTitleText" : "搜索",
+			"enablePullDownRefresh" : false
 		}
-	}],
+	},
+	{"path" : "pages/toplist/toplist",
+		"style" : 
+		{
+			"navigationBarTitleText" : "排行榜",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/songlist/songlist",
+		"style" : 
+		{
+			"navigationBarTitleText" : "歌单",
+			"enablePullDownRefresh" : false
+		}
+	}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "music",

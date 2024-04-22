@@ -35,7 +35,7 @@
 	</view>
 </template>
 
-<style>
+<style lang="scss">
 	.main{
 		height: 535rpx;
 		color: white;

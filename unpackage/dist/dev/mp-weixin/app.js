@@ -2,15 +2,17 @@
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const common_vendor = require("./common/vendor.js");
 if (!Math) {
+  "./pages/login/login.js";
   "./pages/index/index.js";
   "./pages/podcast/podcast.js";
   "./pages/mine/mine.js";
   "./pages/attention/attention.js";
   "./pages/community/community.js";
-  "./pages/login/login.js";
   "./pages/daily/daily.js";
   "./pages/player/player.js";
-  "./pages/songs/songs.js";
+  "./pages/search/search.js";
+  "./pages/toplist/toplist.js";
+  "./pages/songlist/songlist.js";
 }
 const _sfc_main = {
   onLaunch: function() {

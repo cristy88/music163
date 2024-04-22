@@ -24,8 +24,16 @@ const getHomeIconApi = () => {
 const getRrecommendApi = () => {
   return services_request.request({ "url": "/recommend/resource" });
 };
+const toplistApi = () => {
+  return services_request.request({ url: "/toplist/detail" });
+};
+const playlistDetailApi = (id) => {
+  return services_request.request({ url: "/playlist/detail", data: { id } });
+};
 exports.getBannerApi = getBannerApi;
 exports.getHomeIconApi = getHomeIconApi;
 exports.getRrecommendApi = getRrecommendApi;
 exports.loginApi = loginApi;
 exports.loginStatusApi = loginStatusApi;
+exports.playlistDetailApi = playlistDetailApi;
+exports.toplistApi = toplistApi;

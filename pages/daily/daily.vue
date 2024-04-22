@@ -58,10 +58,9 @@
 		</navigator>
 		<view class="tab">
 			<view
-				class="tab-item"
 				v-for="(item, index) in title"
 				key="item"
-				:class="{active: curIndex === index}"
+				:class="[' tab-item' ,{active: curIndex === index}]"
 				@click="curIndex = index"
 				:current="curIndex">
 				<text>{{item}}</text>
@@ -126,6 +125,7 @@
 		.back{
 			position: absolute;
 			top: rpx(20);
+			// top: 20rpx;
 			left: rpx(16);
 			z-index: 1;
 			color: "#ffffff";

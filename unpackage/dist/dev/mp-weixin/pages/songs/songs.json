@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "歌单广场",
-  "usingComponents": {
-    "tab": "../../components/Tab"
-  }
-}

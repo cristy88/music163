@@ -84,3 +84,13 @@ export const toplistApi=()=>{
 export const playlistDetailApi = (id) => {
 	return request({url:'/playlist/detail',data:{id} })
 }
+
+//获取每日推荐歌曲
+export const getDailySongsApi = () => {
+	return request({url:'/recommend/songs'})
+}
+
+// 歌曲详情
+export const getSongDetailApi = (ids) => {
+	return request({url:'/song/detail', data:{ids}})
+}

@@ -1,9 +1,10 @@
 <script setup>
 	import { ref } from 'vue'
 	// import recommend from './wxcomponents/recommend/recommend.vue'
-	import { getRrecommendApi } from '../../services'
+	import { getDailySongsApi } from '../../services'
 	
 	const title = ['每日推荐', '风格推荐']
+	const recommendList = ref([])
 	// tab高亮
 	const curIndex = ref(0)
 	const changeIndex = (index) => {
@@ -15,8 +16,9 @@
 	// 获取歌曲列表数据
 	const getRrecommend = async () => {
 		try {
-			const res = await getRrecommendApi()
-			console.log(res)
+			const res = await getDailySongsApi()
+			console.log("推荐",res.data.dailySongs)
+			recommendList.value = res.data.dailySongs
 		} catch (e) {
 			console.log(e)
 		}
@@ -24,9 +26,10 @@
 	getRrecommend()
 	
 	// 跳转播放页面
-	const goPlayer = () => {
+	const goPlayer = (id) => {
+		console.log(id)
 		uni.navigateTo({
-			url: '/pages/player/player'
+			url: `/pages/player/player?id=${id}`
 		})
 	}
 	
@@ -37,8 +40,6 @@
 		refresh.value = false
 		console.log(refresh.value)
 	}
-
-	
 
 	
 	// 滑动改变tab？？？？？
@@ -58,10 +59,9 @@
 		</navigator>
 		<view class="tab">
 			<view
-				class="tab-item"
 				v-for="(item, index) in title"
-				key="item"
-				:class="{active: curIndex === index}"
+				:key="item"
+				:class="[' tab-item' ,{active: curIndex === index}]"
 				@click="curIndex = index"
 				:current="curIndex">
 				<text>{{item}}</text>
@@ -84,7 +84,7 @@
 						<view class="main">
 							<!-- 导航 -->
 							<view class="nav" @click="goPlayer">
-								<img class="playicon" src="../../static/play.png" alt="" />
+								<image class="playicon" src="../../static/play.png" alt="" />
 								<view class="playAll">
 									<text>播放全部</text>
 									<text class="vip">VIP歌曲免费畅听</text>
@@ -94,18 +94,23 @@
 							</view>
 							<!-- 歌曲列表展示 -->
 							<view class="songsList">
-								<view class="songs" @click="goPlayer">
-									<img class="img" src="" alt="" />
+								<!-- 跳转播放 @click="goPlayer(item.id)" -->
+								<view class="songs" v-for="item in recommendList" :key="item.id" @click="goPlayer(item.id)"> 
+									<img class="img" :src="item.al.picUrl" alt="" />
 									<view class="title">
 										<view class="song">
-											小美满
-											<text>(电影热辣滚烫)</text>
+											<view class="name">{{item.name}}</view>
+											<text v-for="alia in item.alia" :key="alia">({{alia}})</text>
 										</view>
 										<view class="singer">
-											周深
+											<view  v-for=" ar in item.ar" :key="ar.name">
+												{{ar.name}}<span v-if="ar !== item.ar[item.ar.length - 1]">/</span>
+											</view>
+											<text> - {{item.al.name}}</text>
 										</view>
 									</view>
-									<uni-icons class="detail" type="more-filled" size="26" color="#ADADAD"></uni-icons>
+									
+									<uni-icons class="detail" type="more-filled" size="20" color="#ADADAD"></uni-icons>
 								</view>
 							</view>
 						</view>
@@ -126,6 +131,7 @@
 		.back{
 			position: absolute;
 			top: rpx(20);
+			// top: 20rpx;
 			left: rpx(16);
 			z-index: 1;
 			color: "#ffffff";
@@ -173,14 +179,16 @@
 		.header{
 			height: rpx(180);
 			padding: 0 rpx(15);
-			background: rgba(0, 0, 0, .3);
+			background: url(../../static/img/dailyback.jpg) no-repeat center;
+			background-size: 100%;
 		}
 		.main{
 			flex: 1;
-			overflow: hidden;
+			overflow: auto;
 			background: #ffffff;
 			display: flex;
 			flex-direction: column;
+			::-webkit-scrollbar{width: 0rpx;};
 			.nav{
 				height: rpx(50);
 				padding: 0 rpx(15);
@@ -228,19 +236,31 @@
 					}
 					.title{
 						flex: 1;
+						overflow: hidden;
 						margin-left: rpx(10);
 						height: rpx(42);
 						.song{
 							font-size: rpx(16);
 							font-weight: 400;
 							line-height: rpx(25);
+							display: flex;
+							.name{
+								flex-shrink: 0;
+							}
 							text{
 								color: #ADADAD;
+								 white-space: nowrap;
+								 overflow: hidden;
+								 text-overflow: ellipsis;
 							}
 						}
 						.singer{
 							font-size: rpx(12);
 							color: #ADADAD;
+							display: flex;
+							text{
+								padding-left: rpx(4);
+							}
 						}
 					}
 					.detail{

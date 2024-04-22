@@ -30,9 +30,17 @@ const toplistApi = () => {
 const playlistDetailApi = (id) => {
   return services_request.request({ url: "/playlist/detail", data: { id } });
 };
+const getDailySongsApi = () => {
+  return services_request.request({ url: "/recommend/songs" });
+};
+const getSongDetailApi = (ids) => {
+  return services_request.request({ url: "/song/detail", data: { ids } });
+};
 exports.getBannerApi = getBannerApi;
+exports.getDailySongsApi = getDailySongsApi;
 exports.getHomeIconApi = getHomeIconApi;
 exports.getRrecommendApi = getRrecommendApi;
+exports.getSongDetailApi = getSongDetailApi;
 exports.loginApi = loginApi;
 exports.loginStatusApi = loginStatusApi;
 exports.playlistDetailApi = playlistDetailApi;

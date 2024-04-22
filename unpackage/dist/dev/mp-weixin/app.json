@@ -1,14 +1,16 @@
 {
   "pages": [
+    "pages/player/player",
+    "pages/login/login",
     "pages/index/index",
     "pages/podcast/podcast",
     "pages/mine/mine",
     "pages/attention/attention",
     "pages/community/community",
-    "pages/login/login",
     "pages/daily/daily",
-    "pages/player/player",
-    "pages/songs/songs"
+    "pages/search/search",
+    "pages/toplist/toplist",
+    "pages/songlist/songlist"
   ],
   "window": {
     "navigationBarTextStyle": "black",

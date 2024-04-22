@@ -1,1 +1,1 @@
-<view></view>
+<view class="App"><view class="header"><view class="s"><view class="icon1"></view></view><view class="status">+添加状态</view><view class="icon"><view class="search" bindtap="{{a}}"></view><view class="point"></view></view></view><view class="main"><main u-i="d1da91a6-0" bind:__l="__l"/></view><view class="music"><music u-i="d1da91a6-1" bind:__l="__l"/></view></view>

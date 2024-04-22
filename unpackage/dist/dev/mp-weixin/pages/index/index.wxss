@@ -50,3 +50,12 @@
   width: 160rpx;
   height: 120rpx;
 }
+.Play.data-v-1cf27b2a {
+  width: 684rpx;
+  margin: 0 auto;
+}
+.songsheet.data-v-1cf27b2a {
+  height: 108rpx;
+  display: flex;
+  justify-content: space-between;
+}

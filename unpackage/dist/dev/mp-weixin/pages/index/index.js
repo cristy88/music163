@@ -20,6 +20,7 @@ const _sfc_main = {
         banners.value = res.banners;
         console.log(res);
         const resIcon = await services_index.getHomeIconApi();
+        console.log("获得icon", resIcon);
         if (resIcon.code === 200) {
           icons.value = resIcon.data;
         }

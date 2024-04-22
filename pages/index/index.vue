@@ -1,7 +1,9 @@
 <script setup>
 	import { ref } from 'vue'
-	import { getBannerApi, getHomeIconApi, getRrecommendApi } from '../../services/index.js'
-	import { useUserInfo } from '../../store/userInfo.js';
+	import { getBannerApi, getHomeIconApi, getRrecommendApi, getCommandApi, getCommitSongApi } from '../../services/index.js'
+	import { useUserInfo } from '../../store/userInfo.js'
+	import SongSheet from './componets/songSheet.vue'
+	import HomeSearch from './componets/HomeSearch.vue'
 	
 	const user = useUserInfo()
 	console.log('用户信息', user.profile, user.musicSum)
@@ -13,7 +15,8 @@
 	const icons = ref([])
 	// 获取轮播图
 	const banners = ref([])
-	const recommends = ref([])
+	const recommends = ref([])   //展示歌单
+	const firstCommand = ref([])  //轮播歌单
 	
 	const getBanner = async () => {
 		try {
@@ -25,15 +28,31 @@
 			if (resIcon.code === 200) {
 				icons.value = resIcon.data
 			}
-			const command = await getRrecommendApi()
-			console.log('获得每日推荐歌单', command)
-			if (command.code === 200) recommends.value = command.recommend
 		} catch (e) {
 			console.log(e)
 		}
 	}
-	getBanner()
 	
+	const getSongSheet = async () => {
+		const res = await getRrecommendApi()
+		console.log('获得每日推荐歌单', res)
+		if (res.code === 200) {
+			const shuffled = res.recommend.slice().sort(() => Math.random() - 0.5) // 打乱数组顺序
+			recommends.value = shuffled.slice(0, 5) // 截取前count个元素
+			firstCommand.value = shuffled.slice(5)
+		}
+	}
+	
+	// 获得每日推荐歌曲
+	const getSong = async () => {
+		const res = await getCommitSongApi()
+		console.log('获得每日推荐歌曲', res)
+	}
+	
+	
+	getBanner()
+	getSongSheet()
+	getSong()
 	const clickIcon = (name) => {
 		console.log('跳转到icon', name, '界面')
 	}
@@ -41,45 +60,43 @@
 </script>
 
 <template>
-	<view class="uni-margin-wrap">
-		<swiper class="swiper" circular :indicator-dots="true" indicator-active-color="#ffffff" :autoplay="true" :circular="true">
-			<swiper-item v-for="item in banners" :key="item.targetId">
-				<image :src="item.imageUrl" mode="" />
-			</swiper-item>
-		</swiper>
-	</view>
-	<view class="Icons">
-		<view class="Icon" v-for="item in icons" :key="item.id" @click="clickIcon(item.name)">
-			<image :src="item.iconUrl" mode=""  />
-			<view class="title">{{item.name}}</view>
+	<view class="home">
+		<HomeSearch />
+		<view class="uni-margin-wrap">
+			<swiper class="swiper" circular :indicator-dots="true" indicator-active-color="#ffffff" :autoplay="true" :circular="true">
+				<swiper-item v-for="item in banners" :key="item.targetId">
+					<image :src="item.imageUrl" mode="" />
+				</swiper-item>
+			</swiper>
 		</view>
-	</view>
-	<view class="cart">
-		<view class="img">
-			<image src="" mode=""/>
-		</view>
-		<view class="info">
-			<view class="info_top">我喜欢的音乐</view>
-			<view class="info_buttom"></view>
-		</view>
-		<view class="">
-			
-		</view>
-	</view>
-	<view class="Play">
-		<div class="songsheet" v-for="item in recommends" :key="item.id">
-			<image :src="item.picUrl"  />
-			<view class="songsheetdesc">
-				{{item.name}}
+		<view class="Icons">
+			<view class="Icon" v-for="item in icons" :key="item.id" @click="clickIcon(item.name)">
+				<image :src="item.iconUrl" mode=""  />
+				<view class="title">{{item.name}}</view>
 			</view>
-		</div>
+		</view>
+		<view class="cart">
+			<view class="img">
+				<image src="" mode=""/>
+			</view>
+			<view class="info">
+				<view class="info_top">我喜欢的音乐</view>
+				<view class="info_buttom"></view>
+			</view>
+			<view class="">
+				
+			</view>
+		</view>
+		<SongSheet title="推荐歌单"  :firstCommand="firstCommand" :recommends="recommends" />
 	</view>
 </template>
 
 <style lang="scss" scoped>
-	
-	@function rpx($px) {
-		@return $px * 2rpx; 
+	.home {
+		width: 100%;
+		overflow: hidden;
+		overflow-y: auto;
+		height: 100%;
 	}
 	
 	.uni-margin-wrap {
@@ -112,10 +129,10 @@
 			color: #73737e;
 			font-size: rpx(14);
 			text-align: center;
-			border-radius: 50%;
 			image {
 				width: 80%;
 				background: #FB3454;
+				border-radius: 50%;
 			}
 			uni-image {
 				width: 80%;
@@ -132,23 +149,6 @@
 			height: rpx(60);
 		}
 	}
-	
-	.Play {
-		margin-left: rpx(16);
-		height: rpx(164);
-	}
-	
-	.songsheet {
-		height: rpx(164);
-		display: flex;
-		// justify-content: space-between;
-		image {
-			width: rpx(112);
-			height: rpx(112);
-			border-radius: rpx(10);
-		}
-	}
-	
-	
+
 
 </style>

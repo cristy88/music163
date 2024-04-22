@@ -36,6 +36,16 @@ export const getRrecommendApi = () => {
 	return request({'url': '/recommend/resource'})
 }
 
+// 获得推荐歌单
+export const getCommandApi = () => {
+	return request({url: '/personalized'})
+}
+
+// 获得每日推荐歌曲
+export const getCommitSongApi = () => {
+	return request({url: '/recommend/songs'})
+}
+
 // 获取用户等级信息 
 export const getUserLevelrecomApi = () => {
 	return request({'url': '/user/level'})
@@ -83,4 +93,53 @@ export const toplistApi=()=>{
 //歌单详情接口
 export const playlistDetailApi = (id) => {
 	return request({url:'/playlist/detail',data:{id} })
+}
+
+// 获取热门话题
+export const getHotTopicApi = () => {
+	return request({url: '/hot/topic'})
+}
+
+// 搜索默认内容
+export const searchDefaultApi = () => {
+	return request({'url': '/search/default'})
+}
+
+// 搜索接口
+export const searchKeywordApi = (keywords, limit=30, type=1018) => {
+	return request({
+		url: '/search',
+		data: {
+			keywords,
+			limit,
+			type
+		}
+	})
+}
+
+// 热搜列表详情
+export const searchHotApi = () => {
+	return request({
+		url: '/search/hot/detail'
+	})
+}
+
+// 搜索建议
+export const searchSuggest = (keywords) => {
+	return request({
+		url: '/search/suggest',
+		data: {
+			keywords
+		}
+	})
+}
+
+// 搜索多重匹配
+export const serachMult = (keywords) => {
+	return request({
+		url: '/search/multimatch',
+		data: {
+			keywords
+		}
+	})
 }

@@ -1,13 +1,13 @@
 {
   "pages": [
-    "pages/daily/daily",
+    "pages/player/player",
     "pages/login/login",
     "pages/index/index",
     "pages/podcast/podcast",
     "pages/mine/mine",
     "pages/attention/attention",
     "pages/community/community",
-    "pages/player/player",
+    "pages/daily/daily",
     "pages/search/search",
     "pages/toplist/toplist",
     "pages/songlist/songlist"

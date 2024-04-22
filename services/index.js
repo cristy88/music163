@@ -94,3 +94,9 @@ export const getDailySongsApi = () => {
 export const getSongDetailApi = (ids) => {
 	return request({url:'/song/detail', data:{ids}})
 }
+export const commentApi = (type,id) =>{
+	return request({
+		url:`/comment/${type}`,
+		data:{id}
+	})
+}

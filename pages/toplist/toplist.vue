@@ -32,7 +32,7 @@
 		>
 			<view class="songs" v-for="(song,index) in item.tracks">
 				<view class="song-item">
-					<text>{{index+1}}.{{song.first}}</text>
+					<text class="song-name">{{index+1}}.{{song.first}}</text>
 					<text> --{{song.second}}</text>
 				</view>
 			</view>
@@ -55,8 +55,18 @@
 
 
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+.song-item{
+	width: 100%;
+	height: 24px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	flex-wrap: nowrap;
+}
+.song-name{
+	font-weight: bold;
+	margin-right: 6px;
+}
 .uni-grid-item{
 	margin-bottom: 20px;
 	padding: 16rpx;

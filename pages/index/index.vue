@@ -13,6 +13,8 @@
 	const icons = ref([])
 	// 获取轮播图
 	const banners = ref([])
+	const recommends = ref([])
+	
 	const getBanner = async () => {
 		try {
 			const res = await getBannerApi()
@@ -25,6 +27,7 @@
 			}
 			const command = await getRrecommendApi()
 			console.log('获得每日推荐歌单', command)
+			if (command.code === 200) recommends.value = command.recommend
 		} catch (e) {
 			console.log(e)
 		}
@@ -59,12 +62,17 @@
 			<view class="info_top">我喜欢的音乐</view>
 			<view class="info_buttom"></view>
 		</view>
-		<view class="Play">
-			<view class="songsheet">
-				<view class="">推荐歌单</view>
-				<view class="">...</view>
-			</view>
+		<view class="">
+			
 		</view>
+	</view>
+	<view class="Play">
+		<div class="songsheet" v-for="item in recommends" :key="item.id">
+			<image :src="item.picUrl"  />
+			<view class="songsheetdesc">
+				{{item.name}}
+			</view>
+		</div>
 	</view>
 </template>
 
@@ -104,6 +112,7 @@
 			color: #73737e;
 			font-size: rpx(14);
 			text-align: center;
+			border-radius: 50%;
 			image {
 				width: 80%;
 				background: #FB3454;
@@ -125,14 +134,19 @@
 	}
 	
 	.Play {
-		width: rpx(342);
-		margin: 0 auto;
+		margin-left: rpx(16);
+		height: rpx(164);
 	}
 	
 	.songsheet {
-		height: rpx(54);
+		height: rpx(164);
 		display: flex;
-		justify-content: space-between;
+		// justify-content: space-between;
+		image {
+			width: rpx(112);
+			height: rpx(112);
+			border-radius: rpx(10);
+		}
 	}
 	
 	

@@ -1,48 +1,64 @@
 <script setup>
-import Main from './component/main/Main.vue'
-import Music from './component/music/Music.vue'
-import Top from './component/top/Top.vue'
+	import { ref , defineEmits } from 'vue'
+	import Main from './component/main/Main.vue'
+	import Music from './component/music/Music.vue'
+	import Top from './component/top/Top.vue'
+	import TopLeft from '../topLeft/TopLeft.vue'
 
-// const data = {}	
-const search = ()=> {
-	uni.navigateTo({
-		url:'/pages/search/search'
-	})
-}
+		
+	const search = ()=> {
+		uni.navigateTo({
+			url:'/pages/search/search'
+		})
+	}
+
+
+	const showLeft = ref(false)
+	const showPoint = ref(false)
+	const handleClick = () => {
+		showPoint.value = false;
+	}
+	const handlClick = () => {
+		showLeft.value = false;
+	}
 
 </script>
 
 <template>
 	<view class="App">
-		<!-- <Top /> -->
+		<TopLeft v-if="showLeft" @click="handlClick()"/>
+		<Top v-if="showPoint" @click="handleClick()"/>
 		<view class="header">
 			<view class="s">
-				<!-- <uni-badge class="uni-badge-left-margin" :text="5" absolute="rightTop" :offset="[0, 10]" size="small"> -->
-					<view class="icon1"></view>
-				<!-- </uni-badge> -->
+				<uni-badge class="uni-badge-left-margin" :text="2" absolute="rightTop"
+				:offset="[-7, 8]" size="small">
+					<view class="icon1" @click="showLeft = !showLeft"></view>
+				</uni-badge>
 			</view>
 			<view class="status">+添加状态</view>
 			<view class="icon">
 				<view class="search" @click="search()"></view>
-				<view class="point" ></view>
+				<view class="point" @click="showPoint = !showPoint"></view>
 			</view>
 		</view>
-		<view class="main">
+		<view class="con">
 			<Main />
-		</view>
-		<view class="music">
 			<Music />
 		</view>
+		
 	</view>
 </template>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 .App{
 	width: 100vw;
 	height: 100vh;
 	background: url(./icon/icon_04.jpg) no-repeat;
 	background-size: 750rpx;
+	.con{
+		overflow: hidden;
+	}
 	.header{
 		background-color: rgba(0, 0, 0, .35);
 		height: 70rpx;
@@ -50,10 +66,13 @@ const search = ()=> {
 		justify-content: space-between;
 		align-items: center;
 		.s{
+			.uni-badge-left-margin{
+				z-index: 2;
+			}
 			.icon1{
 				padding: 15rpx;	
 				background: url(../mine/icon/icon_003.png) no-repeat;
-				background-size: 60rpx;
+				background-size: 50rpx;
 				margin-left: 5rpx;
 				margin-top: 5rpx;
 				width: 40rpx;
@@ -66,13 +85,12 @@ const search = ()=> {
 		}
 		.icon{
 			display: flex;
-			width: 120rpx;
-			padding: 25rpx;
-			justify-content: space-between;
+			width: 150rpx;
+			justify-content: space-around;
 			.search{
-				background: url(../mine/icon/icon_001.png) no-repeat;
-				background-size: 50rpx;
-				width: 50rpx;
+				background: url(../mine/icon/icon_001.png) no-repeat center;
+				background-size: 45rpx;
+				width: 80rpx;
 				height: 50rpx;
 			}
 			.point{

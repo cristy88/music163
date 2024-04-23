@@ -1,10 +1,15 @@
 
 <script setup>
+import { defineEmits } from 'vue';
+
+const $emit = () => {
+	// console.log('点击父组件');
+}
 	
 </script>
 
 <template>
-	<view class="box">
+	<view class="box" @click="$emit('handleClick')">
 		<view class="list">
 			<view class="list-tit">0616星</view>
 			<view class="list-one"><view class="img"></view>编辑资料</view>
@@ -16,17 +21,17 @@
 	
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.box{
 		width: 100vw;
 		height: 100vh;
-		background-color: rgba(0, 0, 0, .4);
+		background-color: rgba(0, 0, 0, .6);
 		position: fixed;
 		.list{
 			width: 100%;
 			height: 100%;
 			position: absolute;
-			top: 52%;
+			top: 50%;
 			left: 0;
 			background: white;
 			border-radius: 30rpx 30rpx 0 0;

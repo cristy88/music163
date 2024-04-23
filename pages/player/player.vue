@@ -8,12 +8,11 @@
 
 
 	const id = ref('')
-	// 展示页面
-	// const isShow = ref(true)
 	// 展示分享
 	const showShare = ref(false)
 	// 展示歌曲列表
 	const showPlayList = ref(false)
+	const popup = ref('')
 	
 	// 获取歌曲id
 	onLoad((option) => {
@@ -36,7 +35,6 @@
 	// 展示隐藏于页面，跳至上一页
 	const changePage = () => {
 		uni.navigateBack(-1)
-		console.log('跳转')
 	}
 	
 	// 展示隐藏分享
@@ -49,25 +47,12 @@
 		// #ifdef MP-WEIXIN
 			showShare.value = !showShare.value
 		// #endif
-
-
 	}
 	
 	// 展示隐藏播放列表
 	const changePlayList = e => {
-		console.log('展示播放列表',showPlayList.value)
-		// console.log(event.target)
-		// console.log(event.currentTarget)
-
-		// #ifndef MP-WEIXIN
-		// if(event.target === event.currentTarget) {
-		// // 	console.log(111)
-			showPlayList.value = !showPlayList.value
-		// }
-		// #endif
-		// #ifdef MP-WEIXIN
-			showPlayList.value = !showPlayList.value
-		// #endif
+		showPlayList.value = !showPlayList.value
+		popup.value.open('bottom')
 	}
 	
 </script>
@@ -135,7 +120,9 @@
 			</view>
 		</view>
 		<Share v-if="showShare" @click="changeShare" :share="showShare" :changeShare="changeShare"></Share>
-		<PlayList v-if="showPlayList" @click="changePlayList"  :showPlayList="showPlayList" :changePlayList="changePlayList"/>
+		<uni-popup ref="popup" type="bottom" border-radius="10px 10px 0 0">
+			<PlayList></PlayList>
+		</uni-popup>
 	</view>
 </template>
 

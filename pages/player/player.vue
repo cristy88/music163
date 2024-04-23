@@ -3,11 +3,17 @@
 	import { onLoad } from "@dcloudio/uni-app"
 	import { getSongDetailApi } from '../../services'
 	import 'animate.css';
+	import Share from './components/share.vue'
+	import PlayList from '../../components/playList/playList.vue'
 
 
 	const id = ref('')
-  const popup = ref(null)
-	const isShow = ref(true)
+	// 展示页面
+	// const isShow = ref(true)
+	// 展示分享
+	const showShare = ref(false)
+	// 展示歌曲列表
+	const showPlayList = ref(false)
 	
 	// 获取歌曲id
 	onLoad((option) => {
@@ -19,7 +25,7 @@
 		ids = id?.value
 		try {
 			const res = await getSongDetailApi(ids)
-			console.log("推荐",res)
+			// console.log("推荐",res)
 		} catch (e) {
 			console.log(e)
 		}
@@ -29,76 +35,107 @@
 	
 	// 展示隐藏于页面，跳至上一页
 	const changePage = () => {
-		console.log('显示隐藏页面', isShow.value)
-		isShow.value = !isShow.value
 		uni.navigateBack(-1)
+		console.log('跳转')
+	}
+	
+	// 展示隐藏分享
+	const changeShare = e => {
+		// #ifndef MP-WEIXIN
+		if(event.target === event.currentTarget) {
+			showShare.value = !showShare.value
+		}
+		// #endif
+		// #ifdef MP-WEIXIN
+			showShare.value = !showShare.value
+		// #endif
+
+
+	}
+	
+	// 展示隐藏播放列表
+	const changePlayList = e => {
+		console.log('展示播放列表',showPlayList.value)
+		// console.log(event.target)
+		// console.log(event.currentTarget)
+
+		// #ifndef MP-WEIXIN
+		// if(event.target === event.currentTarget) {
+		// // 	console.log(111)
+			showPlayList.value = !showPlayList.value
+		// }
+		// #endif
+		// #ifdef MP-WEIXIN
+			showPlayList.value = !showPlayList.value
+		// #endif
 	}
 	
 </script>
 
 <template>
-	<view :class="[isShow ? ['animate__animated','animate__slideInUp'] : ['animate__animated','animate__slideOutDown']]">
-		<view class="playerPage" v-show="isShow">
-			<view class="bg">
-				<view class="bg-color" style="backgroundImage: url(../../static/img/dailyback.jpg)"></view>
+	<!-- <view :class="[isShow ? ['animate__animated','animate__slideInUp'] : ['animate__animated','animate__slideOutDown']]"></view> -->
+	<view class="playerPage">
+		<view class="bg">
+			<view class="bg-color" style="backgroundImage: url(../../static/img/dailyback.jpg)"></view>
+		</view>
+		<view class="player">
+			<view class="header">
+				<uni-icons class="down" type="right" size="28" color="#efefef" @click="changePage"></uni-icons>
+				<view class="tit">title</view>
+				<uni-icons class="redo" type="redo" size="28" color="#efefef" @click="changeShare"></uni-icons>
 			</view>
-			<view class="player">
-				<view class="header">
-					<uni-icons class="down" type="right" size="28" color="#efefef" @click="changePage"></uni-icons>
-					<view class="tit">title</view>
-					<uni-icons class="redo" type="redo" size="28" color="#efefef"></uni-icons>
-				</view>
-				<view class="main">
-					<image class="needle" src="../../static/img/playneedle.png" mode="widthFix"></image>
-					<view class="circle">
-						<view class="circle-ring">
-							<view class="img">
-								<image src="../../static/img/dailyback.jpg"></image>
-							</view>
+			<view class="main">
+				<image class="needle" src="../../static/img/playneedle.png" mode="widthFix"></image>
+				<view class="circle">
+					<view class="circle-ring">
+						<view class="img">
+							<image src="../../static/img/dailyback.jpg"></image>
 						</view>
 					</view>
 				</view>
-				<view class="footer">
-					<!-- 歌名 -->
-					<view class="songTitle">
-						<view class="songName">
-							<view class="song">
-								吹梦到西洲
-							</view>
-							<view class="singer">
-								妖扬
-							</view>
+			</view>
+			<view class="footer">
+				<!-- 歌名 -->
+				<view class="songTitle">
+					<view class="songName">
+						<view class="song">
+							吹梦到西洲
 						</view>
-						<uni-icons class="like" type="heart" size="26" color="#ffffff"></uni-icons>
-						<uni-icons class="review" type="chat" size="28" color="#ffffff"></uni-icons>
-					</view>
-					<!-- 进度条 -->
-					<view class="control">
-						<slider class="slider" @change="" block-size="8" active-color="#ffffff"/>
-						<view class="time">
-							<view class="begin">
-								00:00
-							</view>
-							<view class="end">
-								00:00
-							</view>
+						<view class="singer">
+							妖扬
 						</view>
 					</view>
-					<!-- 按键 -->
-					<view class="playBar">
-						<image class="xunhuan" src="../../static/suijibofang.png" mode="widthFix"></image>
-						<image class="shang" src="../../static/shang.png" mode="widthFix"></image>
-						<image class="bofang" src="../../static/bofang.png" mode="widthFix"></image>
-						<image class="xia" src="../../static/shang.png" mode="widthFix"></image>
-						<image class="caidan" src="../../static/caidan.png" mode="widthFix"></image>
+					<uni-icons class="like" type="heart" size="26" color="#ffffff"></uni-icons>
+					<uni-icons class="review" type="chat" size="28" color="#ffffff"></uni-icons>
+				</view>
+				<!-- 进度条 -->
+				<view class="control">
+					<slider class="slider" block-size="8" active-color="#ffffff"/>
+					<view class="time">
+						<view class="begin">
+							00:00
+						</view>
+						<view class="end">
+							00:00
+						</view>
 					</view>
-					<view class="info">
-						<image class="xiazai" src="../../static/xiazai.png" mode="widthFix"></image>
-						<uni-icons type="more-filled" size="24" color="#ffffff"></uni-icons>
-					</view>
+				</view>
+				<!-- 按键 -->
+				<view class="playBar">
+					<image class="xunhuan" src="../../static/suijibofang.png" mode="widthFix"></image>
+					<image class="shang" src="../../static/shang.png" mode="widthFix"></image>
+					<image class="bofang" src="../../static/bofang.png" mode="widthFix"></image>
+					<image class="xia" src="../../static/shang.png" mode="widthFix"></image>
+					<image class="caidan" src="../../static/caidan.png" mode="widthFix" @click="changePlayList"></image>
+				</view>
+				<view class="info">
+					<image class="xiazai" src="../../static/xiazai.png" mode="widthFix"></image>
+					<uni-icons type="more-filled" size="24" color="#ffffff"></uni-icons>
 				</view>
 			</view>
 		</view>
+		<Share v-if="showShare" @click="changeShare" :share="showShare" :changeShare="changeShare"></Share>
+		<PlayList v-if="showPlayList" @click="changePlayList"  :showPlayList="showPlayList" :changePlayList="changePlayList"/>
 	</view>
 </template>
 
@@ -134,7 +171,7 @@
 	position: relative;
 	.header{
 		height: rpx(100);
-		padding:0 rpx(10) 0 rpx(10);
+		padding:rpx(30) rpx(10) 0 rpx(10);
 		line-height: rpx(40);
 		display: flex;
 		align-items: center;
@@ -147,7 +184,6 @@
 			flex: 1;
 			text-align: center;
 			color: #efefef;
-			
 		}
 		.redo{
 			width: rpx(40);

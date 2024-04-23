@@ -1,5 +1,11 @@
 /* 水平间距 */
 /* 水平间距 */
+.home.data-v-1cf27b2a {
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  height: 100%;
+}
 .uni-margin-wrap.data-v-1cf27b2a {
   width: 684rpx;
   height: 300rpx;
@@ -37,6 +43,7 @@
 .Icons .Icon image.data-v-1cf27b2a {
   width: 80%;
   background: #FB3454;
+  border-radius: 50%;
 }
 .Icons .Icon uni-image.data-v-1cf27b2a {
   width: 80%;
@@ -49,13 +56,4 @@
 .cart .img.data-v-1cf27b2a {
   width: 160rpx;
   height: 120rpx;
-}
-.Play.data-v-1cf27b2a {
-  width: 684rpx;
-  margin: 0 auto;
-}
-.songsheet.data-v-1cf27b2a {
-  height: 108rpx;
-  display: flex;
-  justify-content: space-between;
 }

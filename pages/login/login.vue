@@ -88,7 +88,7 @@
 					<uni-easyinput v-model="valiFormData.email" placeholder="请输入邮箱" />
 				</uni-forms-item>
 				<uni-forms-item label="密码" required name="password">
-					<uni-easyinput v-model="valiFormData.password" placeholder="请输入密码" />
+					<uni-easyinput v-model="valiFormData.password" placeholder="请输入密码" type="password" />
 				</uni-forms-item>
 			</uni-forms>
 			<button type="primary" @click="submit()">提交</button>

@@ -1,7 +1,7 @@
 <script setup>
 	import { ref } from 'vue';
 	import { onLoad } from "@dcloudio/uni-app"
-	import { getSongDetailApi, checkMusic } from '../../services'
+	import { getSongDetailApi } from '../../services'
 	import 'animate.css';
 	import Share from './components/share.vue'
 	import PlayList from '../../components/playList/playList.vue'

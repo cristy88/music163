@@ -1,7 +1,7 @@
 <script setup>
 	import { ref } from 'vue';
 	import { onLoad } from "@dcloudio/uni-app"
-	import { getSongDetailApi } from '../../services'
+	import { getSongDetailApi, checkMusic } from '../../services'
 	import 'animate.css';
 	import Share from './components/share.vue'
 	import PlayList from '../../components/playList/playList.vue'
@@ -32,7 +32,8 @@
 	songDetail()
 	
 	
-	// 展示隐藏于页面，跳至上一页
+	
+	// 返回上一页
 	const changePage = () => {
 		uni.navigateBack(-1)
 	}

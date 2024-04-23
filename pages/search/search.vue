@@ -1,8 +1,9 @@
 <script setup>
 	import { ref } from 'vue'
 	import { onLoad } from '@dcloudio/uni-app'
-	import { searchHotApi, searchSuggest } from '../../services/index'
+	import { searchHotApi, searchSuggestApi } from '../../services/index'
 	import SearchResData from './components/SearchResData.vue'
+	import OriginUI from './components/originUI.vue'
 	
 	const data = {}
 	
@@ -15,6 +16,8 @@
 	const filterHisData = ref([]) //过滤过的搜索记录
 	const trueData = ref([])  //真实搜索数据
 	const resTime = ref([])  //实时搜索结果
+	const resTimeNull = ref(false)  //实时搜索是否有结果
+	const timeOut = ref(null)   //实现防抖效果的延时器
 	onLoad(options => {
 		searCon.value = decodeURIComponent(options.content)
 	})
@@ -22,41 +25,53 @@
 	// 点击搜索
 	const confirm = async () => {
 		showUI.value = 2
+		showIcon.value = true
 		trueData.value =  inputValue.value.length === 0 ? searCon.value : inputValue.value
 		inputValue.value = trueData.value
-		hisData.value.push(inputValue.value)
+		if (!hisData.value.find(v => v === inputValue.value)) {
+			hisData.value.push(inputValue.value)
+		}
 		// uni.setStorageSync('hisData', JSON.stringify(hisData))
 	}
 	const back = () => {
 		uni.navigateBack()
 	}
-	
-	const clearInput = async e => {
+	// 实时搜索
+	const clearInput = e => {
 		console.log(e.detail.value)
 		inputValue.value = e.detail.value
 		if (e.detail.value.length > 0) {
 			showIcon.value = true
 			showUI.value = 1
-			filterHisData.value = hisData.value.filter(item => item.includes(e.detail.value.length))
-			const res = await searchSuggest(e.detail.value)
-			console.log('搜索结果', res)
-			if (res.code === 200) {
-				const orderList = res.result.order
-				resTime.value = orderList.map(item => res.result[item]).flat(true)
-				console.log(resTime.value)
-			}
-			// debounce(async function() {
-			// 	console.log('实时搜索le')
-			// 	const res = await searchSuggest(e.detail.value)
-			// 	console.log('搜索结果', res)
-			// }, 500)
+			clearTimeout(timeOut.value)
+			timeOut.value = setTimeout(async () => {
+				filterHisData.value = hisData.value.filter(item => item.includes(e.detail.value.length))
+				const res = await searchSuggestApi(e.detail.value)
+				console.log('搜索结果', res)
+				if (res.code === 200) {
+					const orderList = res.result.order
+					if (!orderList) {
+						resTime.value = []
+					} else {
+						resTime.value = orderList.map(item => res.result[item]).flat(true)
+						resTimeNull.value = false
+					}
+					if (resTime.value.length===0 && filterHisData.value.length===0) {
+						resTimeNull.value = true
+					}
+					if (filterHisData.value.length>0) {
+						resTimeNull.value = true
+					}
+					// console.log(resTime.value, filterHisData.value)
+				}
+			}, 500)
 		} else {
 			showIcon.value = false
 			showUI.value = 0
 		}
 	}
 	
-	// 清楚搜索内容
+	// 清除搜索内容
 	const clearIcon = () => {
 		inputValue.value = ''
 		showIcon.value = false
@@ -74,6 +89,14 @@
 		console.log('跳去专区')
 	}
 	
+	const clickTab = (item) => {
+		inputValue.value = item
+		confirm()
+	}
+	
+	const clearhisData = () => {
+		hisData.value = []
+	}
 	
 </script>
 
@@ -108,20 +131,21 @@
 			</view>
 		</view>
 		<view class="search">
-			<view class="" v-for="item in 100" :key="item" v-if="showUI === 0">
-				{{item}}
-			</view>
+			<OriginUI v-if="showUI === 0" :hisData="hisData"  @clickTab="clickTab" @clearhisData="clearhisData" />
 			<view class="TimeRes" v-if="showUI === 1">
-				<view class="TimeResCon" v-for="item in filterHisData" :key="item"  >
-					<view class="">
+				<view class="Empty" v-if="resTimeNull">
+					正在搜索 “{{inputValue}}”
+				</view>
+				<view class="TimeResCon" v-for="item in filterHisData" :key="item" @click="clickTab(item.name)" >
+					<view>
 						<uni-icons type="medal" size="30"></uni-icons>
-						<view>{{item.name}}</view>
+						<view class="TimeRR">{{item.name}}</view>
 					</view>
 				</view>
-				<view class="TimeResCon" v-for="item in resTime" :key="item.id" >
+				<view class="TimeResCon" v-for="item in resTime" :key="item.id" @click="clickTab(item.name)" >
 					<view class="">
 						<uni-icons type="search" size="30"></uni-icons>
-						<view>{{item.name}}</view>
+						<view class="TimeRR">{{item.name}}</view>
 					</view>
 				</view>
 			</view>
@@ -168,8 +192,14 @@
 		}
 	}
 
+	.Empty {
+		color: skyblue;
+		height: rpx(42);
+		line-height: rpx(42);
+		padding-left: rpx(20);
+	}
 	.box-bg {
-		background-color: #F5F5F5;
+		background-color: #F8F9FD;
 		padding: rpx(5) 0;
 	}
 	
@@ -179,9 +209,15 @@
 			display: flex;
 			padding-left: rpx(20);
 			align-items: center;
-			> view {
-				border-bottom: rpx(1) solid #F9FAFE;
-				padding-right: rpx(20);
+			line-height: rpx(45);
+			.TimeRR {
+				flex: 1;
+				margin-left: rpx(20);
+				border-bottom: rpx(1) solid #F1F2F6;
+				padding-right: rpx(30);
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
 			}
 		}
 	}
@@ -204,7 +240,7 @@
 		flex-direction: row;
 		// width: 500rpx;
 		flex: 1;
-		background-color: #f8f8f8;
+		background-color: #ffffff;
 		height: $nav-height;
 		border-radius: 15px;
 		padding: 0 15px;
@@ -225,6 +261,6 @@
 		/* #endif */
 		padding: 0 5px;
 		font-size: 12px;
-		background-color: #f8f8f8;
+		background-color: white;
 	}
 </style>

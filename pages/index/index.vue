@@ -55,6 +55,16 @@
 	getSong()
 	const clickIcon = (name) => {
 		console.log('跳转到icon', name, '界面')
+		let url = ''
+		if (name === '每日推荐') {
+			url = '/pages/daily/daily'
+		} else if (name === '排行榜') {
+			url = '/pages/toplist/toplist'
+		}
+		console.log(url)
+		uni.navigateTo({
+			url
+		})
 	}
 	
 </script>

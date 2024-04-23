@@ -20,6 +20,12 @@ export const loginStatusApi = () => {
 }
 
 // 退出登录状态
+export const exitLoginApi = () => {
+	return request({
+		url: '/logout'
+	})
+}
+
 
 // 轮播图
 export const getBannerApi = () => {
@@ -85,9 +91,25 @@ export const getSongPurchasedApi = () => {
 export const getUserCloudApi = () => {
 	return request({'url': '/user/cloud'})
 }
+
 //排行榜接口
 export const toplistApi=()=>{
 	return request({url:'/toplist/detail'})
+}
+
+// 获得所有榜单
+export const allToplistApi = () => {
+	return request({url: '/toplist'})
+}
+
+// 获取不同榜单的数据
+export const anyToplistApi = (idx) => {
+	return request({
+		url: '/top/list',
+		data: {
+			idx
+		}
+	})
 }
 
 //歌单详情接口
@@ -140,7 +162,7 @@ export const searchHotApi = () => {
 }
 
 // 搜索建议
-export const searchSuggest = (keywords) => {
+export const searchSuggestApi = (keywords) => {
 	return request({
 		url: '/search/suggest',
 		data: {
@@ -150,11 +172,33 @@ export const searchSuggest = (keywords) => {
 }
 
 // 搜索多重匹配
-export const serachMult = (keywords) => {
+export const serachMultApi = (keywords) => {
 	return request({
 		url: '/search/multimatch',
 		data: {
 			keywords
 		}
 	})
+}
+
+// 热评榜
+export const hotCommentApi = () => {
+	return request({
+		url: '/comment/hotwall/list'
+	})
+}
+
+// 最热主播榜
+export const hotUpApi = (limit = 20) => {
+	return request({
+		url: '/dj/toplist/popular',
+		data: {
+			limit
+		}
+	})
+}
+
+// 获得视频标签列表
+export const getVideoIconApi = () => {
+	return request({url: '/video/group/list'})
 }

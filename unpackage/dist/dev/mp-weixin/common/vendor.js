@@ -1527,7 +1527,7 @@ function populateParameters(fromRes, toRes) {
   let _SDKVersion = SDKVersion;
   const hostLanguage = language.replace(/_/g, "-");
   const parameters = {
-    appId: "__UNI__9817CFA",
+    appId: "",
     appName: "music",
     appVersion: "1.0.0",
     appVersionCode: "100",
@@ -1671,7 +1671,7 @@ const getAppBaseInfo = {
       hostName: _hostName,
       hostSDKVersion: SDKVersion,
       hostTheme: theme,
-      appId: "__UNI__9817CFA",
+      appId: "",
       appName: "music",
       appVersion: "1.0.0",
       appVersionCode: "100",

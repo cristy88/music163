@@ -202,3 +202,14 @@ export const hotUpApi = (limit = 20) => {
 export const getVideoIconApi = () => {
 	return request({url: '/video/group/list'})
 }
+
+
+// 音乐是否可用
+export const checkMusicApi = (id) => {
+	return request({url:'/check/music',data: {id}})
+}
+
+// 获取音乐 url 
+export const getMusicUrlApi = (id) => {
+	return request({url: '/song/url', data: {id: []}})
+}

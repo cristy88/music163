@@ -98,6 +98,7 @@ const _sfc_main = {
         d: common_vendor.o(($event) => valiFormData.value.password = $event),
         e: common_vendor.p({
           placeholder: "请输入密码",
+          type: "password",
           modelValue: valiFormData.value.password
         }),
         f: common_vendor.p({

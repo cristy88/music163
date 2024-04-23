@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/player/player",
     "pages/login/login",
     "pages/index/index",
     "pages/podcast/podcast",
@@ -8,6 +7,7 @@
     "pages/attention/attention",
     "pages/community/community",
     "pages/daily/daily",
+    "pages/player/player",
     "pages/search/search",
     "pages/toplist/toplist",
     "pages/songlist/songlist"

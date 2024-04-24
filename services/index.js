@@ -126,6 +126,7 @@ export const getDailySongsApi = () => {
 export const getSongDetailApi = (ids) => {
 	return request({url:'/song/detail', data:{ids}})
 }
+//歌单评论
 export const commentApi = (type,id) =>{
 	return request({
 		url:`/comment/${type}`,
@@ -179,6 +180,11 @@ export const serachMultApi = (keywords) => {
 			keywords
 		}
 	})
+}
+
+//所有mv接口
+export const allmvlistApi = ()=>{
+	return request({ url:'/mv/all' })
 }
 
 // 热评榜

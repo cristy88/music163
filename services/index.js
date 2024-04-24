@@ -211,5 +211,5 @@ export const checkMusicApi = (id) => {
 
 // 获取音乐 url 
 export const getMusicUrlApi = (id) => {
-	return request({url: '/song/url', data: {id: []}})
+	return request({url: '/song/url', data: {id}})
 }

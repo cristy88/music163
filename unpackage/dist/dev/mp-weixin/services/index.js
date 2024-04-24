@@ -58,16 +58,12 @@ const searchKeywordApi = (keywords, limit = 30, type = 1018) => {
     }
   });
 };
-<<<<<<< HEAD
 const searchHotApi = () => {
   return services_request.request({
     url: "/search/hot/detail"
   });
 };
 const searchSuggestApi = (keywords) => {
-=======
-const searchSuggest = (keywords) => {
->>>>>>> liu
   return services_request.request({
     url: "/search/suggest",
     data: {
@@ -75,7 +71,6 @@ const searchSuggest = (keywords) => {
     }
   });
 };
-<<<<<<< HEAD
 const hotUpApi = (limit = 20) => {
   return services_request.request({
     url: "/dj/toplist/popular",
@@ -84,8 +79,6 @@ const hotUpApi = (limit = 20) => {
     }
   });
 };
-=======
->>>>>>> liu
 exports.commentApi = commentApi;
 exports.getBannerApi = getBannerApi;
 exports.getCommitSongApi = getCommitSongApi;
@@ -98,12 +91,7 @@ exports.loginApi = loginApi;
 exports.loginStatusApi = loginStatusApi;
 exports.playlistDetailApi = playlistDetailApi;
 exports.searchDefaultApi = searchDefaultApi;
-<<<<<<< HEAD
 exports.searchHotApi = searchHotApi;
 exports.searchKeywordApi = searchKeywordApi;
 exports.searchSuggestApi = searchSuggestApi;
-=======
-exports.searchKeywordApi = searchKeywordApi;
-exports.searchSuggest = searchSuggest;
->>>>>>> liu
 exports.toplistApi = toplistApi;

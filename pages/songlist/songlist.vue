@@ -23,9 +23,9 @@
 	const change=(e)=>{
 		this.show=e.show
 	}
-	const goDetail= item =>{
+	const goDetail= () =>{
 		uni.navigateTo({
-			url: '/pages/player/player',
+			url: `/pages/player/player`,
 		});
 	}
 	
@@ -69,7 +69,7 @@
 				 class="song-item" 
 				 v-for="(item, index) in playlist.tracks"
 				 :key="item.id"
-				 @click="goDetail(item)"
+				 @click="goDetail"
 				>{{index+1}}.{{item.name}}</view>
 			</view>
 		</view> 

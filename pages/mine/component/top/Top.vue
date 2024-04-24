@@ -4,7 +4,15 @@ import { defineEmits } from 'vue';
 
 const $emit = () => {
 	// console.log('点击父组件');
+
 }
+
+const changeMine = () => {
+	 uni.navigateTo({
+	 	url:'/pages/address/address'
+	 })
+};
+
 	
 </script>
 
@@ -12,7 +20,7 @@ const $emit = () => {
 	<view class="box" @click="$emit('handleClick')">
 		<view class="list">
 			<view class="list-tit">0616星</view>
-			<view class="list-one"><view class="img"></view>编辑资料</view>
+			<view class="list-one" @click="changeMine()"><view class="img"></view>编辑资料</view>
 			<view class="list-one"><view class="img"></view>更换封面</view>
 			<view class="list-one"><view class="img"></view>隐私设置</view>
 			<view class="list-one"><view class="img"></view>分享</view>

@@ -13,7 +13,11 @@ import { getUserFollowedsApi } from '@/services/index.js'
 // }
 // UserFollowedsApi()
 
-
+const changeAddress = () => {
+	uni.navigateTo({
+		url: '/pages/address/address'
+	})
+}
 	
 </script>
 
@@ -21,7 +25,7 @@ import { getUserFollowedsApi } from '@/services/index.js'
 	<view class="main">
 		<view class="ava"></view>
 		<view class="name">0616星</view>
-		<view class="address">
+		<view class="address" @click="changeAddress()">
 			<view class="badge">0枚徽章</view>
 			<view class="age">00后</view>
 			<view class="province">~河北 唐山~</view>

@@ -8,7 +8,7 @@
 <template>
 	<view class="art">
 		<view class="top">艺人</view>
-		<view class="artList" v-for="item in dataArt.artists" :key="item.id">
+		<view class="artList" v-for="item in dataArt?.artists" :key="item.id">
 			<view class="list">
 				<image :src="item.picUrl"></image>
 				<view class="list-tit">

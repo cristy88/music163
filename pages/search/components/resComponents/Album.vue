@@ -9,7 +9,7 @@
 <template>
 	<view class="album">
 		<view class="top">专辑</view>
-		<view class="lists" v-for="item in dataAlbum.albums" :key="item.id">
+		<view class="lists" v-for="item in dataAlbum?.albums" :key="item.id">
 			<image :src="item.blurPicUrl" mode="widthFix"></image>
 			<view class="list">
 				<view class="list-tit">{{item.name}}</view>

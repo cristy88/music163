@@ -3,6 +3,10 @@
 	import { searchKeywordApi } from '../../../services/index'
 	import SingleSongVue from './resComponents/SingleSong.vue'
 	import SearResUI from './SearResUI.vue'
+	import ResSongSheet from './resComponents/ResSongSheet.vue'
+	import Album from './resComponents/Album.vue'
+	import Artist from './resComponents/Artist.vue'
+	import User from './resComponents/User.vue'
 
 	const searchType = ref([
 		{ name: '单曲', id: 1 , resData: [] },
@@ -94,6 +98,10 @@
 		>
 			<swiper-item class="swiper-topic-list">
 				<SingleSongVue :data="confirmData?.song" />
+				<ResSongSheet :data="confirmData?.playList" />
+				<Artist :data="confirmData?.artist" />
+				<Album :data="confirmData?.album" />
+				<User :data="confirmData?.user" />
 			</swiper-item>
 			<swiper-item class="swiper-topic-list" v-for="item in searchType" :key="item.id">
 				<view class="swiper-item">

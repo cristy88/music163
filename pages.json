@@ -94,6 +94,14 @@
 			"navigationBarTitleText" : "mv播放",
 			"enablePullDownRefresh" : false
 		}
+	},
+	{
+		"path" : "pages/address/address",
+		"style" : 
+		{
+			"navigationBarTitleText" : "个人资料",
+			"enablePullDownRefresh" : false
+		}
 	}
 	],
 	"globalStyle": {

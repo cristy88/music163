@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "首页",
-  "usingComponents": {
-    "song-sheet": "./componets/songSheet",
-    "home-search": "./componets/HomeSearch"
-  }
-}

@@ -1,11 +1,11 @@
 <script setup>
 	import { ref } from 'vue'
-	import Mcon from './son/Mcon.vue'
-	import Bcon from './son/Bcon.vue'
-	import Dcon from './son/Dcon.vue'
+	import Mcon from './son/mcon/Mcon.vue'
+	import Bcon from './son/bcon/Bcon.vue'
+	import Dcon from './son/dcon/Dcon.vue'
 	
 	const currIndex = ref(0);   //当前下标
-	const tab = ['音乐' , '博客' , '动态'];  
+	const tab = ['音乐' , '电台' , '动态'];  
 	
 	const changeTab = (index) => {
 		currIndex.value = index;
@@ -24,19 +24,19 @@
 			>{{item}}</view>
 		</view>
 		
-		<Mcon />
-		<Bcon />
-		<Dcon />
+		<Mcon v-if="currIndex === 0"/>
+		<Bcon v-else-if="currIndex === 1"/>
+		<Dcon v-else="currIndex === 2"/>
 	</view>
 </template>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.music{
-		height: 900rpx;
+		height: 800rpx;
 		background: white;
 		color: white;
-		border-radius: 25rpx 0 0 25rpx;
+		border-radius: 25rpx 25rpx 0 0;
 		box-shadow: 0 10rpx 10rpx 15rpx rgba(0, 0, 0, .8);
 		.top{
 			width: 100%;
@@ -52,7 +52,5 @@
 				color: black;
 			}
 		}
-		
-		
 	}
 </style>

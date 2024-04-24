@@ -1,5 +1,20 @@
 <script setup>
-	const data = {}
+import { ref } from 'vue'
+import { getUserFollowedsApi } from '@/services/index.js'
+
+
+// const UserFollowedsApi = async () => {
+// 	try {
+// 		const res = await getUserFollowedsApi();
+// 		console.log('粉丝列表' , res)
+// 	}catch (e) {
+// 		console.log();
+// 	}
+// }
+// UserFollowedsApi()
+
+
+	
 </script>
 
 <template>
@@ -35,7 +50,7 @@
 	</view>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.main{
 		height: 535rpx;
 		color: white;
@@ -76,6 +91,9 @@
 				margin-left: 20rpx;
 			}
 			.DJ{
+				margin-left: 20rpx;
+			}
+			.TG{
 				margin-left: 20rpx;
 			}
 		}

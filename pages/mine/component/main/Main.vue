@@ -3,15 +3,15 @@ import { ref } from 'vue'
 import { getUserFollowedsApi } from '@/services/index.js'
 
 
-const UserFollowedsApi = async () => {
-	try {
-		const res = await getUserFollowedsApi();
-		console.log('粉丝列表' , res)
-	}catch (e) {
-		console.log();
-	}
-}
-UserFollowedsApi()
+// const UserFollowedsApi = async () => {
+// 	try {
+// 		const res = await getUserFollowedsApi();
+// 		console.log('粉丝列表' , res)
+// 	}catch (e) {
+// 		console.log();
+// 	}
+// }
+// UserFollowedsApi()
 
 
 	

@@ -1,7 +1,11 @@
 
 <script setup>
 	
-	
+const clickHearch = ()=> {
+	uni.navigateTo({
+		url:'/pages/player/player'
+	})
+}
 </script>
 
 <template>
@@ -11,10 +15,10 @@
 				<view class="img"></view>
 				<view class="title">
 					<view class="iSongs">我喜欢的音乐</view>
-					<view class="shou">4首~13次</view>
+					<view class="shou">首~次</view>
 				</view>
 			</view>
-			<view class="heart">心动模式</view>
+			<view class="heart" @click="clickHearch()">心动模式</view>
 		</view>
 		<view class="list-three">
 			<view class="news">+</view>
@@ -54,11 +58,15 @@
 					}
 				}
 				.heart{
+					height: 100%;
+					width: 130rpx;
 					margin-right: 50rpx;
 					color: #666666;
-					font-size: 25rpx;
+					font-size: 24rpx;
 					text-align: center;
-					padding: 20rpx;
+					padding: 10rpx;
+					border: 1px solid #999999;
+					border-radius: 50rpx;
 				}
 			}
 			.list-three{

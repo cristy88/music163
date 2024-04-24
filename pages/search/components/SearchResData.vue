@@ -2,6 +2,10 @@
 	import { ref } from 'vue'
 	import { searchKeywordApi } from '../../../services/index'
 	import SingleSongVue from './resComponents/SingleSong.vue'
+	import ResSongSheetVue from './resComponents/ResSongSheet.vue';
+	import Artist from './resComponents/Artist.vue';
+	import Album from './resComponents/Album.vue';
+	import User from './resComponents/User.vue';
 
 	
 	const searchType = [
@@ -32,7 +36,11 @@
 <template>
 	<view class="">
 		<SingleSongVue :data="confirmData.song" />
-		{{confirmData}}
+		<ResSongSheetVue :dataRes="confirmData.playList" />
+		<Artist :dataArt="confirmData.artist"/>
+		<Album :dataAlbum="confirmData.album"/>
+		<User :dataUser="confirmData.user"/>
+		<!-- {{confirmData}} -->
 	</view>
 </template>
 

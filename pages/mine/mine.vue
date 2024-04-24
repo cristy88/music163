@@ -53,11 +53,14 @@
 <style lang="scss" scoped>
 .App{
 	width: 100vw;
-	height: 100vh;
-	background: url(./icon/icon_04.jpg) no-repeat;
+	height: 100%;
+	background: url(./icon/004.webp) no-repeat;
 	background-size: 750rpx;
+	display: flex;
+	flex-direction: column;
 	.con{
-		overflow: hidden;
+		overflow: auto;
+		flex: 1;
 	}
 	.header{
 		background-color: rgba(0, 0, 0, .35);
@@ -81,7 +84,7 @@
 		}
 		.status{
 			font-size: 26rpx;
-			color: #999999;
+			color: #eeeeee;
 		}
 		.icon{
 			display: flex;

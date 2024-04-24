@@ -75,7 +75,7 @@ const clickHearch = ()=> {
 					width: 130rpx;
 					margin-right: 50rpx;
 					color: #666666;
-					font-size: 25rpx;
+					font-size: 24rpx;
 					text-align: center;
 					padding: 10rpx;
 					border: 1px solid #999999;

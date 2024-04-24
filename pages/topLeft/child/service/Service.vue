@@ -99,7 +99,7 @@
 				justify-content: flex-end;
 				align-items: center;
 				.small{
-					font-size: 25rpx;
+					font-size: 23rpx;
 					margin-right: 20rpx;
 					color: #999999;
 				}

@@ -53,8 +53,9 @@ const $emit = () => {
 		overflow: hidden; 
 		background-color: rgba(0, 0, 0, .6);
 		z-index: 10;
+		font-size: 25rpx;
 		.list{
-			width: 85%;
+			width: 80%;
 			height: 100%;
 			padding: 0 30rpx;
 			background: #f0f0f0;

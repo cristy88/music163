@@ -219,3 +219,13 @@ export const checkMusicApi = (id) => {
 export const getMusicUrlApi = (id) => {
 	return request({url: '/song/url', data: {id: []}})
 }
+
+//获取mv地址url
+export const getMvUrlApi = (id) =>{
+	return request({url:'/mv/url', data:{id} })
+}
+
+//获取mv详情
+export const getMvDataApi = (mvid) =>{
+	return request({url:'/mv/detail', data:{mvid} })
+}

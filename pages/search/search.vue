@@ -1,7 +1,7 @@
 <script setup>
 	import { ref } from 'vue'
 	import { onLoad } from '@dcloudio/uni-app'
-	import { searchHotApi, searchSuggestApi } from '../../services/index'
+	import { searchHotApi, searchSuggestApi, searchDefaultApi } from '../../services/index'
 	import SearchResData from './components/SearchResData.vue'
 	import OriginUI from './components/originUI.vue'
 	
@@ -19,8 +19,13 @@
 	const resTimeNull = ref(false)  //实时搜索是否有结果
 	const timeOut = ref(null)   //实现防抖效果的延时器
 	const showRes = ref(0)   //初始展示哪一个搜索结果
+
 	onLoad(options => {
-		searCon.value = decodeURIComponent(options.content)
+		const getdefaultWord = async () => {
+			const res = await searchDefaultApi()
+			searCon.value = decodeURIComponent(options.content) || res.data.showKeyword
+		}
+		getdefaultWord()
 	})
 	
 	// 点击搜索

@@ -4,14 +4,18 @@
 
 <template>
 	<view class="single">
-		<view class="" v-for="item in data.songs" :key="item.id">
+		<view class="" v-for="item in data?.songs" :key="item.id">
 			{{item.name}}
 		</view>
 		<view class="">
-			{{data.moreText}}
+			{{data?.moreText}}
 		</view>
 	</view>
 </template>
 
-<style>
+<style lang="scss" scoped>
+	.single {
+		width: 100%;
+		background: white;
+	}
 </style>

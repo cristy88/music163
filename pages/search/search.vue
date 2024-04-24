@@ -18,6 +18,7 @@
 	const resTime = ref([])  //实时搜索结果
 	const resTimeNull = ref(false)  //实时搜索是否有结果
 	const timeOut = ref(null)   //实现防抖效果的延时器
+	const showRes = ref(0)   //初始展示哪一个搜索结果
 	onLoad(options => {
 		searCon.value = decodeURIComponent(options.content)
 	})
@@ -149,7 +150,7 @@
 					</view>
 				</view>
 			</view>
-			<SearchResData :trueSearCon="trueData" v-if="showUI === 2"/>
+			<SearchResData :trueSearCon="trueData" v-if="showUI === 2" :showRes="showRes" />
 		</view>
 	</view>
 </template>

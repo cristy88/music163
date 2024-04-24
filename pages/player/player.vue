@@ -2,7 +2,7 @@
 	import { ref } from 'vue';
 	import { onLoad } from "@dcloudio/uni-app"
 	import { getSongDetailApi } from '../../services'
-	import 'animate.css';
+	// import 'animate.css';
 
 
 	const id = ref('')

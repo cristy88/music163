@@ -86,6 +86,14 @@
 			"navigationBarTitleText" : "歌单",
 			"enablePullDownRefresh" : false
 		}
+	},
+	{
+		"path" : "pages/mvplayer/mvplayer",
+		"style" : 
+		{
+			"navigationBarTitleText" : "mv播放",
+			"enablePullDownRefresh" : false
+		}
 	}
 	],
 	"globalStyle": {

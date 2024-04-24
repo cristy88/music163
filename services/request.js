@@ -1,5 +1,6 @@
 
 const BaseURL = 'https://zyxcl.xyz/music/api'
+const BaseURL = 'https://zyxcl.xyz/music/api'
 
 // 封装请求函数
 export const request = ({ url, method = 'GET', data = {}, header = {} }) => {

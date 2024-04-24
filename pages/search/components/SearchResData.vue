@@ -8,7 +8,7 @@
 		{ name: '单曲', id: 1 , resData: [] },
 		{ name: '歌单', id: 1000 , resData: [] },
 		{ name: '视频', id: 1014 , resData: [] },
-		{ name: '歌手', id: 1000 , resData: [] },
+		{ name: '歌手', id: 100 , resData: [] },
 		{ name: '歌词', id: 1006 , resData: [] },
 		{ name: '专辑', id: 10 , resData: [] },
 		{ name: '用户', id: 1002 , resData: [] }
@@ -46,7 +46,7 @@
 		console.log('id', searchType.value[index-1].id)
 		const res = await searchKeywordApi(props.trueSearCon, searchType.value[index-1].id)
 		searchType.value[index - 1].resData = res.result
-		console.log(searchType.value[index-1].name, res)
+		console.log(searchType.value[index-1].name, searchType.value[index - 1].resData)
 	}
 	
 	// 滚动条移动效果
@@ -93,11 +93,16 @@
 			@change="event => swiperChange(event)"
 		>
 			<swiper-item class="swiper-topic-list">
-				<SingleSongVue :data="confirmData?.song" />
+				<view class="swiper-item">
+					<!-- <SingleSongVue :data="confirmData?.song" /> -->
+					<view v-for="(item,index) in confirmData.order" :key="index">
+						<SearResUI :data="confirmData[item]" :name="item" />
+					</view>
+				</view>
 			</swiper-item>
 			<swiper-item class="swiper-topic-list" v-for="item in searchType" :key="item.id">
 				<view class="swiper-item">
-					<SearResUI :data="item.resData" />
+					<SearResUI :data="item.resData" :name="item.name" />
 				</view>
 			</swiper-item>
 		</swiper>

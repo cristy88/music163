@@ -3,12 +3,14 @@
 	
 	const props = defineProps(['dataRes']);
 	
+	const resSongsheet = ref(props.dataRes.playLists || props.dataRes.playlists)
+	
 </script>
 
 <template>
 	<view class="resSong">
 		<view class="top">歌单</view>
-		<view class="list" v-for="item in dataRes.playLists" :key="item.id">
+		<view class="list" v-for="item in resSongsheet" :key="item.id">
 			<image :src="item.coverImgUrl" mode="widthFix"></image>
 			<view class="list-con">
 				<view class="name">{{item.name}}</view>

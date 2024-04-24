@@ -8,5 +8,5 @@ const _sfc_main = {
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {};
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/13116/Desktop/music163/pages/community/community.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/2-前端工程化/weixinxcx/Uni_music/newMusic/pages/community/community.vue"]]);
 wx.createPage(MiniProgramPage);

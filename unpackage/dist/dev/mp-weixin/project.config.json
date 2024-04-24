@@ -18,20 +18,12 @@
     }
   },
   "compileType": "miniprogram",
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "libVersion": "3.4.1",
-=======
   "libVersion": "3.4.2",
->>>>>>> wbh
-=======
-  "libVersion": "3.4.2",
->>>>>>> liu
   "appid": "touristappid",
   "projectname": "music",
   "condition": {},
   "editorSetting": {
-    "tabIndent": "auto",
+    "tabIndent": "insertSpaces",
     "tabSize": 2
   }
 }

@@ -1,7 +1,9 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const services_index = require("../../services/index.js");
+const store_userInfo = require("../../store/userInfo.js");
 require("../../services/request.js");
+require("../../services/userApi.js");
 if (!Array) {
   const _easycom_uni_easyinput2 = common_vendor.resolveComponent("uni-easyinput");
   const _easycom_uni_forms_item2 = common_vendor.resolveComponent("uni-forms-item");
@@ -17,9 +19,11 @@ if (!Math) {
 const _sfc_main = {
   __name: "login",
   setup(__props) {
+    store_userInfo.useUserInfo();
     const getLoginStatu = async () => {
       const status = await services_index.loginStatusApi();
-      if (status.data.code === 200) {
+      if (status.data.account) {
+        common_vendor.index.setStorageSync("id", String(status.data.account.id));
         common_vendor.index.switchTab({
           url: "/pages/index/index"
         });
@@ -63,6 +67,7 @@ const _sfc_main = {
       });
       common_vendor.index.setStorageSync("curCookie", res.cookie);
       common_vendor.index.setStorageSync("token", res.token);
+      getLoginStatu();
       common_vendor.index.switchTab({
         url: "/pages/index/index"
       });
@@ -112,5 +117,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-e4e4508d"], ["__file", "C:/Users/13116/Desktop/music163/pages/login/login.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-e4e4508d"], ["__file", "D:/2-前端工程化/weixinxcx/Uni_music/newMusic/pages/login/login.vue"]]);
 wx.createPage(MiniProgramPage);

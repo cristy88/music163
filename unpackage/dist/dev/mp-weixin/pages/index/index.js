@@ -1,11 +1,17 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
-<<<<<<< HEAD
 const services_index = require("../../services/index.js");
+const store_userInfo = require("../../store/userInfo.js");
 require("../../services/request.js");
+require("../../services/userApi.js");
 const _sfc_main = {
   __name: "index",
   setup(__props) {
+    const user = store_userInfo.useUserInfo();
+    console.log("用户信息", user.profile, user.musicSum);
+    if (!user.profile || !user.musicSum) {
+      user.getUserInfo();
+    }
     const icons = common_vendor.ref([]);
     const banners = common_vendor.ref([]);
     const getBanner = async () => {
@@ -14,6 +20,7 @@ const _sfc_main = {
         banners.value = res.banners;
         console.log(res);
         const resIcon = await services_index.getHomeIconApi();
+        console.log("获得icon", resIcon);
         if (resIcon.code === 200) {
           icons.value = resIcon.data;
         }
@@ -47,20 +54,5 @@ const _sfc_main = {
     };
   }
 };
-<<<<<<< HEAD
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "C:/Users/13116/Desktop/music163/pages/index/index.vue"]]);
-=======
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "E:/qianduan/37203_1/Music/music/pages/index/index.vue"]]);
-=======
-const _sfc_main = {
-  data() {
-    return {};
-  }
-};
-function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {};
-}
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/2-前端工程化/weixinxcx/Uni_music/newMusic/pages/index/index.vue"]]);
->>>>>>> wbh
->>>>>>> 3ac61d262a724f80d94756e41433e6d1b131fe06
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "D:/2-前端工程化/weixinxcx/Uni_music/newMusic/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

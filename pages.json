@@ -84,6 +84,23 @@
 			"navigationBarTitleText" : "歌单",
 			"enablePullDownRefresh" : false
 		}
+	},
+	{
+		"path" : "pages/songs/songs",
+		"style" : 
+		{
+			"navigationBarTitleText" : "歌单广场",
+			"enablePullDownRefresh" : false
+		}
+	},
+	{
+		"path" : "pages/songTags/songTags",
+		"style" : 
+		{
+			"navigationBarTitleText" : "歌单标签",
+			"enablePullDownRefresh" : false,
+			"navigationBarBackgroundColor":"#FFFFFF"
+		}
 	}
 	],
 	"globalStyle": {

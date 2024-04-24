@@ -1,0 +1,59 @@
+/* 水平间距 */
+/* 水平间距 */
+.home.data-v-1cf27b2a {
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  height: 100%;
+}
+.uni-margin-wrap.data-v-1cf27b2a {
+  width: 684rpx;
+  height: 300rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.uni-margin-wrap image.data-v-1cf27b2a {
+  width: 100%;
+  height: 100%;
+}
+.Icons.data-v-1cf27b2a {
+  width: 684rpx;
+  height: 180rpx;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+}
+.Icons.data-v-1cf27b2a::-webkit-scrollbar {
+  height: 0px;
+}
+.Icons .Icon.data-v-1cf27b2a {
+  width: 136.8rpx;
+  height: 120rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-shrink: 0;
+  color: #73737e;
+  font-size: 28rpx;
+  text-align: center;
+}
+.Icons .Icon image.data-v-1cf27b2a {
+  width: 80%;
+  background: #FB3454;
+  border-radius: 50%;
+}
+.Icons .Icon uni-image.data-v-1cf27b2a {
+  width: 80%;
+}
+.cart.data-v-1cf27b2a {
+  height: 160rpx;
+  border-bottom: 1px solid #999;
+  display: flex;
+}
+.cart .img.data-v-1cf27b2a {
+  width: 160rpx;
+  height: 120rpx;
+}

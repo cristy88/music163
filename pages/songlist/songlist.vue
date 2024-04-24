@@ -3,7 +3,8 @@
 	import { ref } from 'vue';
 	import { onLoad } from '@dcloudio/uni-app';
 	import Comment from "../../components/comment.vue"
-	
+	import PlaylistCover from "../../components/playlistCover.vue"
+ 	
 	const commentShow=ref(false)
 	const playlist = ref({})
 	const id=ref('')
@@ -12,7 +13,7 @@
 	const getDetail = async (id)=>{
 		const res= await playlistDetailApi(id)
 		playlist.value=res.playlist
-		console.log(res.playlist)
+		console.log(res.playlist.tracks)
 	}
 	
 	onLoad((options)=>{
@@ -43,7 +44,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="description">{{playlist.description}}</view>
+			<view class="description" @click="show=true">{{playlist.description}}</view>
 			<view class="btns">
 				<view class="btn-item">
 					<uni-icons type="redo-filled" color="#fff" size="20px"></uni-icons>
@@ -70,26 +71,29 @@
 				 v-for="(item, index) in playlist.tracks"
 				 :key="item.id"
 				 @click="goDetail(item)"
-				>{{index+1}}.{{item.name}}</view>
+				>{{index+1}}.{{item.name}} --
+				 <text v-for="v in item.ar">{{v.name}}/</text>
+				 </view>
 			</view>
 		</view> 
+		<PlaylistCover v-model:visible="show" :id="id" type="playlist" />
 		<Comment v-model:visible="commentShow" :id="id" type="playlist" />
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.header{
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		
+		max-height: 210px;
 	}
 	.info{
 		display: flex;
 		padding: 10px;
 		image {
-		    width: 240rpx;
-		    height: 240rpx;
-		    border-radius: 20rpx;
+		    width: 120px;
+		    height: 120px;
+		    border-radius: 10px;
 		}
 		.right{
 			margin-left: 20px;
@@ -122,7 +126,7 @@
 		padding: 5px;
 		justify-content: center;
 		.btn-item{
-			width: 100px;
+			flex: 1;
 			height: 40px;
 			line-height: 40px;
 			text-align: center;
@@ -144,6 +148,11 @@
 		.songs{
 			.song-item{
 				padding: 10px;
+				width: 100%;
+				height: 30px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				flex-wrap: nowrap;
 			}
 		}
 	}

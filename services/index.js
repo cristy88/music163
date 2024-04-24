@@ -144,13 +144,14 @@ export const searchDefaultApi = () => {
 }
 
 // 搜索接口
-export const searchKeywordApi = (keywords, limit=30, type=1018) => {
+export const searchKeywordApi = (keywords, type=1018, offset=1, limit=30, ) => {
 	return request({
 		url: '/search',
 		data: {
 			keywords,
-			limit,
-			type
+			type,
+			offset,
+			limit
 		}
 	})
 }

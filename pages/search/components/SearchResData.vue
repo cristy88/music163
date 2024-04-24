@@ -164,7 +164,12 @@
 		.swiper-topic-list {
 			width: 100%;
 			height: 100%;
-			padding: 20rpx 40rpx;
+			padding: rpx(16) 40rpx;
+		}
+		.swiper-item {
+			width: 100%;
+			height: 100%;
+			overflow-y: auto;
 		}
 	}
 	

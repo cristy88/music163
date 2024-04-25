@@ -1,17 +1,26 @@
 <script setup>
 	import { ref } from 'vue'
+	import { useMusicStore } from '@/store/music.js'
  	
 	const props = defineProps(['data', 'moreText']);
 	const emits = defineEmits('toDetail')
-	const clickPlayer = (e) => {
+	
+	const musicStore = useMusicStore()
+	
+	
+	const clickPlayer = (item) => {
+		musicStore.addSong(item)
 		uni.navigateTo({
 			url:'/pages/player/player'
 		})
 	}
 	
-	const clickAdd = () => {
+	const clickAdd = (item) => {
+		musicStore.addToSongList(item)
 		console.log('添加到播放列表')
 	}
+	
+	console.log('单曲', props.data)
 
 </script>
 
@@ -24,14 +33,14 @@
 				<view class="all">播放全部</view>
 			</view>
 		</view>
-		<view class="allSongs" v-for="item in data" :key="item.id" @click="clickPlayer()">
+		<view class="allSongs" v-for="item in data" :key="item.id" @click="clickPlayer(item)">
 			<view class="songs">
 				<view class="songName">{{item?.name}}</view>
 				<view class="songZj"><view class="zj">专辑</view>{{item.al?.name}}</view>
 				<view class="songSinger"><view class="singer">歌手</view>{{item.al && item.ar[0]?.name}}</view>
 			</view>
 			<view class="icons">
-				<view class="sPlayer" @click.stop="clickAdd()"></view>
+				<view class="sPlayer" @click.stop="clickAdd(item)"></view>
 				<view class="point"></view>
 			</view>
 		</view>

@@ -28,6 +28,9 @@
 				<view class="songsheetdesc">
 					{{item.name}}
 				</view>
+				<view class="img">
+					<image src="@/static/bofang.png" mode="scaleToFill"></image>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -89,6 +92,7 @@
 		margin-left: rpx(10);
 		display: flex;
 		flex-direction: column;
+		position: relative;
 		&:last-of-type {
 			margin-right: rpx(30);
 		}
@@ -97,6 +101,18 @@
 			height: rpx(112);
 			border-radius: rpx(10);
 			background: rgba(0, 0, 0, .5);
+		}
+		.img {
+			width: rpx(20);
+			height: rpx(20);
+			position: absolute;
+			bottom: rpx(60);
+			right: rpx(10);
+			image {
+				width: 100%;
+				height: 100%;
+				background-color: transparent;
+			}
 		}
 	}
 	.songsheetdesc {

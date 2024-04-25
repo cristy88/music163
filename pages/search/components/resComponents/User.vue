@@ -1,9 +1,8 @@
 <script setup>
 	import { ref } from 'vue'
 	
-	const props = defineProps(['dataUser']);
-	const users = ref([])
-	users.value = props.dataUser.users || props.dataUser.userprofiles
+	const props = defineProps(['dataUser'])
+	
 </script>
 
 <template>

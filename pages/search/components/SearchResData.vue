@@ -73,6 +73,10 @@
 		scrollLeft.value = (ind - 2) * 60
 	})
 	
+	const scrollEl = (item) => {
+		console.log("item滚动了")
+	}
+  	
 	getSearchRes()
 	
 </script>
@@ -105,7 +109,7 @@
 				</view>
 			</swiper-item>
 			<swiper-item class="swiper-topic-list" v-for="item in searchType" :key="item.id">
-				<view class="swiper-item">
+				<view class="swiper-item" @scroll="scrollEl(item)">
 					<SearResUI :data="item.resData" :name="item.name" />
 				</view>
 			</swiper-item>
@@ -179,8 +183,9 @@
 			width: 100%;
 			height: 100%;
 			overflow-y: auto;
+			&::-webkit-scrollbar{width: 0px;}
 		}
 	}
 	
-	.uni-scroll-view::-webkit-scrollbar{display:none};
+	::v-deep .uni-scroll-view::-webkit-scrollbar{height:0px;}
 </style>

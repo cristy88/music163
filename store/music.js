@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
-import { getSongDetailApi, checkMusic, getMusicUrl } from "../services/index.js"
+import { getSongDetailApi} from "../services/index.js"
+import { checkMusicApi,getMusicUrlApi } from '../services/index.js'
 
 export const useMusicStore = defineStore('music', () => {
 	// 播放列表

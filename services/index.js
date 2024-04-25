@@ -230,3 +230,19 @@ export const getMvUrlApi = (id) =>{
 export const getMvDataApi = (mvid) =>{
 	return request({url:'/mv/detail', data:{mvid} })
 }
+
+//mv评论
+export const getMvCommentApi = (tyep,id) =>{
+	return request({
+		url:`/comment/${type}`,
+		data:{id} ,
+	})
+}
+
+//获取相似mv
+export const getSimilarMvApi = (mvid) =>{
+	return request({
+		url:'/simi/mv',
+		data:{mvid}
+	})
+}

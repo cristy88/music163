@@ -1,6 +1,9 @@
 <script setup>
 	import { ref, watchEffect } from 'vue';
-	import { commentApi } from '../services';
+	import { commentApi,getMvCommentApi } from '../services';
+	import { useCommentStore } from '../store/comment';
+	
+	const commentStore = useCommentStore()
 	
 	const props=defineProps(['visible','id','type'])
 	const emits=defineEmits("update:visible")
@@ -12,11 +15,18 @@
 	watchEffect(async () => {
 		if(props.visible){
 			popup.value?.open()
-			const res= await commentApi(props.type,props.id)
-			comments.value=res.comments
+			if(props.id){
+				const res= await commentApi(props.type,props.id)
+				comments.value=res.comments
+				return comments
+			}else{
+				const res = await getMvCommentApi(props.type,props.id)
+				comments.value=res.content
+				return comments
+			}
+			
 			hotComments.value=res.hotComments
-			console.log(res.comments)
-			console.log(res.hotComments)
+			console.log(props.id)
 		}else{
 			popup.value?.close()
 		}
@@ -27,8 +37,6 @@
 			emits("update:visible",false)
 		}
 	}
-	
-	
 	
 </script>
 
@@ -43,7 +51,6 @@
 						:avatar-circle="true"
 						:title="item.user.nickname"   
 						clickable  
-						@click="onClick"
 						:note="item.content"
 						:thumb="item.user.avatarUrl"
 						:time="item.timeStr"

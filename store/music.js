@@ -20,12 +20,22 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	
 	
 	// 获取播放列表数据
-	const setCurPlayList = (item, index, listid) => {
-		// console.log(id, index, listid)
-		musicPlayList.value = listid
-		curPlayIndex.value = index
-		curMusic.value = item
+	const setCurPlayList = (item, index, list) => {
+		console.log('当前播放歌曲:',item, '下标：',index, '播放列表：',list)
+		musicPlayList.value = list
+		if(index >= 0) {
+			curPlayIndex.value = index
+			curMusic.value = item
+		} else {
+			curPlayIndex.value = 0
+			curMusic.value = musicPlayList.value[0]
+		}
 	}
+	
+	// 监听歌曲下标改变
+	watch(() => curMusic.value, () => {
+		songDetail(curMusic.value.id)
+	})
 
 	// 歌曲url
 	const songDetail = async (ids) => {
@@ -38,13 +48,6 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 		}
 	}
 	songDetail(curPlayIndex.value)
-	
-	
-	// watch(() => curPlayIndex.value, () => {
-	// 	songDetail(curPlayIndex.value)
-	// 	console.log('音乐url：',resUrl.data[0].url,"+", curPlayIndex.value);
-	// })
-	
 	
 	// 音乐播放暂停
 	const playing = () => {
@@ -68,6 +71,8 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 		curMusic.value = musicPlayList.value[curPlayIndex.value]
 		songDetail(curPlayIndex.value)
 	}
+	
+	
 	
 	
 	return {

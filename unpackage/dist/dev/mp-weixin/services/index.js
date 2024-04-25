@@ -40,9 +40,6 @@ const playlistDetailApi = (id) => {
 const getDailySongsApi = () => {
   return services_request.request({ url: "/recommend/songs" });
 };
-const getSongDetailApi = (ids) => {
-  return services_request.request({ url: "/song/detail", data: { ids } });
-};
 const commentApi = (type, id) => {
   return services_request.request({
     url: `/comment/${type}`,
@@ -52,13 +49,14 @@ const commentApi = (type, id) => {
 const searchDefaultApi = () => {
   return services_request.request({ "url": "/search/default" });
 };
-const searchKeywordApi = (keywords, limit = 30, type = 1018) => {
+const searchKeywordApi = (keywords, type = 1018, offset = 1, limit = 30) => {
   return services_request.request({
     url: "/search",
     data: {
       keywords,
-      limit,
-      type
+      type,
+      offset,
+      limit
     }
   });
 };
@@ -75,6 +73,9 @@ const searchSuggestApi = (keywords) => {
     }
   });
 };
+const allmvlistApi = () => {
+  return services_request.request({ url: "/mv/all" });
+};
 const hotUpApi = (limit = 20) => {
   return services_request.request({
     url: "/dj/toplist/popular",
@@ -83,6 +84,16 @@ const hotUpApi = (limit = 20) => {
     }
   });
 };
+const getMusicUrlApi = (id) => {
+  return services_request.request({ url: "/song/url", data: { id } });
+};
+const getMvUrlApi = (id) => {
+  return services_request.request({ url: "/mv/url", data: { id } });
+};
+const getMvDataApi = (mvid) => {
+  return services_request.request({ url: "/mv/detail", data: { mvid } });
+};
+exports.allmvlistApi = allmvlistApi;
 exports.commentApi = commentApi;
 =======
 const playlisthotApi = () => {
@@ -93,8 +104,10 @@ exports.getBannerApi = getBannerApi;
 exports.getCommitSongApi = getCommitSongApi;
 exports.getDailySongsApi = getDailySongsApi;
 exports.getHomeIconApi = getHomeIconApi;
+exports.getMusicUrlApi = getMusicUrlApi;
+exports.getMvDataApi = getMvDataApi;
+exports.getMvUrlApi = getMvUrlApi;
 exports.getRrecommendApi = getRrecommendApi;
-exports.getSongDetailApi = getSongDetailApi;
 exports.hotUpApi = hotUpApi;
 exports.loginApi = loginApi;
 exports.loginStatusApi = loginStatusApi;

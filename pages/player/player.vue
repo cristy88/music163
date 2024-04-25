@@ -6,26 +6,16 @@
 	import PlayList from '../../components/playList/playList.vue'
 	import useMusicStore from '../../store/music.js'
 
+	// 获取音乐实例
 	const musicStor = useMusicStore()
-
 	// 展示分享
 	const showShare = ref(false)
 	// 展示歌曲列表
 	const popup = ref(null)
 	const showPlayList = ref(false)
-	// 歌曲url
-	const songUrl = ref('')
-	const audio = uni.createInnerAudioContext();
-	// 是否播放
-	// const isPlay = ref(true)
 	
-
+	// 当前播放歌曲详情
 	musicStor.songDetail(musicStor.curMusic.id)
-	
-	watch(() => musicStor.curPlayIndex, () => {
-		musicStor.songDetail(musicStor.curMusic.id)
-	})
-	
 	
 	console.log(musicStor.isPlay)
 	
@@ -105,9 +95,9 @@
 				<view class="playBar">
 					<image class="xunhuan" src="../../static/suijibofang.png" mode="widthFix"></image>
 					<image class="shang" src="../../static/shang.png" mode="widthFix" @click="musicStor.cutSong(-1)"></image>
-					<view class="" @click="musicStor.playing">
-						<img class="bofang" v-if="musicStor.isPlay" src="../../static/zanting.png" alt="" />
-						<img class="bofang" v-else src="../../static/bofang.png" alt="" />
+					<view class="play-btn" @click="musicStor.playing">
+						<image class="bofang" v-if="musicStor.isPlay" src="../../static/zanting.png" mode="widthFix"></image>
+						<image class="bofang" v-else src="../../static/bofang.png" mode="widthFix"></image>
 					</view>
 					<image class="xia" src="../../static/shang.png" mode="widthFix" @click="musicStor.cutSong(1)"></image>
 					<image class="caidan" src="../../static/caidan.png" mode="widthFix" @click="changePlayList"></image>
@@ -120,7 +110,7 @@
 		</view>
 		<Share v-if="showShare" @click="changeShare" :share="showShare" :changeShare="changeShare"></Share>
 		<uni-popup ref="popup" type="bottom" border-radius="10px 10px 0 0">
-			<PlayList :nowList="musicPlayList"></PlayList>
+			<PlayList :musicPlayList="musicStor.musicPlayList"></PlayList>
 		</uni-popup>
 	</view>
 </template>
@@ -235,6 +225,7 @@
 		}
 	}
 	.footer{
+
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -271,8 +262,6 @@
 			}
 		}
 		.control{
-			// display: flex;
-			// flex-direction: column;
 			padding:0 rpx(10);
 			.slider{
 				margin:rpx(12) rpx(15) rpx(2);
@@ -285,6 +274,7 @@
 			}
 		}
 		.playBar{
+			flex: 1;
 			padding: rpx(15) rpx(20);
 			display: flex;
 			justify-content: space-between;
@@ -292,9 +282,14 @@
 			image{
 				width: rpx(24);
 			}
-			.bofang{
+			.play-btn{
 				width: rpx(32);
+				height: rpx(32);
+				.bofang{
+					width: rpx(32);
+				}
 			}
+
 			.xia{
 				transform: rotate(180deg);
 			}
@@ -302,8 +297,8 @@
 		.info{
 			display: flex;
 			justify-content: space-around;
-			margin-bottom: rpx(8);
-			padding: 0 rpx(20);
+			// margin-bottom: rpx(8);
+			padding: 0 rpx(20) rpx(8);
 			.xiazai{
 				width: rpx(20);
 			}

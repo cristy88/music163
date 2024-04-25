@@ -8,7 +8,6 @@ import nowListVue from './components/nowList.vue';
 	const curIndex = ref(0)
 	
 	const props = defineProps(['musicPlayList'])
-	console.log(props.musicPlayList)
 	
 	
 </script>

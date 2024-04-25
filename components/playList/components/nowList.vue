@@ -3,7 +3,6 @@
 	const props = defineProps({
 		nowList: Array
 	})
-	console.log(props.nowList)
 </script>
 
 <template>
@@ -21,7 +20,7 @@
 			<view class="song-item" v-for="item in nowList" :key="item.id">
 				<view class="song-info">
 					<view class="songName">{{item.name}}</view>
-					<view class="singer" v-for="ar in item.ar">{{ar.name}}<span></span></view>
+					<view class="singer" v-for="ar in item.ar" :key="ar.id">{{ar.name}}<span></span></view>
 				</view>
 				<view class="delete">X</view>
 			</view>
@@ -45,9 +44,6 @@
 				font-size: rpx(12);
 				display: flex;
 				align-items: center;
-				text{
-					
-				}
 			}
 			image{
 				width: rpx(20);

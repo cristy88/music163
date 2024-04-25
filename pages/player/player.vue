@@ -6,26 +6,16 @@
 	import PlayList from '../../components/playList/playList.vue'
 	import useMusicStore from '../../store/music.js'
 
+	// 获取音乐实例
 	const musicStor = useMusicStore()
-
 	// 展示分享
 	const showShare = ref(false)
 	// 展示歌曲列表
 	const popup = ref(null)
 	const showPlayList = ref(false)
-	// 歌曲url
-	const songUrl = ref('')
-	const audio = uni.createInnerAudioContext();
-	// 是否播放
-	// const isPlay = ref(true)
 	
-
+	// 当前播放歌曲详情
 	musicStor.songDetail(musicStor.curMusic.id)
-	
-	watch(() => musicStor.curPlayIndex, () => {
-		musicStor.songDetail(musicStor.curMusic.id)
-	})
-	
 	
 	console.log(musicStor.isPlay)
 	

@@ -1,37 +1,33 @@
 <script setup>
-	import { ref } from 'vue';
+	import { ref, watch, computed } from 'vue';
 	import { onLoad } from "@dcloudio/uni-app"
-	import { getSongDetailApi, checkMusicApi } from '../../services'
-	import 'animate.css';
+	import { getSongDetailApi, getMusicUrlApi } from '../../services'
 	import Share from './components/share.vue'
 	import PlayList from '../../components/playList/playList.vue'
+	import useMusicStore from '../../store/music.js'
 
+	const musicStor = useMusicStore()
 
-	const id = ref('')
 	// 展示分享
 	const showShare = ref(false)
 	// 展示歌曲列表
+	const popup = ref(null)
 	const showPlayList = ref(false)
-	const popup = ref('')
+	// 歌曲url
+	const songUrl = ref('')
+	const audio = uni.createInnerAudioContext();
+	// 是否播放
+	// const isPlay = ref(true)
 	
-	// 获取歌曲id
-	onLoad((option) => {
-		console.log("播放歌曲id",option)
-		id.value = option.id
+
+	musicStor.songDetail(musicStor.curMusic.id)
+	
+	watch(() => musicStor.curPlayIndex, () => {
+		musicStor.songDetail(musicStor.curMusic.id)
 	})
 	
-	const songDetail = async (ids) => {
-		ids = id?.value
-		try {
-			const res = await getSongDetailApi(ids)
-			// console.log("推荐",res)
-		} catch (e) {
-			console.log(e)
-		}
-	} 
-	songDetail()
 	
-	
+	console.log(musicStor.isPlay)
 	
 	// 返回上一页
 	const changePage = () => {
@@ -59,15 +55,14 @@
 </script>
 
 <template>
-	<!-- <view :class="[isShow ? ['animate__animated','animate__slideInUp'] : ['animate__animated','animate__slideOutDown']]"></view> -->
 	<view class="playerPage">
 		<view class="bg">
-			<view class="bg-color" style="backgroundImage: url(../../static/img/dailyback.jpg)"></view>
+			<view class="bg-color" :style="{backgroundImage: `url(${musicStor.curMusic.al?.picUrl})`}"></view>
 		</view>
 		<view class="player">
 			<view class="header">
 				<uni-icons class="down" type="right" size="28" color="#efefef" @click="changePage"></uni-icons>
-				<view class="tit">title</view>
+				<view class="tit">{{musicStor.curMusic.al.name}}</view>
 				<uni-icons class="redo" type="redo" size="28" color="#efefef" @click="changeShare"></uni-icons>
 			</view>
 			<view class="main">
@@ -75,7 +70,7 @@
 				<view class="circle">
 					<view class="circle-ring">
 						<view class="img">
-							<image src="../../static/img/dailyback.jpg"></image>
+							<image :src="musicStor.curMusic.al.picUrl"></image>
 						</view>
 					</view>
 				</view>
@@ -85,10 +80,10 @@
 				<view class="songTitle">
 					<view class="songName">
 						<view class="song">
-							吹梦到西洲
+							{{musicStor.curMusic.name}}
 						</view>
-						<view class="singer">
-							妖扬
+						<view class="singer" v-for="singer in musicStor.curMusic.ar" :key="singer.id">
+							{{singer.name}}<span v-if="singer !== musicStor.curMusic.ar[musicStor.curMusic.ar.length - 1]">/</span>
 						</view>
 					</view>
 					<uni-icons class="like" type="heart" size="26" color="#ffffff"></uni-icons>
@@ -109,9 +104,12 @@
 				<!-- 按键 -->
 				<view class="playBar">
 					<image class="xunhuan" src="../../static/suijibofang.png" mode="widthFix"></image>
-					<image class="shang" src="../../static/shang.png" mode="widthFix"></image>
-					<image class="bofang" src="../../static/bofang.png" mode="widthFix"></image>
-					<image class="xia" src="../../static/shang.png" mode="widthFix"></image>
+					<image class="shang" src="../../static/shang.png" mode="widthFix" @click="musicStor.cutSong(-1)"></image>
+					<view class="" @click="musicStor.playing">
+						<img class="bofang" v-if="musicStor.isPlay" src="../../static/zanting.png" alt="" />
+						<img class="bofang" v-else src="../../static/bofang.png" alt="" />
+					</view>
+					<image class="xia" src="../../static/shang.png" mode="widthFix" @click="musicStor.cutSong(1)"></image>
 					<image class="caidan" src="../../static/caidan.png" mode="widthFix" @click="changePlayList"></image>
 				</view>
 				<view class="info">
@@ -122,7 +120,7 @@
 		</view>
 		<Share v-if="showShare" @click="changeShare" :share="showShare" :changeShare="changeShare"></Share>
 		<uni-popup ref="popup" type="bottom" border-radius="10px 10px 0 0">
-			<PlayList></PlayList>
+			<PlayList :nowList="musicPlayList"></PlayList>
 		</uni-popup>
 	</view>
 </template>
@@ -137,6 +135,7 @@
 .bg{
 	width: 100%;
 	height: 100%;
+	background: rgba(0, 0, 0, .4);
 	overflow: hidden;
 	position: fixed;
 	top: 0;
@@ -220,10 +219,12 @@
 					transform: translate(-50%, -50%);
 					background-repeat:no-repeat;
 					background-position: center;
-					background-size: cover;
+					background-size: rpx(160);
 					overflow: hidden;
 					border-radius: 50%;
 					image{
+						width: rpx(160);
+						height: rpx(160);
 						position: absolute;
 						top: 50%;
 						left: 50%;
@@ -244,13 +245,22 @@
 			padding: 0 rpx(20);
 			.songName{
 				flex: 1;
+				overflow: hidden;
 				.song{
 					line-height: rpx(26);
 					font-size: rpx(18);
 					font-weight: 600;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
 				}
 				.singer{
 					color: #efefef;
+					float: left;
+					span{
+						padding: 0 rpx(5);
+					}
+					
 				}
 			}
 			.like{

@@ -5,6 +5,10 @@
 
 	const title = ['当前播放', '历史播放']
 	const curIndex = ref(0)
+	
+	const props = defineProps({
+	})
+	
 </script>
 
 <template>

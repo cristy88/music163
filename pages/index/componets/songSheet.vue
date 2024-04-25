@@ -3,7 +3,7 @@
 	
 	const props = defineProps(['title', 'firstCommand', 'recommends'])
 	// console.log('子组件产值', props
-	
+	const curI = ref(0)
 </script>
 
 <template>
@@ -14,13 +14,13 @@
 		</view>
 		<view class="songs">
 			<view class="firstAllSongSheet" v-if="firstCommand">
-				<swiper class="swiper" circular :autoplay="true" :vertical="true">
+				<swiper class="swiper" circular :autoplay="true" :vertical="true" :current="curI" @change="e => curI = e.detail.current">
 					<swiper-item v-for="item in firstCommand" :key="item.id">
 						<image :src="item.picUrl" />
 					</swiper-item>
 				</swiper>
-				<view class="">
-					{{firstCommand[0]?.name}}
+				<view class="songsheetdesc">
+					{{firstCommand[curI]?.name}}
 				</view>
 			</view>
 			<view class="songsheet" v-for="item in recommends" :key="item.id" v-if="recommends">
@@ -63,6 +63,8 @@
 		&::-webkit-scrollbar{height:0px};
 	}
 	.firstAllSongSheet {
+		display: flex;
+		flex-direction: column;
 		height: rpx(164);
 		width: rpx(112);
 		font-size: rpx(12);
@@ -85,6 +87,8 @@
 		width: rpx(112);
 		font-size: rpx(12);
 		margin-left: rpx(10);
+		display: flex;
+		flex-direction: column;
 		&:last-of-type {
 			margin-right: rpx(30);
 		}
@@ -96,8 +100,8 @@
 		}
 	}
 	.songsheetdesc {
-		/* 限制在一个块元素中显示的文本的行数 */
-		-webkit-line-clamp: 2; 
+		flex: 1;
+		line-height: rpx(24);
 		/* 隐藏溢出的内容 */
 		overflow: hidden;
 		/* 为文本添加省略号 */

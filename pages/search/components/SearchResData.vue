@@ -175,8 +175,9 @@
 			width: 100%;
 			height: 100%;
 			overflow-y: auto;
+			&::-webkit-scrollbar{width: 0px;}
 		}
 	}
 	
-	.uni-scroll-view::-webkit-scrollbar{display:none};
+	::v-deep .uni-scroll-view::-webkit-scrollbar{height:0px;}
 </style>

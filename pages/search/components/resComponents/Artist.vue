@@ -19,7 +19,7 @@
 			</view>
 			<view class="GZ">+ 关注</view>
 		</view>
-		<view class="much">{{dataArt.moreText}}</view>
+		<view class="much" v-if="dataArt.moreText">{{dataArt.moreText}}</view>
 	</view>
 </template>
 

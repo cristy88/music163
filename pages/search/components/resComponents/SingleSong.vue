@@ -13,7 +13,8 @@
 		})
 	}
 	
-	const clickAdd = () => {
+	const clickAdd = (id) => {
+		musicStore.addToSongList(id)
 		console.log('添加到播放列表')
 	}
 
@@ -35,7 +36,7 @@
 				<view class="songSinger"><view class="singer">歌手</view>{{item.al && item.ar[0]?.name}}</view>
 			</view>
 			<view class="icons">
-				<view class="sPlayer" @click.stop="clickAdd()"></view>
+				<view class="sPlayer" @click.stop="clickAdd(item.id)"></view>
 				<view class="point"></view>
 			</view>
 		</view>

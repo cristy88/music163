@@ -51,8 +51,10 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	}
 	
 	// 点击添加到下一首
-	const addToSongList = (item) => {
-		curPlayList.value.splice(curPlayIndex.value + 1, 0, item)
+	const addToSongList = async (id) => {
+		const res = await getSongDetailApi(id)
+		curPlayList.value.splice(curPlayIndex.value + 1, 0, res.songs[0])
+		// console.log(curPlayList.value)
 	}
 
 	

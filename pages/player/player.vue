@@ -82,7 +82,7 @@
 						<view class="song">
 							{{musicStor.curMusic.name}}
 						</view>
-						<view class="singer" v-for="singer in musicStor.curMusic.ar" key="singer.id">
+						<view class="singer" v-for="singer in musicStor.curMusic.ar" :key="singer.id">
 							{{singer.name}}<span v-if="singer !== musicStor.curMusic.ar[musicStor.curMusic.ar.length - 1]">/</span>
 						</view>
 					</view>

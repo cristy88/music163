@@ -9,13 +9,13 @@
 	import User from './resComponents/User.vue'
 
 	const searchType = ref([
-		{ name: '单曲', id: 1 , resData: [] },
-		{ name: '歌单', id: 1000 , resData: [] },
-		{ name: '视频', id: 1014 , resData: [] },
-		{ name: '歌手', id: 100 , resData: [] },
-		{ name: '歌词', id: 1006 , resData: [] },
-		{ name: '专辑', id: 10 , resData: [] },
-		{ name: '用户', id: 1002 , resData: [] }
+		{ name: '单曲', hasMore: false, nickName: 'songs', id: 1 , offset: 1, resData: [] },
+		{ name: '歌单', hasMore: false, nickName: 'playlists', id: 1000 , offset: 1, resData: [] },
+		{ name: '视频', hasMore: false, nickName: 'videos', id: 1014 , offset: 1, resData: [] },
+		{ name: '歌手', hasMore: false, nickName: 'artists', id: 100 , offset: 1, resData: [] },
+		{ name: '歌词', hasMore: false, nickName: 'songs', id: 1006 , offset: 1, resData: [] },
+		{ name: '专辑', hasMore: false, nickName: 'albums', id: 10 , offset: 1, resData: [] },
+		{ name: '用户', hasMore: false, nickName: 'userprofiles', id: 1002 , offset: 1, resData: [] }
 	])
 	// const searType = ['综合', '单曲', '歌单', '视频', '歌手', '歌词', '专辑', '用户']
 	const searType = [
@@ -37,7 +37,6 @@
 	const scrollLeft = ref(0)
 	
 	const confirmData = ref([])  //综合搜索结果
-	
 	// 综合搜索结果
 	const getSearchRes = async (id) => {
 		const res = await searchKeywordApi(props.trueSearCon, id)
@@ -47,10 +46,22 @@
 	
 	// 其他搜索结果
 	const getSearAnyRes = async (index) => {
-		console.log('id', searchType.value[index-1].id)
-		const res = await searchKeywordApi(props.trueSearCon, searchType.value[index-1].id)
-		searchType.value[index - 1].resData = res.result
-		console.log(searchType.value[index-1].name, searchType.value[index - 1].resData)
+		const trueItem = searchType.value[index - 1]
+		console.log('id', trueItem.id)
+		const res = await searchKeywordApi(props.trueSearCon, trueItem.id, trueItem.offset)
+		searchType.value[index - 1].resData = [...searchType.value[index - 1].resData, ...res.result[trueItem.nickName]]
+		searchType.value[index - 1].hasMore = res.result.hasMore
+		// console.log(res.result)
+	}
+	
+	// 滚动到底后添加数据
+	const scrollDown = e => {
+		const index = searchType.value.findIndex(v => v.name === e)
+		console.log('执行函数',index)
+		if (searchType.value[index].hasMore) {
+			searchType.value[index].offset+=1
+			getSearAnyRes(index+1)
+		}
 	}
 	
 	// 滚动条移动效果
@@ -64,6 +75,7 @@
 	
 	watch(showAnyRes, () => {
 		let ind = showAnyRes.value
+		console.log(ind)
 		if (ind > 0 && searchType.value[ind - 1].resData.length === 0 ) {
 			getSearAnyRes(ind)
 		}
@@ -73,8 +85,8 @@
 		scrollLeft.value = (ind - 2) * 60
 	})
 	
-	const scrollEl = (item) => {
-		console.log("item滚动了")
+	const toDetail = (e) => {
+		showAnyRes.value = e
 	}
   	
 	getSearchRes()
@@ -101,16 +113,16 @@
 			@change="event => swiperChange(event)"
 		>
 			<swiper-item class="swiper-topic-list">
-				<view class="swiper-item">
+				<view class="swiper-item allRound">
 					<!-- <SingleSongVue :data="confirmData?.song" /> -->
 					<view v-for="(item,index) in confirmData.order" :key="index">
-						<SearResUI :data="confirmData[item]" :name="item" />
+						<SearResUI :data="confirmData[item][`${item}s`]" :name="item" :moreText="confirmData[item]['moreText']" @toDetail="toDetail" />
 					</view>
 				</view>
 			</swiper-item>
-			<swiper-item class="swiper-topic-list" v-for="item in searchType" :key="item.id">
-				<view class="swiper-item" @scroll="scrollEl(item)">
-					<SearResUI :data="item.resData" :name="item.name" />
+			<swiper-item class="swiper-topic-list" v-for="(item, index) in searchType" :key="item.id">
+				<view class="swiper-item">
+					<SearResUI :data="item.resData" :name="item.name" :moreText="false" @toDetail="toDetail" @scrollDown="scrollDown" />
 				</view>
 			</swiper-item>
 		</swiper>
@@ -177,12 +189,17 @@
 		.swiper-topic-list {
 			width: 100%;
 			height: 100%;
-			padding: rpx(16) 40rpx;
+			padding: rpx(16) 0;
 		}
 		.swiper-item {
 			width: 100%;
 			height: 100%;
-			overflow-y: auto;
+			overflow: hidden;
+		}
+		.allRound {
+			width: 100%;
+			height: 100%;
+			overflow: auto;
 			&::-webkit-scrollbar{width: 0px;}
 		}
 	}

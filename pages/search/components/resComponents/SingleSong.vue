@@ -27,16 +27,16 @@
 		</view>
 		<view class="allSongs" v-for="item in data?.songs" :key="item.id" @click="clickPlayer()">
 			<view class="songs">
-				<view class="songName">{{item.name}}</view>
-				<view class="songZj"><view class="zj">专辑</view>{{item.al.name}}</view>
-				<view class="songSinger"><view class="singer">歌手</view>{{item.ar[0].name}}</view>
+				<view class="songName">{{item?.name}}</view>
+				<view class="songZj"><view class="zj">专辑</view>{{item.al?.name}}</view>
+				<view class="songSinger"><view class="singer">歌手</view>{{item.al && item.ar[0]?.name}}</view>
 			</view>
 			<view class="icons">
 				<view class="sPlayer" @click="clickAdd()"></view>
 				<view class="point"></view>
 			</view>
 		</view>
-		<view class="much">{{data.moreText}} ></view>
+		<view class="much" v-if="data.moreText">{{data.moreText}} ></view>
 		
 	</view>
 </template>

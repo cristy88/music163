@@ -71,7 +71,7 @@
 					热搜榜
 				</view>
 				<view class="li" v-for="(item, index) in hotlist" :key="item.score" @click="$emit('clickTab', item.searchWord)">
-					<text :class="['act', {'active': index < 3}]">{{index}}</text> <text class="liSear">{{item.searchWord}}</text>
+					<text :class="['act', {'active': index < 3}]">{{index + 1}}</text> <text class="liSear">{{item.searchWord}}</text>
 					<image :src="item.iconUrl" mode=""></image>
 				</view>
 			</view>

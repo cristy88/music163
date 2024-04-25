@@ -218,5 +218,31 @@ export const checkMusicApi = (id) => {
 
 // 获取音乐 url 
 export const getMusicUrlApi = (id) => {
-	return request({url: '/song/url', data: {id: []}})
+	return request({url: '/song/url', data: {id}})
 }
+
+//获取mv地址url
+export const getMvUrlApi = (id) =>{
+	return request({url:'/mv/url', data:{id} })
+}
+
+//获取mv详情
+export const getMvDataApi = (mvid) =>{
+	return request({url:'/mv/detail', data:{mvid} })
+}
+
+//获取全部歌单
+export const allTagsApi = () => {
+	return request({url:'/playlist/catlist'})
+}
+
+//获取热门标签
+export const playlisthotApi = () => {
+	return request({url:'/playlist/hot'})
+}
+
+//获取推荐歌单
+export const topPlaylistApi = () => {
+	return request({url:'/top/playlist'})
+}
+

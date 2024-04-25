@@ -1,0 +1,57 @@
+/* 水平间距 */
+/* 水平间距 */
+.songs.data-v-bdf9cecb {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.songs .top.data-v-bdf9cecb {
+  height: 100rpx;
+  line-height: 100rpx;
+  display: flex;
+  overflow: auto;
+}
+.songs .top .active.data-v-bdf9cecb {
+  border-bottom: 4rpx solid tomato;
+  padding: 20rpx;
+}
+.songs .top.data-v-bdf9cecb::-webkit-scrollbar {
+  height: 0px;
+}
+.songs .top .top-item.data-v-bdf9cecb {
+  flex-shrink: 0;
+  padding: 0 20rpx;
+}
+.songs .main.data-v-bdf9cecb {
+  flex: 1;
+}
+.songs .main .title.data-v-bdf9cecb {
+  height: 60rpx;
+  line-height: 60rpx;
+  padding-left: 60rpx;
+  background: palegreen;
+}
+.songs .main .list.data-v-bdf9cecb {
+  height: 160rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+.songs .main .list .item.data-v-bdf9cecb {
+  width: 33.33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.songs .main .list .item .pic.data-v-bdf9cecb {
+  display: block;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 16rpx;
+  border: 2rpx solid;
+}
+.songs .footer.data-v-bdf9cecb {
+  height: 100rpx;
+  line-height: 100rpx;
+  background: tomato;
+}

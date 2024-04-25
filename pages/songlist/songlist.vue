@@ -13,7 +13,7 @@
 	const getDetail = async (id)=>{
 		const res= await playlistDetailApi(id)
 		playlist.value=res.playlist
-		console.log(res.playlist.tracks)
+		console.log(res)
 	}
 	
 	onLoad((options)=>{
@@ -24,9 +24,9 @@
 	const change=(e)=>{
 		this.show=e.show
 	}
-	const goDetail= item =>{
+	const goDetail= (item,id )=>{
 		uni.navigateTo({
-			url: '/pages/player/player',
+			url: `/pages/player/player?id=${id}`,
 		});
 	}
 	
@@ -70,7 +70,7 @@
 				 class="song-item" 
 				 v-for="(item, index) in playlist.tracks"
 				 :key="item.id"
-				 @click="goDetail(item)"
+				 @click="goDetail(item,item.id)"
 				>{{index+1}}.{{item.name}} --
 				 <text v-for="v in item.ar">{{v.name}}/</text>
 				 </view>

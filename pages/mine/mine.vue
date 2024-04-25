@@ -30,7 +30,7 @@
 		<Top v-if="showPoint" @click="handleClick()"/>
 		<view class="header">
 			<view class="s">
-				<uni-badge class="uni-badge-left-margin" :text="2" absolute="rightTop"
+				<uni-badge class="uni-badge-left-margin" :text="1" absolute="rightTop"
 				:offset="[-7, 8]" size="small">
 					<view class="icon1" @click="showLeft = !showLeft"></view>
 				</uni-badge>

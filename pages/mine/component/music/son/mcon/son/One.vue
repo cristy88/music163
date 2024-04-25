@@ -7,7 +7,7 @@ const clickHearch = ()=> {
 		url:'/pages/player/player'
 	})
 }
-	
+
 </script>
 
 <template>

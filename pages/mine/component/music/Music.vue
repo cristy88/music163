@@ -11,7 +11,6 @@
 		currIndex.value = index;
 	};
 	
-
 </script>
 
 <template>
@@ -23,13 +22,11 @@
 			@click="changeTab(index)"
 			>{{item}}</view>
 		</view>
-		
 		<Mcon v-if="currIndex === 0"/>
 		<Bcon v-else-if="currIndex === 1"/>
 		<Dcon v-else="currIndex === 2"/>
 	</view>
 </template>
-
 
 <style lang="scss" scoped>
 	.music{

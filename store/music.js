@@ -21,10 +21,19 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	
 	// 获取播放列表数据
 	const setCurPlayList = (item, index, listid) => {
-		// console.log(id, index, listid)
-		musicPlayList.value = listid
-		curPlayIndex.value = index
-		curMusic.value = item
+		console.log('当前播放歌曲:',item, '下标：',index, '播放列表：',listid)
+		// musicPlayList.value = listid
+		// curPlayIndex.value = index
+		// curMusic.value = item
+		if(index >= 0) {
+			musicPlayList.value = listid
+			curPlayIndex.value = index
+			curMusic.value = item
+		} else {
+			musicPlayList.value = listid
+			curPlayIndex.value = 0
+			curMusic.value = musicPlayList.value[0]
+		}
 	}
 
 	// 歌曲url

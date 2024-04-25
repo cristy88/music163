@@ -1,13 +1,13 @@
 <script setup>
 	import { ref } from 'vue'
-	// import recommend from './wxcomponents/recommend/recommend.vue'
 	import { getDailySongsApi } from '../../services'
+	import Recommend from '../../components/musicList.vue'
 	import PlayCart from '../../components/playCart/playCart.vue';
 	import Selected from '../../components/selected.vue'
 	import useMusicStore from '../../store/music';
 	
 	
-	const {setCurPlayList} = useMusicStore()
+	const musicStore = useMusicStore()
 	
 	const title = ['每日推荐', '风格推荐']
 	// 推荐歌单数据
@@ -35,7 +35,7 @@
 	
 	// 跳转播放页面
 	const goPlayer = (item, index) => {
-		setCurPlayList(item, index, recommendList.value)
+		musicStore.setCurPlayList(item, index, recommendList.value)
 		uni.navigateTo({
 			url: `/pages/player/player`
 		})
@@ -93,47 +93,8 @@
 				@touchmove="move(index)"
 			>
 				<view class="swiper-item" :class="'swiper-item' + index">
-					<!-- 每日推荐主页面 -->
-					<view class="recommend">
-						<view class="header">
-							
-						</view>
-						<!-- 歌曲列表 -->
-						<view class="main">
-							<!-- 导航 -->
-							<view class="nav" @click="goPlayer">
-								<image class="playicon" src="../../static/play.png" alt="" />
-								<view class="playAll">
-									<text>播放全部</text>
-									<text class="vip">VIP歌曲免费畅听</text>
-								</view>
-								<img class="refreshicon" src="../../static/shuaxin.png" alt=""  @click.stop="toRefresh"/>
-								<img class="selecticon" src="../../static/xuanze.png" alt="" @click.stop="toSelected"/>
-							</view>
-							<!-- 歌曲列表展示 -->
-							<view class="songsList">
-								<!-- 跳转播放 @click="goPlayer(item.id)" -->
-								<view class="songs" v-for="(item, index) in recommendList" :key="item.id" @click="goPlayer(item, index)"> 
-									<img class="img" :src="item.al.picUrl" alt="" />
-									<view class="title">
-										<view class="song">
-											<view class="name">{{item.name}}</view>
-											<text v-for="alia in item.alia" :key="alia">({{alia}})</text>
-										</view>
-										<view class="singer">
-											<view  v-for=" ar in item.ar" :key="ar.name">
-												{{ar.name}}<span v-if="ar !== item.ar[item.ar.length - 1]">/</span>
-											</view>
-											<text> - {{item.al.name}}</text>
-										</view>
-									</view>
-									<view class="detail"  @click.stop="moreDetail">
-										<uni-icons type="more-filled" size="20" color="#ADADAD"></uni-icons>
-									</view>
-								</view>
-							</view>
-						</view>
-					</view>
+					<!-- 每日推荐歌单 -->
+					<Recommend :goPlayer="goPlayer" :musicList="recommendList" :moreDetail="moreDetail" :toSelected="toSelected"/>
 				</view>
 			</swiper-item>
 		</swiper>

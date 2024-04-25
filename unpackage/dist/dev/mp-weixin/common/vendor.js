@@ -7958,4 +7958,6 @@ exports.resolveComponent = resolveComponent;
 exports.s = s;
 exports.sr = sr;
 exports.t = t;
+exports.unref = unref;
+exports.watch = watch;
 exports.watchEffect = watchEffect;

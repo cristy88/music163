@@ -1,5 +1,9 @@
 <script setup>
-
+	import { ref, defineProps } from 'vue'
+	const props = defineProps({
+		nowList: Array
+	})
+	console.log(props.nowList)
 </script>
 
 <template>
@@ -14,10 +18,10 @@
 			<image src="../../../static/shanchu.png"  mode="widthFix"></image>
 		</view>
 		<view class="songs">
-			<view class="song-item">
+			<view class="song-item" v-for="item in nowList" :key="item.id">
 				<view class="song-info">
-					<view class="songName">消愁</view>
-					<view class="singer">毛不易</view>
+					<view class="songName">{{item.name}}</view>
+					<view class="singer" v-for="ar in item.ar">{{ar.name}}<span></span></view>
 				</view>
 				<view class="delete">X</view>
 			</view>

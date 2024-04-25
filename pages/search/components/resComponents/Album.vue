@@ -16,7 +16,7 @@
 				<view class="list-small">{{item.artist.name}}</view>
 			</view>
 		</view>
-		<view class="much">{{dataAlbum.moreText}} ></view>
+		<view class="much" v-if="dataAlbum.moreText">{{dataAlbum.moreText}} ></view>
 	</view>
 </template>
 

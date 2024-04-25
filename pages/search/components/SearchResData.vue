@@ -156,7 +156,7 @@
 				justify-content: center;
 			}
 			.menu-topic-act .menu-topic-text {
-				color: #ff0000;
+				font-weight: 900;
 			}
 			.menu-topic-act .menu-topic-bottom-color {
 				background: #ff0000;

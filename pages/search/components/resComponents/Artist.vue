@@ -1,14 +1,15 @@
 <script setup>
 	import { ref } from 'vue'
 	
-	const props = defineProps(['dataArt']);
+	const props = defineProps(['dataArt', 'moreText'])
+	const emits = defineEmits(['toDetail'])
 	
 </script>
 
 <template>
 	<view class="art">
 		<view class="top">艺人</view>
-		<view class="artList" v-for="item in dataArt?.artists" :key="item.id">
+		<view class="artList" v-for="item in dataArt" :key="item.id">
 			<view class="list">
 				<image :src="item.picUrl"></image>
 				<view class="list-tit">
@@ -19,7 +20,7 @@
 			</view>
 			<view class="GZ">+ 关注</view>
 		</view>
-		<view class="much" v-if="dataArt.moreText">{{dataArt.moreText}}</view>
+		<view class="much" @click="$emit('toDetail', 4)" v-if="moreText">{{moreText}}</view>
 	</view>
 </template>
 

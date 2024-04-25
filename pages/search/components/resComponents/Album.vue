@@ -1,22 +1,33 @@
 <script setup>
 	import { ref } from 'vue'
+	import { getAlbumConApi } from '../../../../services/index.js'
 	
-	const props = defineProps(['dataAlbum']);
+	const props = defineProps(['dataAlbum', 'moreText'])
+	const emits = defineEmits(['toDetail'])
+	console.log(props.dataAlbum)
+	const getAllAlbum = async (id) => {
+		const res = await getAlbumConApi(id)
+		console.log(res)
+	}
 	
+	
+	const toAlbumPage = (id) => {
+		getAllAlbum(id)
+	}
 	
 </script>
 
 <template>
 	<view class="album">
 		<view class="top">专辑</view>
-		<view class="lists" v-for="item in dataAlbum?.albums" :key="item.id">
-			<image :src="item.blurPicUrl" mode="widthFix"></image>
+		<view class="lists" v-for="item in dataAlbum" :key="item.id" @click="toAlbumPage(item.id)">
+			<image :src="item.picUrl" mode="widthFix"></image>
 			<view class="list">
 				<view class="list-tit">{{item.name}}</view>
 				<view class="list-small">{{item.artist.name}}</view>
 			</view>
 		</view>
-		<view class="much" v-if="dataAlbum.moreText">{{dataAlbum.moreText}} ></view>
+		<view class="much" v-if="moreText" @click="$emit('toDetail', 6)">{{moreText}} ></view>
 	</view>
 </template>
 

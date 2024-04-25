@@ -246,3 +246,44 @@ export const topPlaylistApi = () => {
 	return request({url:'/top/playlist'})
 }
 
+// 关注取消用户   t 1关注
+export const careUserApi = (id, t) => {
+	return request({
+		url: '/follow',
+		data: {
+			id,
+			t
+		}
+	})
+}
+
+// 获得专辑内容
+export const getAlbumConApi = (id) => {
+	return request({
+		url: '/album',
+		data: {
+			id
+		}
+	})
+}
+
+// 获取专辑动态信息
+export const getAlbumDynamic = (id) => {
+	return request({
+		url: '/album/detail/dynamic',
+		data: {
+			id
+		}
+	})
+}
+
+// 收藏取消专辑
+export const careAlbumSubApi = (id) => {
+	return request({
+		url: '/album/sub',
+		data: {
+			id,
+			t
+		}
+	})
+}

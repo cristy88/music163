@@ -52,7 +52,7 @@
 		<view class="player">
 			<view class="header">
 				<uni-icons class="down" type="right" size="28" color="#efefef" @click="changePage"></uni-icons>
-				<view class="tit">{{musicStor.curMusic.al.name}}</view>
+				<view class="tit">{{musicStor.curMusic.al?.name}}</view>
 				<uni-icons class="redo" type="redo" size="28" color="#efefef" @click="changeShare"></uni-icons>
 			</view>
 			<view class="main">
@@ -60,7 +60,7 @@
 				<view class="circle">
 					<view class="circle-ring">
 						<view class="img">
-							<image :src="musicStor.curMusic.al.picUrl"></image>
+							<image :src="musicStor.curMusic.al?.picUrl"></image>
 						</view>
 					</view>
 				</view>

@@ -35,15 +35,17 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	}
 	
 	// 点击添加并播放
-	const addSong = (item) => {
+	const addSong = async (id) => {
 		// 排他
-		const index = curPlayList.value.findIndex(v => v.id === item.id)
+		const index = curPlayList.value.findIndex(v => v.id === id)
 		if(index > -1) {
 			curPlayIndex.value = index
 		} else {
-			curPlayList.value.splice(curPlayIndex.value + 1, 0, item)
-			songDetail(item.id)
-			curMusic.value = item
+			// 获取当前歌曲详情
+			const res = await getSongDetailApi(id)
+			curPlayList.value.splice(curPlayIndex.value + 1, 0, res.songs[0])
+			songDetail(res.songs[0].id)
+			curMusic.value = res.songs[0]
 			curPlayIndex.value = curPlayIndex.value + 1
 		}
 	}
@@ -87,7 +89,7 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 		curPlayIndex.value += num
 		if(curPlayIndex.value < 0) {
 			curPlayIndex.value = curPlayList.value.length - 1
-		} else if(curPlayIndex.value >= curPlayList.value.length - 1) {
+		} else if(curPlayIndex.value >= curPlayList.value.length) {
 			curPlayIndex.value = 0
 		}
 		curMusic.value = curPlayList.value[curPlayIndex.value]

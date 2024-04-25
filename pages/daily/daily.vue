@@ -2,8 +2,15 @@
 	import { ref } from 'vue'
 	// import recommend from './wxcomponents/recommend/recommend.vue'
 	import { getDailySongsApi } from '../../services'
+	import PlayCart from '../../components/playCart/playCart.vue';
+	import Selected from '../../components/selected.vue'
+	import useMusicStore from '../../store/music';
+	
+	
+	const {setCurPlayList} = useMusicStore()
 	
 	const title = ['每日推荐', '风格推荐']
+	// 推荐歌单数据
 	const recommendList = ref([])
 	// tab高亮
 	const curIndex = ref(0)
@@ -12,12 +19,13 @@
 	}
 	// 刷新
 	const refresh = ref(true)
+	// 展示选择菜单
+	const showSeletMenu = ref(false)
 	
 	// 获取歌曲列表数据
 	const getRrecommend = async () => {
 		try {
 			const res = await getDailySongsApi()
-			console.log("推荐",res.data.dailySongs)
 			recommendList.value = res.data.dailySongs
 		} catch (e) {
 			console.log(e)
@@ -26,23 +34,33 @@
 	getRrecommend()
 	
 	// 跳转播放页面
-	const goPlayer = (id) => {
-		console.log(id)
+	const goPlayer = (item, index) => {
+		setCurPlayList(item, index, recommendList.value)
 		uni.navigateTo({
-			url: `/pages/player/player?id=${id}`
+			url: `/pages/player/player`
 		})
 	}
 	
 	// 刷新
 	const toRefresh = () => {
 		console.log('刷新一次')
-		event.stopPropagation()
 		refresh.value = false
 		console.log(refresh.value)
 	}
 
+	// 选择菜单
+	const toSelected = () => {
+		console.log('选择')
+		showSeletMenu.value = !showSeletMenu.value
+		console.log(showSeletMenu.value);
+	}
 	
-	// 滑动改变tab？？？？？
+	// 点击更多
+	const moreDetail = () => {
+		console.log('更多详情')
+	}
+	
+	// 滑动改变tab
 	const move = (index) => {
 		console.log(event.touches[0].clientX)
 		// if(event.touches[0].clientX > 0 && event.touches[0].clientX <= 300){
@@ -89,13 +107,13 @@
 									<text>播放全部</text>
 									<text class="vip">VIP歌曲免费畅听</text>
 								</view>
-								<img class="refreshicon" src="../../static/shuaxin.png" alt=""  @click="toRefresh(e)"/>
-								<img class="selecticon" src="../../static/xuanze.png" alt="" />
+								<img class="refreshicon" src="../../static/shuaxin.png" alt=""  @click.stop="toRefresh"/>
+								<img class="selecticon" src="../../static/xuanze.png" alt="" @click.stop="toSelected"/>
 							</view>
 							<!-- 歌曲列表展示 -->
 							<view class="songsList">
 								<!-- 跳转播放 @click="goPlayer(item.id)" -->
-								<view class="songs" v-for="item in recommendList" :key="item.id" @click="goPlayer(item.id)"> 
+								<view class="songs" v-for="(item, index) in recommendList" :key="item.id" @click="goPlayer(item, index)"> 
 									<img class="img" :src="item.al.picUrl" alt="" />
 									<view class="title">
 										<view class="song">
@@ -109,8 +127,9 @@
 											<text> - {{item.al.name}}</text>
 										</view>
 									</view>
-									
-									<uni-icons class="detail" type="more-filled" size="20" color="#ADADAD"></uni-icons>
+									<view class="detail"  @click.stop="moreDetail">
+										<uni-icons type="more-filled" size="20" color="#ADADAD"></uni-icons>
+									</view>
 								</view>
 							</view>
 						</view>
@@ -119,6 +138,8 @@
 			</swiper-item>
 		</swiper>
 	</view>
+	<!-- <PlayCart /> -->
+	<Selected v-if="showSeletMenu" :showSeletMenu="showSeletMenu" :toSelected="toSelected"/>
 </template>
 <style lang="scss" scoped>
 

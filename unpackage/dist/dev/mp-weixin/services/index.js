@@ -24,15 +24,19 @@ const getHomeIconApi = () => {
 const getRrecommendApi = () => {
   return services_request.request({ "url": "/recommend/resource" });
 };
+<<<<<<< HEAD
 const getCommitSongApi = () => {
   return services_request.request({ url: "/recommend/songs" });
 };
+=======
+>>>>>>> wbh
 const toplistApi = () => {
   return services_request.request({ url: "/toplist/detail" });
 };
 const playlistDetailApi = (id) => {
   return services_request.request({ url: "/playlist/detail", data: { id } });
 };
+<<<<<<< HEAD
 const getDailySongsApi = () => {
   return services_request.request({ url: "/recommend/songs" });
 };
@@ -80,6 +84,11 @@ const hotUpApi = (limit = 20) => {
   });
 };
 exports.commentApi = commentApi;
+=======
+const playlisthotApi = () => {
+  return services_request.request({ url: "/playlist/hot" });
+};
+>>>>>>> wbh
 exports.getBannerApi = getBannerApi;
 exports.getCommitSongApi = getCommitSongApi;
 exports.getDailySongsApi = getDailySongsApi;
@@ -90,8 +99,12 @@ exports.hotUpApi = hotUpApi;
 exports.loginApi = loginApi;
 exports.loginStatusApi = loginStatusApi;
 exports.playlistDetailApi = playlistDetailApi;
+<<<<<<< HEAD
 exports.searchDefaultApi = searchDefaultApi;
 exports.searchHotApi = searchHotApi;
 exports.searchKeywordApi = searchKeywordApi;
 exports.searchSuggestApi = searchSuggestApi;
+=======
+exports.playlisthotApi = playlisthotApi;
+>>>>>>> wbh
 exports.toplistApi = toplistApi;

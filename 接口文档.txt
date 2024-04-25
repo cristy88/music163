@@ -4,6 +4,9 @@
 轮播图  getBannerApi
 获得首页图标   getHomeIconApi
 获得每日推荐歌单 getRrecommendApi
+获取热门歌单  playlisthotApi
+获取歌单标签  songTagsApi
+获取歌单分类  songSortApi
 
 
 

@@ -7958,4 +7958,7 @@ exports.resolveComponent = resolveComponent;
 exports.s = s;
 exports.sr = sr;
 exports.t = t;
+<<<<<<< HEAD
 exports.watchEffect = watchEffect;
+=======
+>>>>>>> wbh

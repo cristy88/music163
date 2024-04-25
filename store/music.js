@@ -4,7 +4,7 @@ import { getSongDetailApi, getMusicUrlApi } from "../services/index.js"
 
 export const useMusicStore = defineStore('useMusicStore', () => {
 	// 播放列表
-	const musicPlayList = ref([])
+	// const musicPlayList = ref([])
 	// 当前播放下标
 	const curPlayIndex = ref(0)
 	// 音频
@@ -20,19 +20,41 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	
 	
 	// 获取播放列表数据
-	const setCurPlayList = (item, index, list) => {
-		console.log('当前播放歌曲:',item, '下标：',index, '播放列表：',list)
-		musicPlayList.value = list
+	const setCurPlayList = (item,list) => {
+		// console.log(list)
+		const index = list.findIndex((v) => v.id === item.id)
+		console.log(`%c 点击歌曲下标`,"color:red", index)
+		curPlayList.value = list
 		if(index >= 0) {
 			curPlayIndex.value = index
 			curMusic.value = item
 		} else {
 			curPlayIndex.value = 0
-			curMusic.value = musicPlayList.value[0]
+			curMusic.value = curPlayList.value[0]
 		}
 	}
 	
-	// 监听歌曲下标改变
+	// 点击添加并播放
+	const addSong = (item) => {
+		// 排他
+		const index = curPlayList.value.findIndex(v => v.id === item.id)
+		if(index > -1) {
+			curPlayIndex.value = index
+		} else {
+			curPlayList.value.splice(curPlayIndex.value + 1, 0, item)
+			songDetail(item.id)
+			curMusic.value = item
+			curPlayIndex.value = curPlayIndex.value + 1
+		}
+	}
+	
+	// 点击添加到下一首
+	const addToSongList = (item) => {
+		curPlayList.value.splice(curPlayIndex.value + 1, 0, item)
+	}
+
+	
+	// 监听歌曲改变
 	watch(() => curMusic.value, () => {
 		songDetail(curMusic.value.id)
 	})
@@ -64,26 +86,28 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	const cutSong = (num) => {
 		curPlayIndex.value += num
 		if(curPlayIndex.value < 0) {
-			curPlayIndex.value = musicPlayList.value.length - 1
-		} else if(curPlayIndex.value >= musicPlayList.value.length - 1) {
+			curPlayIndex.value = curPlayList.value.length - 1
+		} else if(curPlayIndex.value >= curPlayList.value.length - 1) {
 			curPlayIndex.value = 0
 		}
-		curMusic.value = musicPlayList.value[curPlayIndex.value]
+		curMusic.value = curPlayList.value[curPlayIndex.value]
 		songDetail(curPlayIndex.value)
 	}
 	
 	
 	
-	
 	return {
-		musicPlayList,
+		// musicPlayList,
+		curPlayList,
 		setCurPlayList,
 		curPlayIndex,
 		curMusic,
 		isPlay,
 		playing,
 		cutSong,
-		songDetail
+		songDetail,
+		addSong,
+		addToSongList
 	}
 })
 

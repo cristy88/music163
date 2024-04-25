@@ -7,7 +7,7 @@ import nowListVue from './components/nowList.vue';
 	const title = ['当前播放', '历史播放']
 	const curIndex = ref(0)
 	
-	const props = defineProps(['musicPlayList'])
+	const props = defineProps(['curPlayList'])
 	
 	
 </script>
@@ -20,7 +20,7 @@ import nowListVue from './components/nowList.vue';
 			</view>
 			<view class="stripe"></view>
 			<view class="songsList">
-				<NowList v-if="curIndex === 0" :nowList="musicPlayList"/>
+				<NowList v-if="curIndex === 0" :nowList="curPlayList"/>
 				<HistoryList v-if="curIndex === 1"/>
 			</view>
 		</view>

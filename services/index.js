@@ -287,3 +287,19 @@ export const careAlbumSubApi = (id) => {
 		}
 	})
 }
+
+//mv评论
+export const getMvCommentApi = (tyep,id) =>{
+	return request({
+		url:`/comment/${type}`,
+		data:{id} ,
+	})
+}
+
+//获取相似mv
+export const getSimilarMvApi = (mvid) =>{
+	return request({
+		url:'/simi/mv',
+		data:{mvid}
+	})
+}

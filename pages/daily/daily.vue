@@ -9,7 +9,7 @@
 	
 	const musicStore = useMusicStore()
 	
-	const title = ['每日推荐', '风格推荐']
+	const title = [{name:'每日推荐', id:123456234}, {name:'风格推荐'}]
 	// 推荐歌单数据
 	const recommendList = ref([])
 	// tab高亮
@@ -26,6 +26,7 @@
 	const getRrecommend = async () => {
 		try {
 			const res = await getDailySongsApi()
+			console.log(res)
 			recommendList.value = res.data.dailySongs
 		} catch (e) {
 			console.log(e)
@@ -34,8 +35,8 @@
 	getRrecommend()
 	
 	// 跳转播放页面
-	const goPlayer = (item, index) => {
-		musicStore.setCurPlayList(item, index, recommendList.value)
+	const goPlayer = (item) => {
+		musicStore.setCurPlayList(item,recommendList.value)
 		uni.navigateTo({
 			url: `/pages/player/player`
 		})
@@ -82,7 +83,7 @@
 				:class="[' tab-item' ,{active: curIndex === index}]"
 				@click="curIndex = index"
 				:current="curIndex">
-				<text>{{item}}</text>
+				<text>{{item.name}}</text>
 			</view>
 		</view>
 		<swiper class="swiper-box" :current="curIndex">

@@ -72,8 +72,10 @@
 						<view class="song">
 							{{musicStor.curMusic.name}}
 						</view>
-						<view class="singer" v-for="singer in musicStor.curMusic.ar" :key="singer.id">
-							{{singer.name}}<span v-if="singer !== musicStor.curMusic.ar[musicStor.curMusic.ar.length - 1]">/</span>
+						<view class="singer">
+							<view class="singer-item" v-for="singer in musicStor.curMusic.ar" :key="singer.id">
+								{{singer.name}}<span v-if="singer !== musicStor.curMusic.ar[musicStor.curMusic.ar.length - 1]">/</span>
+							</view>
 						</view>
 					</view>
 					<uni-icons class="like" type="heart" size="26" color="#ffffff"></uni-icons>
@@ -110,7 +112,7 @@
 		</view>
 		<Share v-if="showShare" @click="changeShare" :share="showShare" :changeShare="changeShare"></Share>
 		<uni-popup ref="popup" type="bottom" border-radius="10px 10px 0 0">
-			<PlayList :musicPlayList="musicStor.musicPlayList"></PlayList>
+			<PlayList :curPlayList="musicStor.curPlayList"></PlayList>
 		</uni-popup>
 	</view>
 </template>
@@ -247,11 +249,13 @@
 				}
 				.singer{
 					color: #efefef;
-					float: left;
+					overflow: hidden;
+					white-space: nowrap;
+					// text-overflow: ellipsis;
+					display: flex;
 					span{
 						padding: 0 rpx(5);
 					}
-					
 				}
 			}
 			.like{

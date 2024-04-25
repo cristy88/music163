@@ -9,7 +9,7 @@
 </script>
 
 <template>
-	<view class="res">
+	<view class="res" >
 		<view class="" v-if="name==='单曲'||name==='song'">
 			<SingleSong :data="data" />
 			<!-- {{data}} -->

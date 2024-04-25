@@ -69,6 +69,10 @@
 		scrollLeft.value = (ind - 2) * 60
 	})
 	
+	const scrollEl = (item) => {
+		console.log("item滚动了")
+	}
+  	
 	getSearchRes()
 	
 </script>
@@ -101,7 +105,7 @@
 				</view>
 			</swiper-item>
 			<swiper-item class="swiper-topic-list" v-for="item in searchType" :key="item.id">
-				<view class="swiper-item">
+				<view class="swiper-item" @scroll="scrollEl(item)">
 					<SearResUI :data="item.resData" :name="item.name" />
 				</view>
 			</swiper-item>

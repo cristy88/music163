@@ -15,18 +15,18 @@
 	watchEffect(async () => {
 		if(props.visible){
 			popup.value?.open()
-			if(props.id){
-				const res= await commentApi(props.type,props.id)
-				comments.value=res.comments
-				return comments
-			}else{
-				const res = await getMvCommentApi(props.type,props.id)
-				comments.value=res.content
-				return comments
-			}
+			// if(props.id){
+			// 	const res= await commentApi(props.type,props.id)
+			// 	comments.value=res.comments
+			// 	return comments
+			// }else{
+			// 	const res = await getMvCommentApi(props.type,props.id)
+			// 	comments.value=res.content
+			// 	return comments
+			// }
 			
-			hotComments.value=res.hotComments
-			console.log(props.id)
+			// hotComments.value=res.hotComments
+			// console.log(props.id)
 		}else{
 			popup.value?.close()
 		}
@@ -46,7 +46,7 @@
 			<uni-section class="mb-10" title="评论" sub-title="最新" type="line">
 				<uni-list>
 					<uni-list-item 
-						v-for="item in comments" 
+						v-for="item in commentStore.comments" 
 						:key="item.commentId"
 						:avatar-circle="true"
 						:title="item.user.nickname"   

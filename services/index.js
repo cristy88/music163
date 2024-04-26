@@ -303,3 +303,8 @@ export const getSimilarMvApi = (mvid) =>{
 		data:{mvid}
 	})
 }
+
+//获取视频地址
+export const getVideoUrlApi = (id) =>{
+	return request({url:'/video/url', data:{id} })
+}

@@ -6,8 +6,9 @@
 	import PlaylistCover from "../../components/playlistCover.vue"
 	import SongsList from "../../components/songsList.vue"
 	import { useMusicStore } from '../../store/music';
+	import { useCommentStore } from '../../store/comment';
 	
-	
+	const commentStore =useCommentStore()
  	const musicStore = useMusicStore()
 	const commentShow=ref(false)
 	const playlist = ref({})
@@ -35,6 +36,11 @@
 		});
 	}
 	
+	const comment = (item) =>{
+		commentStore.getComments(item)
+		commentShow=true
+	}
+	
 </script>
 
 <template>
@@ -56,7 +62,7 @@
 					{{playlist.shareCount}}
 				</view> 
 				<!-- 评论 -->
-				<view class="btn-item" @click="commentShow=true">
+				<view class="btn-item" @click="comment(playlist)">
 					<uni-icons type="chat" color="#fff" size="20px"></uni-icons>
 					{{playlist.commentCount}}
 				</view>

@@ -1,7 +1,7 @@
 <script setup>
 	import { ref } from 'vue';
 	import {onLoad} from "@dcloudio/uni-app"
-	import { allmvlistApi,getMvUrlApi,getMvDataApi,getSimilarMvApi } from '../../services';
+	import { allmvlistApi,getMvUrlApi,getMvDataApi,getSimilarMvApi,getVideoUrlApi } from '../../services';
 	import Comment from "../../components/comment.vue"
 	
 	const mvlist =ref([])
@@ -9,6 +9,7 @@
 	const mvurl=ref({})
 	const mv=ref({})
 	const sMvList=ref([])
+	const videoUrl=ref({})
 	const commentShow=ref(false)
 	
 	allmvlistApi().then(res=>{
@@ -17,13 +18,18 @@
 	})
 	
 	const getmvUrl=async (id)=>{
+		//mv地址
 		const res1 = await getMvUrlApi(id)
+		//mv详细数据
 		const res2 = await getMvDataApi(id)
+		//相似mv
 		const res3 = await getSimilarMvApi(id)
+		//视频地址
+		const res4 = await getVideoUrlApi(id)
 		mvurl.value=res1.data
 		mv.value=res2.data
 		sMvList.value = res3.mvs
-		console.log(res3.mvs)
+		console.log(res4)
 	}
 	
 	onLoad((options)=>{

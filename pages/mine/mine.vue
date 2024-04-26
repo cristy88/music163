@@ -3,15 +3,13 @@
 	import Main from './component/main/Main.vue'
 	import Music from './component/music/Music.vue'
 	import Top from './component/top/Top.vue'
-	import TopLeft from '../topLeft/TopLeft.vue'
+	import TopLeft from '../topLeft/TopLeft.vue'	
 
-		
 	const search = ()=> {
 		uni.navigateTo({
 			url:'/pages/search/search'
 		})
 	}
-
 
 	const showLeft = ref(false)
 	const showPoint = ref(false)

@@ -1,38 +1,66 @@
 <script setup>
-	import { ref } from 'vue'
-	import { getBannerApi, getHomeIconApi, getRrecommendApi, getCommandApi, getCommitSongApi } from '../../services/index.js'
+	import { ref, watch } from 'vue'
+	import { onShow } from '@dcloudio/uni-app'
+	import { getBannerApi, getHomeIconApi, getRrecommendApi, getCommandApi, getCommitSongApi, loginStatusApi, loginTouristApi } from '../../services/index.js'
 	import { useUserInfo } from '../../store/userInfo.js'
 	import SongSheet from './componets/songSheet.vue'
 	import HomeSearch from './componets/HomeSearch.vue'
-	
-	const user = useUserInfo()
-	console.log('用户信息', user.profile, user.musicSum)
-	if (!user.profile || !user.musicSum) {
-		// 登录成功后调用  获取用户详细信息,保存为全局数据
-		user.getUserInfo()
-	}
-	
 	const icons = ref([])
 	// 获取轮播图
 	const banners = ref([])
 	const recommends = ref([])   //展示歌单
 	const firstCommand = ref([])  //轮播歌单
+	const user = useUserInfo()
+	
+	const toLogintourist = async () => {
+		const res = await loginTouristApi()
+		if (res.code === 200) {
+			uni.setStorageSync('curCookie', res.cookie)
+			user.setId(res.userId)
+		} else {
+			uni.showToast({
+				icon:'none',
+				title: '出现错误'
+			})
+		}
+	}
+	// 查看登录状态
+	const getLoginStatus = async () => {
+		const status = await loginStatusApi()
+		if (status.data.account) {
+			uni.setStorageSync('id', String(status.data.account.id))
+			user.setId(status.data.account.id)
+		} else {   //没有登录使用游客身份登录
+			toLogintourist()
+		}
+	}
+	
+	onShow(() => {
+		console.log('进入首页')
+		getLoginStatus()
+	})
 	
 	const getBanner = async () => {
 		try {
 			const res = await getBannerApi()
 			banners.value = res.banners
 			console.log(res)
-			const resIcon = await getHomeIconApi()
-			console.log('获得icon', resIcon)
-			if (resIcon.code === 200) {
-				icons.value = resIcon.data
-			}
 		} catch (e) {
 			console.log(e)
 		}
 	}
 	
+	const getIcons = async () => {
+		try {
+			const resIcon = await getHomeIconApi()
+			console.log('获得icon', resIcon)
+			if (resIcon.code === 200) {
+				icons.value = resIcon.data
+			}
+		} catch (e) {}
+	}
+	
+	// 获得每日推荐歌单
 	const getSongSheet = async () => {
 		const res = await getRrecommendApi()
 		console.log('获得每日推荐歌单', res)
@@ -43,16 +71,18 @@
 		}
 	}
 	
-	// 获得每日推荐歌曲
-	const getSong = async () => {
-		const res = await getCommitSongApi()
-		console.log('获得每日推荐歌曲', res)
+	const isLoginCanGet = () => {
+		getIcons()
+		getSongSheet()
 	}
 	
-	
 	getBanner()
-	getSongSheet()
-	getSong()
+	// 当用户登录游客身份之后重新调用接口
+	watch(() => user.userId, () => {
+		console.log('存储的用户信息', user.userId)
+		isLoginCanGet()
+	})
+	isLoginCanGet()
 	const clickIcon = (name) => {
 		console.log('跳转到icon', name, '界面')
 		let url = ''
@@ -85,19 +115,7 @@
 				<view class="title">{{item.name}}</view>
 			</view>
 		</view>
-		<view class="cart">
-			<view class="img">
-				<image src="" mode=""/>
-			</view>
-			<view class="info">
-				<view class="info_top">我喜欢的音乐</view>
-				<view class="info_buttom"></view>
-			</view>
-			<view class="">
-				
-			</view>
-		</view>
-		<SongSheet title="推荐歌单"  :firstCommand="firstCommand" :recommends="recommends" />
+		<SongSheet title="推荐歌单"  :firstCommand="firstCommand" :recommends="recommends" :show="true" />
 	</view>
 </template>
 
@@ -127,7 +145,8 @@
 		display: flex;
 		align-items: center;
 		overflow-x: auto;
-		&::-webkit-scrollbar{height:0px};
+		border-bottom: 1px solid #999;
+		&::-webkit-scrollbar{height:0px;}
 		.Icon {
 			width: calc(rpx(342) / 5);
 			height: rpx(60);
@@ -147,16 +166,6 @@
 			uni-image {
 				width: 80%;
 			}
-		}
-	}
-	
-	.cart {
-		height: rpx(80);
-		border-bottom: 1px solid #999;
-		display: flex;
-		.img {
-			width: rpx(80);
-			height: rpx(60);
 		}
 	}
 	

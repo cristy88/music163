@@ -1,16 +1,16 @@
 {
 	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": "首页"
+		}
+	},
+	{
 		"path" : "pages/login/login",
 		"style" : 
 		{
 			"navigationBarTitleText" : "登录",
 			"enablePullDownRefresh" : false
-		}
-	},
-	{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "首页"
 		}
 	},
 	{
@@ -118,6 +118,22 @@
 			"navigationBarTitleText" : "歌单标签",
 			"enablePullDownRefresh" : false,
 			"navigationBarBackgroundColor":"#FFFFFF"
+		}
+	},
+	{
+		"path" : "pages/songsheetDetail/songsheetDetail",
+		"style" : 
+		{
+			"enablePullDownRefresh" : false,
+			"navigationStyle": "custom"
+		}
+	},
+	{
+		"path" : "pages/albumDetail/albumDetail",
+		"style" : 
+		{
+			"navigationBarTitleText" : "",
+			"enablePullDownRefresh" : false
 		}
 	}
 	],

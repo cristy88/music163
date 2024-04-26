@@ -1,19 +1,23 @@
 <script setup>
 	import { ref } from 'vue'
+	import useMusicStore from '../../../../store/music';
  	
-	const props = defineProps(['data']);
-
-	const clickPlayer = (e) => {
+	const props = defineProps(['data', 'moreText']);
+	const emits = defineEmits('toDetail')
+	const musicStore = useMusicStore()
+	
+	const clickPlayer = (id) => {
+		musicStore.addSong(id)
 		uni.navigateTo({
 			url:'/pages/player/player'
 		})
 	}
 	
-	const clickAdd = (e) => {
-		e.stopPropagation();
+	const clickAdd = (id) => {
+		musicStore.addToSongList(id)
+		console.log('添加到播放列表')
 	}
 
-	
 </script>
 
 <template>
@@ -25,18 +29,18 @@
 				<view class="all">播放全部</view>
 			</view>
 		</view>
-		<view class="allSongs" v-for="item in data?.songs" :key="item.id" @click="clickPlayer()">
+		<view class="allSongs" v-for="item in data" :key="item.id" @click="clickPlayer(item.id)">
 			<view class="songs">
 				<view class="songName">{{item?.name}}</view>
 				<view class="songZj"><view class="zj">专辑</view>{{item.al?.name}}</view>
 				<view class="songSinger"><view class="singer">歌手</view>{{item.al && item.ar[0]?.name}}</view>
 			</view>
 			<view class="icons">
-				<view class="sPlayer" @click="clickAdd()"></view>
+				<view class="sPlayer" @click.stop="clickAdd(item.id)"></view>
 				<view class="point"></view>
 			</view>
 		</view>
-		<view class="much" v-if="data.moreText">{{data.moreText}} ></view>
+		<view class="much" @click="$emit('toDetail', 1)" v-if="moreText">{{moreText}} ></view>
 		
 	</view>
 </template>
@@ -46,6 +50,7 @@
 		width: 100%;
 		height: 100%;
 		padding: 0 30rpx;
+		overflow: hidden;
 		.top{
 			width: 100%;
 			display: flex;

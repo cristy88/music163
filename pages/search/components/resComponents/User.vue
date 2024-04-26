@@ -1,21 +1,22 @@
 <script setup>
 	import { ref } from 'vue'
 	
-	const props = defineProps(['dataUser'])
+	const props = defineProps(['dataUser', 'moreText'])
+	const emits = defineEmits(['toDetail'])
 	
 </script>
 
 <template>
 	<view class="user">
 		<view class="top">用户</view>
-		<view class="list" v-for="item in (dataUser.users || dataUser.userprofiles)" :key="item.id">
+		<view class="list" v-for="item in dataUser" :key="item.id">
 				<view class="list-user">
 					<image :src="item.avatarUrl" mode="widthFix"></image>
 					<view class="name">{{item.nickname}}</view>
 				</view>
 				<view class="GZ">+ 关注</view>
 		</view>
-		<view class="much" v-if="dataUser.moreText">{{dataUser.moreText}} ></view>
+		<view class="much" v-if="moreText" @click="$emit('toDetail', 7)" >{{moreText}} ></view>
 	</view>
 </template>
 

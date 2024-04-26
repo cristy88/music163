@@ -1,29 +1,48 @@
 <script setup>
+	import { ref } from 'vue'
 	import SingleSong from './resComponents/SingleSong.vue'
 	import Album from './resComponents/Album.vue'
 	import ResSongSheet from './resComponents/ResSongSheet.vue'
 	import Artist from './resComponents/Artist.vue'
 	import User from './resComponents/User.vue'
+	import Video from './resComponents/Video.vue'
 	
-	const props = defineProps(['data', 'name'])
+	const props = defineProps(['data', 'name', 'numId', 'moreText'])
+	const emits = defineEmits(['toDetail', 'scrollDown'])
+	const resPage = ref(null)
+	
+	// scrollTop + clientHeight == scrollHeight。
+	const scrollEl = () => {
+		console.log(props.name, '滚动到底了')
+		emits('scrollDown', props.name)
+	}
+	
+	const toDetailSear = id => {
+		emits('toDetail', id)
+	}
+	
 </script>
 
 <template>
-	<view class="res" >
+	<scroll-view
+		class="Refres"
+		:scroll-x="false"
+		:scroll-y="true"
+		@scrolltolower="scrollEl"
+	>
 		<view class="" v-if="name==='单曲'||name==='song'">
-			<SingleSong :data="data" />
+			<SingleSong :data="data" :moreText="moreText"  @toDetail="toDetailSear" />
 			<!-- {{data}} -->
 		</view>
 		<view class="" v-if="name==='歌单'||name==='playList'">
-			<ResSongSheet :dataRes="data" />
+			<ResSongSheet :dataRes="data" :moreText="moreText" @toDetail="toDetailSear" />
 			<!-- {{data}} -->
 		</view>
 		<view class="" v-if="name==='视频'">
-			<!-- <SingleSong :data="data" /> -->
-			{{data}}
+			<Video :data="data" :moreText="moreText" @toDetail="toDetailSear" />
 		</view>
 		<view class="" v-if="name==='歌手'||name==='aitist'">
-			<Artist :dataArt="data" />
+			<Artist :dataArt="data" :moreText="moreText" @toDetail="toDetailSear" />
 			<!-- {{data}} -->
 		</view>
 		<view class="" v-if="name==='歌词'">
@@ -31,19 +50,23 @@
 			{{data}}
 		</view>
 		<view class="" v-if="name==='专辑'||name==='album'">
-			<Album :dataAlbum="data" />
+			<Album :dataAlbum="data" :moreText="moreText"  @toDetail="toDetailSear" />
 			<!-- {{data}} -->
 		</view>
 		<view class="" v-if="name==='用户'||name==='user'">
-			<User :dataUser="data" />
+			<User :dataUser="data" :moreText="moreText"  @toDetail="toDetailSear" />
 			<!-- {{data}} -->
 		</view>
-	</view>
+	</scroll-view>
 </template>
 
 <style lang="scss" scoped>
-	.res {
+	.Refres {
 		width: 100%;
+		height: 100%;
 		background: white;
+		overflow: hidden;
+		overflow-y: auto;
+		&::-webkit-scrollbar{width: 0px;}
 	}
 </style>

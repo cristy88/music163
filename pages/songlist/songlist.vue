@@ -4,7 +4,12 @@
 	import { onLoad } from '@dcloudio/uni-app';
 	import Comment from "../../components/comment.vue"
 	import PlaylistCover from "../../components/playlistCover.vue"
- 	
+	import SongsList from "../../components/songsList.vue"
+	import { useMusicStore } from '../../store/music';
+	import { useCommentStore } from '../../store/comment';
+	
+	const commentStore =useCommentStore()
+ 	const musicStore = useMusicStore()
 	const commentShow=ref(false)
 	const playlist = ref({})
 	const id=ref('')
@@ -13,7 +18,7 @@
 	const getDetail = async (id)=>{
 		const res= await playlistDetailApi(id)
 		playlist.value=res.playlist
-		console.log(res)
+		console.log(res.playlist)
 	}
 	
 	onLoad((options)=>{
@@ -24,10 +29,16 @@
 	const change=(e)=>{
 		this.show=e.show
 	}
-	const goDetail= (item,id )=>{
+	const goDetail= (item)=>{
+		musicStore.setCurPlayList(item,playlist.value.tracks)
 		uni.navigateTo({
-			url: `/pages/player/player?id=${id}`,
+			url: `/pages/player/player`,
 		});
+	}
+	
+	const comment = (item) =>{
+		commentStore.getComments(item)
+		commentShow=true
 	}
 	
 </script>
@@ -51,7 +62,7 @@
 					{{playlist.shareCount}}
 				</view> 
 				<!-- 评论 -->
-				<view class="btn-item" @click="commentShow=true">
+				<view class="btn-item" @click="comment(playlist)">
 					<uni-icons type="chat" color="#fff" size="20px"></uni-icons>
 					{{playlist.commentCount}}
 				</view>
@@ -61,21 +72,7 @@
 				</view> 
 			</view>
 		</view>
-		<view class="playlist">
-			<view class="top-btns">
-				<button class="play-btn" type="default" size="mini" >播放全部 ({{playlist.tracks?.length}})</button>
-			</view>
-			<view class="songs">
-				<view
-				 class="song-item" 
-				 v-for="(item, index) in playlist.tracks"
-				 :key="item.id"
-				 @click="goDetail(item,item.id)"
-				>{{index+1}}.{{item.name}} --
-				 <text v-for="v in item.ar">{{v.name}}/</text>
-				 </view>
-			</view>
-		</view> 
+		<SongsList />
 		<PlaylistCover v-model:visible="show" :id="id" type="playlist" />
 		<Comment v-model:visible="commentShow" :id="id" type="playlist" />
 </template>
@@ -135,25 +132,4 @@
 			border-radius: 20px;
 		}
 	}	
-	.playlist{
-		.top-btns{
-			height: 60px;
-			border-bottom: 1px solid #ccc;
-			.play-btn{
-				margin-top: 14px;
-				font-size: 14px;
-				font-weight: 600;
-			}
-		}
-		.songs{
-			.song-item{
-				padding: 10px;
-				width: 100%;
-				height: 30px;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				flex-wrap: nowrap;
-			}
-		}
-	}
 </style>

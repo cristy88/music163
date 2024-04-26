@@ -2,12 +2,13 @@
 	import { ref, defineProps } from 'vue'
 	import NowList from './components/nowList.vue'
 	import HistoryList from './components/historyList.vue'
+import nowListVue from './components/nowList.vue';
 
 	const title = ['当前播放', '历史播放']
 	const curIndex = ref(0)
 	
-	const props = defineProps({
-	})
+	const props = defineProps(['curPlayList'])
+	
 	
 </script>
 
@@ -19,7 +20,7 @@
 			</view>
 			<view class="stripe"></view>
 			<view class="songsList">
-				<NowList v-if="curIndex === 0"/>
+				<NowList v-if="curIndex === 0" :nowList="curPlayList"/>
 				<HistoryList v-if="curIndex === 1"/>
 			</view>
 		</view>

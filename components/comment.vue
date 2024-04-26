@@ -1,6 +1,9 @@
 <script setup>
 	import { ref, watchEffect } from 'vue';
-	import { commentApi } from '../services';
+	import { commentApi,getMvCommentApi } from '../services';
+	import { useCommentStore } from '../store/comment';
+	
+	const commentStore = useCommentStore()
 	
 	const props=defineProps(['visible','id','type'])
 	const emits=defineEmits("update:visible")
@@ -12,11 +15,18 @@
 	watchEffect(async () => {
 		if(props.visible){
 			popup.value?.open()
-			const res= await commentApi(props.type,props.id)
-			comments.value=res.comments
-			hotComments.value=res.hotComments
-			console.log(res.comments)
-			console.log(res.hotComments)
+			// if(props.id){
+			// 	const res= await commentApi(props.type,props.id)
+			// 	comments.value=res.comments
+			// 	return comments
+			// }else{
+			// 	const res = await getMvCommentApi(props.type,props.id)
+			// 	comments.value=res.content
+			// 	return comments
+			// }
+			
+			// hotComments.value=res.hotComments
+			// console.log(props.id)
 		}else{
 			popup.value?.close()
 		}
@@ -28,8 +38,6 @@
 		}
 	}
 	
-	
-	
 </script>
 
 <template>
@@ -38,12 +46,11 @@
 			<uni-section class="mb-10" title="评论" sub-title="最新" type="line">
 				<uni-list>
 					<uni-list-item 
-						v-for="item in comments" 
+						v-for="item in commentStore.comments" 
 						:key="item.commentId"
 						:avatar-circle="true"
 						:title="item.user.nickname"   
 						clickable  
-						@click="onClick"
 						:note="item.content"
 						:thumb="item.user.avatarUrl"
 						:time="item.timeStr"

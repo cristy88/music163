@@ -4,7 +4,7 @@ import { getSongDetailApi, getMusicUrlApi } from "../services/index.js"
 
 export const useMusicStore = defineStore('useMusicStore', () => {
 	// 播放列表
-	const musicPlayList = ref([])
+	// const musicPlayList = ref([])
 	// 当前播放下标
 	const curPlayIndex = ref(0)
 	// 音频
@@ -20,12 +20,48 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	
 	
 	// 获取播放列表数据
-	const setCurPlayList = (item, index, listid) => {
-		// console.log(id, index, listid)
-		musicPlayList.value = listid
-		curPlayIndex.value = index
-		curMusic.value = item
+	const setCurPlayList = (item,list) => {
+		// console.log(list)
+		const index = list.findIndex((v) => v.id === item.id)
+		console.log(`%c 点击歌曲下标`,"color:red", index)
+		curPlayList.value = list
+		if(index >= 0) {
+			curPlayIndex.value = index
+			curMusic.value = item
+		} else {
+			curPlayIndex.value = 0
+			curMusic.value = curPlayList.value[0]
+		}
 	}
+	
+	// 点击添加并播放
+	const addSong = async (id) => {
+		// 排他
+		const index = curPlayList.value.findIndex(v => v.id === id)
+		if(index > -1) {
+			curPlayIndex.value = index
+		} else {
+			// 获取当前歌曲详情
+			const res = await getSongDetailApi(id)
+			curPlayList.value.splice(curPlayIndex.value + 1, 0, res.songs[0])
+			songDetail(res.songs[0].id)
+			curMusic.value = res.songs[0]
+			curPlayIndex.value = curPlayIndex.value + 1
+		}
+	}
+	
+	// 点击添加到下一首
+	const addToSongList = async (id) => {
+		const res = await getSongDetailApi(id)
+		curPlayList.value.splice(curPlayIndex.value + 1, 0, res.songs[0])
+		// console.log(curPlayList.value)
+	}
+
+	
+	// 监听歌曲改变
+	watch(() => curMusic.value, () => {
+		songDetail(curMusic.value.id)
+	})
 
 	// 歌曲url
 	const songDetail = async (ids) => {
@@ -38,13 +74,6 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 		}
 	}
 	songDetail(curPlayIndex.value)
-	
-	
-	// watch(() => curPlayIndex.value, () => {
-	// 	songDetail(curPlayIndex.value)
-	// 	console.log('音乐url：',resUrl.data[0].url,"+", curPlayIndex.value);
-	// })
-	
 	
 	// 音乐播放暂停
 	const playing = () => {
@@ -61,24 +90,28 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	const cutSong = (num) => {
 		curPlayIndex.value += num
 		if(curPlayIndex.value < 0) {
-			curPlayIndex.value = musicPlayList.value.length - 1
-		} else if(curPlayIndex.value >= musicPlayList.value.length - 1) {
+			curPlayIndex.value = curPlayList.value.length - 1
+		} else if(curPlayIndex.value >= curPlayList.value.length) {
 			curPlayIndex.value = 0
 		}
-		curMusic.value = musicPlayList.value[curPlayIndex.value]
+		curMusic.value = curPlayList.value[curPlayIndex.value]
 		songDetail(curPlayIndex.value)
 	}
 	
 	
+	
 	return {
-		musicPlayList,
+		// musicPlayList,
+		curPlayList,
 		setCurPlayList,
 		curPlayIndex,
 		curMusic,
 		isPlay,
 		playing,
 		cutSong,
-		songDetail
+		songDetail,
+		addSong,
+		addToSongList
 	}
 })
 

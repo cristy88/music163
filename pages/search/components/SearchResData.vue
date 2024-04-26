@@ -1,12 +1,12 @@
 <script setup>
 	import { ref, watch } from 'vue'
-	import { searchKeywordApi } from '../../../services/index'
-	import SingleSongVue from './resComponents/SingleSong.vue'
+	import { searchKeywordApi } from '@/services/index'
+	import SingleSongVue from '@/components/resComponents/SingleSong.vue'
 	import SearResUI from './SearResUI.vue'
-	import ResSongSheet from './resComponents/ResSongSheet.vue'
-	import Album from './resComponents/Album.vue'
-	import Artist from './resComponents/Artist.vue'
-	import User from './resComponents/User.vue'
+	import ResSongSheet from '@/components/resComponents/ResSongSheet.vue'
+	import Album from '@/components/resComponents/Album.vue'
+	import Artist from '@/components/resComponents/Artist.vue'
+	import User from '@/components/resComponents/User.vue'
 
 	const searchType = ref([
 		{ name: '单曲', hasMore: false, nickName: 'songs', id: 1 , offset: 0, resData: [] },

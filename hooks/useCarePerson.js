@@ -15,7 +15,7 @@ export const useCarePerson = () => {
 		} else {
 			uni.showToast({
 				icon:'error',
-				res.message
+				title: res.message
 			})
 		}
 	}

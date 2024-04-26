@@ -1,6 +1,6 @@
 <script setup>
 	import { ref } from 'vue'
-	import { getAlbumConApi } from '../../../../services/index.js'
+	import { getAlbumConApi } from '@/services/index.js'
 	
 	const props = defineProps(['dataAlbum', 'moreText'])
 	const emits = defineEmits(['toDetail'])
@@ -9,7 +9,6 @@
 		const res = await getAlbumConApi(id)
 		console.log(res)
 	}
-	
 	
 	const toAlbumPage = (id) => {
 		getAllAlbum(id)

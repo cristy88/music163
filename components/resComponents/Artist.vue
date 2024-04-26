@@ -1,9 +1,12 @@
 <script setup>
 	import { ref } from 'vue'
+	import { useCarePerson } from '@/hooks/useCarePerson.js'
 	
 	const props = defineProps(['dataArt', 'moreText'])
 	const emits = defineEmits(['toDetail'])
+	const carePerson = useCarePerson()
 	
+	console.log('歌手', props.dataArt)
 </script>
 
 <template>
@@ -18,7 +21,11 @@
 					<view class ="TA"></view>
 				</view>
 			</view>
-			<view class="GZ">+ 关注</view>
+			<view class="GZ" v-if="!item.followed" @click="carePerson.carePerson(item.id, 1)">+ 关注</view>
+			<view class="GZ isCare" v-else @click="carePerson.carePerson(item.id, 0)">
+				<uni-icons type="checkmarkempty" size="12"></uni-icons>
+				<text>已关注</text>
+			</view>
 		</view>
 		<view class="much" @click="$emit('toDetail', 4)" v-if="moreText">{{moreText}}</view>
 	</view>
@@ -71,7 +78,10 @@
 				font-size: 25rpx;
 				margin-right: 10rpx;
 			}
-			
+			.isCare {
+				border-color: #959595;
+				color: #959595;
+			}
 		}
 		.much{
 			color: #959595;

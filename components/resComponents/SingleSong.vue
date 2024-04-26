@@ -1,6 +1,6 @@
 <script setup>
 	import { ref } from 'vue'
-	import useMusicStore from '../../../../store/music';
+	import useMusicStore from '@/store/music';
  	
 	const props = defineProps(['data', 'moreText']);
 	const emits = defineEmits('toDetail')

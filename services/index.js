@@ -12,6 +12,14 @@ export const loginApi = ({ email, password }) => {
   })
 }
 
+// 游客登录
+export const loginTouristApi = () => {
+	return request({
+		url: '/register/anonimous'
+	})
+}
+
+
 // 登录状态
 export const loginStatusApi = () => {
   return request({
@@ -114,7 +122,7 @@ export const anyToplistApi = (idx) => {
 
 //歌单详情接口
 export const playlistDetailApi = (id) => {
-	return request({url:'/playlist/detail',data:{id} })
+	return request({url:'/playlist/detail',data:{id, s:3} })
 }
 
 //获取每日推荐歌曲
@@ -267,6 +275,16 @@ export const getAlbumConApi = (id) => {
 	})
 }
 
+// 数字专辑详情
+export const getAlbumDetail = (id) => {
+	return request({
+		url: '/digitalAlbum/detail',
+		data: {
+			id
+		}
+	})
+}
+
 // 获取专辑动态信息
 export const getAlbumDynamic = (id) => {
 	return request({
@@ -308,3 +326,30 @@ export const getSimilarMvApi = (mvid) =>{
 export const getVideoUrlApi = (id) =>{
 	return request({url:'/video/url', data:{id} })
 }
+
+// 获取歌单里的所有歌
+export const  playlistAllApi = (id) => {
+	return request({
+		url: '/playlist/track/all',
+		data: {
+			id
+		}
+	})
+}
+// 获取歌单里的详情动态
+export const playlistDunamicApi = (id) => {
+	return request({
+		url: '/playlist/detail/dynamic',
+		data: {
+			id
+		}
+	})
+}
+
+// 歌单更新播放量
+export const playlistCountApi = () => {
+	return request({
+		url: '/playlist/update/playcount'
+	})
+}
+

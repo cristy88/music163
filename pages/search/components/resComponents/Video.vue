@@ -7,6 +7,9 @@
 	console.log('视频数据', props.data)
 	const toVideo = (id) => {
 		console.log('播放视频的id', id)
+		uni.navigateTo({
+			url: `/pages/mvplayer/mvplayer?id=${id}`,
+		});
 	}
 	
 	const toZero = (n) => {
@@ -32,7 +35,7 @@
 <template>
 	<view class="video">
 		<view class="videoCon">
-			<view class="videoLi" v-for="(item,index) in data" :key="item.id" @click="toVideo(item.id)">
+			<view class="videoLi" v-for="(item,index) in data" :key="item.vid" @click="toVideo(item.vid)">
 				<view class="img">
 					<image :src="item.coverUrl" mode="widthFix"></image>
 					<view class="time">

@@ -7,8 +7,7 @@ export const useCommentStore = defineStore('comment',()=>{
 	const mvComment =ref ([])
 	
 	//歌单的评论
-	const getComments= async (item)=>{
-		const id=comments.value.findIndex(v=>v.id===item.id)
+	const getComments= async (id)=>{
 		if(id){
 			const res = await commentApi(id)
 			comments.value=res.comments

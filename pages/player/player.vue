@@ -299,6 +299,7 @@
 				height: rpx(32);
 				.bofang{
 					width: rpx(32);
+					height: rpx(32)
 				}
 			}
 

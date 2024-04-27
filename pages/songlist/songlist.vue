@@ -36,10 +36,11 @@
 		});
 	}
 	
-	// const comment = (id) =>{
-	// 	commentStore.getComments(playlist.id)
-	// 	commentShow=true
-	// }
+	const comment = (type,id) =>{
+		
+		commentStore.getComments(type,id)
+		commentShow.value=true
+	}
 	
 </script>
 
@@ -62,7 +63,7 @@
 					{{playlist.shareCount}}
 				</view> 
 				<!-- 评论 -->
-				<view class="btn-item" @click="commentShow=true">
+				<view class="btn-item" @click="comment(playlist,playlist.id)">
 					<uni-icons type="chat" color="#fff" size="20px"></uni-icons>
 					{{playlist.commentCount}}
 				</view>

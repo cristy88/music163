@@ -3,7 +3,7 @@
 	import useMusicStore from '../store/music';
 	import Selected from '../components/selected.vue'
 	
-	const props = defineProps(["musicList"])
+	const props = defineProps(["musicList", "type"])
 	
 	const musicStore = useMusicStore()
 	// 展示选择菜单
@@ -63,7 +63,10 @@
 		<view class="songsList">
 			<!-- 跳转播放 -->
 			<view class="songs" v-for="(item, index) in musicList" :key="item.id" @click="goPlayer(item, index)">
-				<img class="img" :src="item.al.picUrl" alt="" />
+				<img class="img" :src="item.al.picUrl" alt="" v-if="!type || type !== 'album'" />
+				<view class="" v-else>
+					{{index + 1}}
+				</view>
 				<view class="title">
 					<view class="song">
 						<view class="name">{{item.name}}</view>

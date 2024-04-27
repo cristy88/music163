@@ -276,7 +276,7 @@ export const getAlbumConApi = (id) => {
 }
 
 // 数字专辑详情
-export const getAlbumDetail = (id) => {
+export const getAlbumDetailApi = (id) => {
 	return request({
 		url: '/digitalAlbum/detail',
 		data: {
@@ -286,7 +286,7 @@ export const getAlbumDetail = (id) => {
 }
 
 // 获取专辑动态信息
-export const getAlbumDynamic = (id) => {
+export const getAlbumDynamicApi = (id) => {
 	return request({
 		url: '/album/detail/dynamic',
 		data: {

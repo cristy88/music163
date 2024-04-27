@@ -7,7 +7,7 @@
 	
 	const getLoginStatu = async () => {
 		const status = await loginStatusApi()
-		if (status.data.account.status === 0) {
+		if (status.data.account && status.data.account.status === 0) {
 			uni.setStorageSync('id', String(status.data.account.id))
 			if (!userInfo.profile || !userInfo.musicSum) {
 				// 登录成功后调用  获取用户详细信息,保存为全局数据
@@ -71,7 +71,7 @@
 	
 	const submit = () => {
 		valiForm.value.validate().then(res => {
-			console.log('success', res)
+			// console.log('success', res)
 			uni.showToast({
 				title: `校验通过`
 			})
@@ -84,7 +84,7 @@
 </script>
 
 <template>
-	<view>
+	<view class="login">
 		<view class="example">
 						<!-- 基础表单校验 -->
 			<uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
@@ -104,12 +104,16 @@
 	@function rpx($px) {
 		@return $px * 2rpx;
 	}
+	.login {
+		padding-top: rpx(150);
+	}
 	.example {
-		position: fixed;
+		// position: fixed;
 		width: rpx(273);
 		height: rpx(296);
-		left: 50%;
-		top: 50%;
-		transform:translate(-50%, -50%);
+		// left: 50%;
+		// top: 50%;
+		// transform:translate(-50%, -50%);
+		margin: 0 auto;
 	}
 </style>

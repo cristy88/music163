@@ -4,12 +4,18 @@
 	const props = defineProps(['dataRes', 'moreText']);
 	const emits = defineEmits(['toDetail'])
 	
+	const tosongSheetDetail = (id) => {
+		uni.navigateTo({
+			url: `/pages/songsheetDetail/songsheetDetail?id=${id}`
+		})
+	}
+	
 </script>
 
 <template>
 	<view class="resSong">
 		<view class="top" >歌单</view>
-		<view class="list" v-for="item in dataRes" :key="item.id">
+		<view class="list" v-for="item in dataRes" :key="item.id" @click="tosongSheetDetail(item.id)">
 			<image :src="item.coverImgUrl" mode="widthFix"></image>
 			<view class="list-con">
 				<view class="name">{{item.name}}</view>

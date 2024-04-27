@@ -1,14 +1,18 @@
 <script setup>
 	import { ref } from 'vue'
 	import { loginApi, loginStatusApi } from '../../services'
-	import { useUserInfo } from '../../store/userInfo'
+	import { useUserInfo } from '@/store/userInfo'
 	
 	const userInfo = useUserInfo()
 	
 	const getLoginStatu = async () => {
 		const status = await loginStatusApi()
-		if (status.data.account) {
+		if (status.data.account.status === 0) {
 			uni.setStorageSync('id', String(status.data.account.id))
+			if (!userInfo.profile || !userInfo.musicSum) {
+				// 登录成功后调用  获取用户详细信息,保存为全局数据
+				userInfo.getUserInfo()
+			}
 			uni.switchTab({
 				url: '/pages/index/index'
 			})

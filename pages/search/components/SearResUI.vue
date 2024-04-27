@@ -1,11 +1,11 @@
 <script setup>
 	import { ref } from 'vue'
-	import SingleSong from './resComponents/SingleSong.vue'
-	import Album from './resComponents/Album.vue'
-	import ResSongSheet from './resComponents/ResSongSheet.vue'
-	import Artist from './resComponents/Artist.vue'
-	import User from './resComponents/User.vue'
-	import Video from './resComponents/Video.vue'
+	import SingleSong from '@/components/resComponents/SingleSong.vue'
+	import Album from '@/components/resComponents/Album.vue'
+	import ResSongSheet from '@/components/resComponents/ResSongSheet.vue'
+	import Artist from '@/components/resComponents/Artist.vue'
+	import User from '@/components/resComponents/User.vue'
+	import Video from '@/components/resComponents/Video.vue'
 	
 	const props = defineProps(['data', 'name', 'numId', 'moreText'])
 	const emits = defineEmits(['toDetail', 'scrollDown'])

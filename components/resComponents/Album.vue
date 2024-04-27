@@ -1,6 +1,6 @@
 <script setup>
 	import { ref } from 'vue'
-	import { getAlbumConApi } from '../../../../services/index.js'
+	import { getAlbumConApi } from '@/services/index.js'
 	
 	const props = defineProps(['dataAlbum', 'moreText'])
 	const emits = defineEmits(['toDetail'])
@@ -10,9 +10,11 @@
 		console.log(res)
 	}
 	
-	
 	const toAlbumPage = (id) => {
-		getAllAlbum(id)
+		// getAllAlbum(id)
+		uni.navigateTo({
+			url: `/pages/albumDetail/albumDetail?id=${id}`
+		})
 	}
 	
 </script>
@@ -21,7 +23,7 @@
 	<view class="album">
 		<view class="top">专辑</view>
 		<view class="lists" v-for="item in dataAlbum" :key="item.id" @click="toAlbumPage(item.id)">
-			<image :src="item.picUrl" mode="widthFix"></image>
+			<image :src="item?.picUrl" mode="widthFix"></image>
 			<view class="list">
 				<view class="list-tit">{{item.name}}</view>
 				<view class="list-small">{{item.artist.name}}</view>

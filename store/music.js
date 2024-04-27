@@ -17,13 +17,17 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	const curPlayList = ref([])
 	// 当前播放歌曲
 	const curMusic = ref('')
+	// 播放顺序
+	const order = ref(0)  // 0：顺序 1：单曲 2：随机
 	
+	
+	// const curSongDetati = co'm
 	
 	// 获取播放列表数据
 	const setCurPlayList = (item,list) => {
 		// console.log(list)
 		const index = list.findIndex((v) => v.id === item.id)
-		console.log(`%c 点击歌曲下标`,"color:red", index)
+		console.log(`%c 点击歌曲下标`,"color:red", curPlayIndex.value)
 		curPlayList.value = list
 		if(index >= 0) {
 			curPlayIndex.value = index
@@ -43,6 +47,7 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 		} else {
 			// 获取当前歌曲详情
 			const res = await getSongDetailApi(id)
+			// const resUrl = await getMusicUrlApi(ids)
 			curPlayList.value.splice(curPlayIndex.value + 1, 0, res.songs[0])
 			songDetail(res.songs[0].id)
 			curMusic.value = res.songs[0]
@@ -54,7 +59,6 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	const addToSongList = async (id) => {
 		const res = await getSongDetailApi(id)
 		curPlayList.value.splice(curPlayIndex.value + 1, 0, res.songs[0])
-		// console.log(curPlayList.value)
 	}
 
 	
@@ -68,6 +72,7 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 		try{
 			const resUrl = await getMusicUrlApi(ids)
 			audio.autoplay = true;
+			isPlay.value = ref(true)
 			audio.src = musicUrl.value = resUrl.data[0].url
 		} catch(e) {
 			console.log(e)
@@ -98,6 +103,31 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 		songDetail(curPlayIndex.value)
 	}
 	
+	// 播放顺序
+	const playOrder = (r) => {
+		order.value = r
+		console.log(r)
+		if(order.value === 0) {
+			console.log('按顺序播放')
+			// if(curPlayIndex.value < 0) {
+			// 	curPlayIndex.value = curPlayList.value.length - 1
+			// } else if(curPlayIndex.value >= curPlayList.value.length) {
+			// 	curPlayIndex.value = 0
+			// }
+			curMusic.value = curPlayList.value[curPlayIndex.value + 1]
+			songDetail(curPlayIndex.value)
+		} else if(order.value === 1) {
+			// curMusic.value = curPlayList.value[curPlayIndex.value]
+			// songDetail(curPlayIndex.value)
+			console.log('单曲循环')
+			audio.loop = true;
+		} else {
+			console.log('随机播放')
+			curPlayIndex.value = Math.floor(Math.random() * curPlayList.value.length)
+			curMusic.value = curPlayList.value[curPlayIndex.value]
+			songDetail(curPlayIndex.value)
+		}
+	}
 	
 	
 	return {
@@ -111,7 +141,9 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 		cutSong,
 		songDetail,
 		addSong,
-		addToSongList
+		addToSongList,
+		order,
+		playOrder,
 	}
 })
 

@@ -1,6 +1,6 @@
 <script setup>
 	import { ref } from 'vue'
-	import useMusicStore from '../../../../store/music';
+	import useMusicStore from '@/store/music';
  	
 	const props = defineProps(['data', 'moreText']);
 	const emits = defineEmits('toDetail')
@@ -26,7 +26,7 @@
 			<view class="topTit">单曲</view>
 			<view class="topAll">
 				<view class="allPlayer">
-					<img src="../../icon/icon_01.png" alt="" />
+					<image src="@/static/icon/icon_01.png" mode="widthFix"></image>
 				</view>
 				<view class="all">播放全部</view>
 			</view>
@@ -39,10 +39,10 @@
 			</view>
 			<view class="icons">
 				<view class="sPlayer" @click.stop="clickAdd(item.id)">
-					<img src="../../icon/icon_02.png" alt="" />
+					<image src="@/static/icon/icon_02.png" mode=""></image>
 				</view>
 				<view class="point">
-					<img src="../../icon/icon_003.png" alt="" />
+					<image src="@/static/icon/icon_03.png" mode=""></image>
 				</view>
 			</view>
 		</view>
@@ -52,6 +52,10 @@
 </template>
 
 <style lang="scss" scoped>
+	image {
+		width: 100%;
+		height: 100%;
+	}
 	.single{
 		width: 100%;
 		height: 100%;
@@ -74,12 +78,14 @@
 				display: flex;
 				align-items: center;
 				.allPlayer{
-					width: 40rpx;
-					height: 40rpx;
-					margin-left: 4rpx;
-					img{
-						width: 28rpx;
-						height: 28rpx;
+					width: 50rpx;
+					height: 50rpx;
+					background-size: 26rpx;
+					image {
+						width: rpx(14);
+						height: rpx(14);
+						vertical-align: middle;
+						margin-left: rpx(8);
 					}
 				}
 				.all{
@@ -136,22 +142,15 @@
 				.sPlayer{
 					width: 50rpx;
 					height: 50rpx;
-					text-align: center;
-					img{
-						width: 40rpx;
-						height: 40rpx;
-					}
+					background-size: 40rpx;
 				}
 				.point{
 					width: 50rpx;
 					height: 50rpx;
-					text-align: center;
-					img{
-						width: 40rpx;
-						height: 40rpx;
-					}
+					background-size: 50rpx;
 				}
 			}
+			
 		}
 		.much{
 			color: #959595;

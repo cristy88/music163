@@ -1,21 +1,21 @@
 <script setup>
 	import { ref, watch } from 'vue'
-	import { searchKeywordApi } from '../../../services/index'
-	import SingleSongVue from './resComponents/SingleSong.vue'
+	import { searchKeywordApi } from '@/services/index'
+	import SingleSongVue from '@/components/resComponents/SingleSong.vue'
 	import SearResUI from './SearResUI.vue'
-	import ResSongSheet from './resComponents/ResSongSheet.vue'
-	import Album from './resComponents/Album.vue'
-	import Artist from './resComponents/Artist.vue'
-	import User from './resComponents/User.vue'
+	import ResSongSheet from '@/components/resComponents/ResSongSheet.vue'
+	import Album from '@/components/resComponents/Album.vue'
+	import Artist from '@/components/resComponents/Artist.vue'
+	import User from '@/components/resComponents/User.vue'
 
 	const searchType = ref([
-		{ name: '单曲', hasMore: false, nickName: 'songs', id: 1 , offset: 1, resData: [] },
-		{ name: '歌单', hasMore: false, nickName: 'playlists', id: 1000 , offset: 1, resData: [] },
-		{ name: '视频', hasMore: false, nickName: 'videos', id: 1014 , offset: 1, resData: [] },
-		{ name: '歌手', hasMore: false, nickName: 'artists', id: 100 , offset: 1, resData: [] },
-		{ name: '歌词', hasMore: false, nickName: 'songs', id: 1006 , offset: 1, resData: [] },
-		{ name: '专辑', hasMore: false, nickName: 'albums', id: 10 , offset: 1, resData: [] },
-		{ name: '用户', hasMore: false, nickName: 'userprofiles', id: 1002 , offset: 1, resData: [] }
+		{ name: '单曲', hasMore: false, nickName: 'songs', id: 1 , offset: 0, resData: [] },
+		{ name: '歌单', hasMore: false, nickName: 'playlists', id: 1000 , offset: 0, resData: [] },
+		{ name: '视频', hasMore: false, nickName: 'videos', id: 1014 , offset: 0, resData: [] },
+		{ name: '歌手', hasMore: false, nickName: 'artists', id: 100 , offset: 0, resData: [] },
+		{ name: '歌词', hasMore: false, nickName: 'songs', id: 1006 , offset: 0, resData: [] },
+		{ name: '专辑', hasMore: false, nickName: 'albums', id: 10 , offset: 0, resData: [] },
+		{ name: '用户', hasMore: false, nickName: 'userprofiles', id: 1002 , offset: 0, resData: [] }
 	])
 	// const searType = ['综合', '单曲', '歌单', '视频', '歌手', '歌词', '专辑', '用户']
 	const searType = [
@@ -45,13 +45,14 @@
 	}
 	
 	// 其他搜索结果
-	const getSearAnyRes = async (index) => {
+	const getSearAnyRes = async (index, limit=30) => {
 		const trueItem = searchType.value[index - 1]
-		console.log('id', trueItem.id)
-		const res = await searchKeywordApi(props.trueSearCon, trueItem.id, trueItem.offset)
+		console.log('id', trueItem.id, trueItem.offset)
+		const res = await searchKeywordApi(props.trueSearCon, trueItem.id, trueItem.offset * limit)
 		searchType.value[index - 1].resData = [...searchType.value[index - 1].resData, ...res.result[trueItem.nickName]]
 		searchType.value[index - 1].hasMore = res.result.hasMore
-		// console.log(res.result)
+		console.log(res.result)
+		// console.log(searchType.value[index - 1].name, searchType.value[index - 1].resData)
 	}
 	
 	// 滚动到底后添加数据

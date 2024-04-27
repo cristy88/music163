@@ -17,7 +17,7 @@
 	// 当前播放歌曲详情
 	musicStor.songDetail(musicStor.curMusic.id)
 	
-	console.log(musicStor.isPlay)
+	console.log(musicStor.order)
 	
 	// 返回上一页
 	const changePage = () => {
@@ -95,7 +95,11 @@
 				</view>
 				<!-- 按键 -->
 				<view class="playBar">
-					<image class="xunhuan" src="../../static/suijibofang.png" mode="widthFix"></image>
+					<view class="xunxu-btn">
+						<image class="xunhuan" v-if="musicStor.order === 0" src="../../static/shunxubofang.png" mode="widthFix" @click="musicStor.playOrder(1)"></image>
+						<image class="xunhuan" v-if="musicStor.order === 1" src="../../static/danquxunhuan.png" mode="widthFix" @click="musicStor.playOrder(2)"></image>
+						<image class="xunhuan" v-if="musicStor.order === 2" src="../../static/suijibofang.png" mode="widthFix" @click="musicStor.playOrder(0)"></image>
+					</view>
 					<image class="shang" src="../../static/shang.png" mode="widthFix" @click="musicStor.cutSong(-1)"></image>
 					<view class="play-btn" @click="musicStor.playing">
 						<image class="bofang" v-if="musicStor.isPlay" src="../../static/zanting.png" mode="widthFix"></image>
@@ -127,7 +131,7 @@
 .bg{
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, .4);
+	background: rgba(0, 0, 0, 0.4);
 	overflow: hidden;
 	position: fixed;
 	top: 0;
@@ -286,11 +290,16 @@
 			image{
 				width: rpx(24);
 			}
+			.xunxu-btn{
+				width: rpx(24);
+				height: rpx(24);
+			}
 			.play-btn{
 				width: rpx(32);
 				height: rpx(32);
 				.bofang{
 					width: rpx(32);
+					height: rpx(32)
 				}
 			}
 

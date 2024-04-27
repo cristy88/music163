@@ -1,6 +1,6 @@
 <script setup>
 	import { ref } from 'vue'
-	import useMusicStore from '../../../../store/music';
+	import useMusicStore from '@/store/music';
  	
 	const props = defineProps(['data', 'moreText']);
 	const emits = defineEmits('toDetail')
@@ -25,7 +25,9 @@
 		<view class="top">
 			<view class="topTit">单曲</view>
 			<view class="topAll">
-				<view class="allPlayer"></view>
+				<view class="allPlayer">
+					<image src="@/static/icon/icon_01.png" mode="widthFix"></image>
+				</view>
 				<view class="all">播放全部</view>
 			</view>
 		</view>
@@ -36,8 +38,12 @@
 				<view class="songSinger"><view class="singer">歌手</view>{{item.al && item.ar[0]?.name}}</view>
 			</view>
 			<view class="icons">
-				<view class="sPlayer" @click.stop="clickAdd(item.id)"></view>
-				<view class="point"></view>
+				<view class="sPlayer" @click.stop="clickAdd(item.id)">
+					<image src="@/static/icon/icon_02.png" mode=""></image>
+				</view>
+				<view class="point">
+					<image src="@/static/icon/icon_03.png" mode=""></image>
+				</view>
 			</view>
 		</view>
 		<view class="much" @click="$emit('toDetail', 1)" v-if="moreText">{{moreText}} ></view>
@@ -46,6 +52,10 @@
 </template>
 
 <style lang="scss" scoped>
+	image {
+		width: 100%;
+		height: 100%;
+	}
 	.single{
 		width: 100%;
 		height: 100%;
@@ -70,8 +80,13 @@
 				.allPlayer{
 					width: 50rpx;
 					height: 50rpx;
-					background: url(../../icon/icon_01.png) no-repeat center;
 					background-size: 26rpx;
+					image {
+						width: rpx(14);
+						height: rpx(14);
+						vertical-align: middle;
+						margin-left: rpx(8);
+					}
 				}
 				.all{
 					font-size: 22rpx;
@@ -127,13 +142,11 @@
 				.sPlayer{
 					width: 50rpx;
 					height: 50rpx;
-					background: url(../../icon/icon_02.png) no-repeat center;
 					background-size: 40rpx;
 				}
 				.point{
 					width: 50rpx;
 					height: 50rpx;
-					background: url(../../icon/icon_003.png) no-repeat center;
 					background-size: 50rpx;
 				}
 			}

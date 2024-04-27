@@ -1,21 +1,28 @@
 <script setup>
 	import { ref } from 'vue'
 	
-	const props = defineProps(['title', 'firstCommand', 'recommends'])
+	const props = defineProps(['title', 'firstCommand', 'recommends', 'show'])
 	// console.log('子组件产值', props
 	const curI = ref(0)
+	
+	const toSongSheetdeatil  = (id) => {
+		uni.navigateTo({
+			url: `/pages/songsheetDetail/songsheetDetail?id=${id}`
+		})
+	}
+	
 </script>
 
 <template>
 	<view class="Play">
 		<view class="Playtitle">
-			<view class=""><text>{{title}}</text><uni-icons type="right" size="30"></uni-icons></view>
-			<view class=""><uni-icons type="more-filled" size="30"></uni-icons></view>
+			<view class=""><text>{{title}}</text><uni-icons type="right" size="16"></uni-icons></view>
+			<view class="Ic" v-if="show"><uni-icons type="more-filled" size="16"></uni-icons></view>
 		</view>
 		<view class="songs">
 			<view class="firstAllSongSheet" v-if="firstCommand">
 				<swiper class="swiper" circular :autoplay="true" :vertical="true" :current="curI" @change="e => curI = e.detail.current">
-					<swiper-item v-for="item in firstCommand" :key="item.id">
+					<swiper-item v-for="item in firstCommand" :key="item.id" @click="toSongSheetdeatil(item.id)">
 						<image :src="item.picUrl" />
 					</swiper-item>
 				</swiper>
@@ -23,10 +30,13 @@
 					{{firstCommand[curI]?.name}}
 				</view>
 			</view>
-			<view class="songsheet" v-for="item in recommends" :key="item.id" v-if="recommends">
+			<view class="songsheet" v-for="item in recommends" :key="item.id" v-if="recommends" @click="toSongSheetdeatil(item.id)">
 				<image :src="item.picUrl" mode="scaleToFill" />
 				<view class="songsheetdesc">
 					{{item.name}}
+				</view>
+				<view class="img">
+					<image src="@/static/bofang.png" mode="scaleToFill"></image>
 				</view>
 			</view>
 		</view>
@@ -48,12 +58,16 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		font-size: rpx(20);
+		font-size: rpx(18);
+		font-weight: 900;
 		color: #2C3342;
 		view:nth-of-type(2) {
 			transform: rotate(90deg);
 			width: rpx(40);
 			margin-right: rpx(20);
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 	}
 	
@@ -89,6 +103,7 @@
 		margin-left: rpx(10);
 		display: flex;
 		flex-direction: column;
+		position: relative;
 		&:last-of-type {
 			margin-right: rpx(30);
 		}
@@ -97,6 +112,18 @@
 			height: rpx(112);
 			border-radius: rpx(10);
 			background: rgba(0, 0, 0, .5);
+		}
+		.img {
+			width: rpx(20);
+			height: rpx(20);
+			position: absolute;
+			bottom: rpx(60);
+			right: rpx(10);
+			image {
+				width: 100%;
+				height: 100%;
+				background-color: transparent;
+			}
 		}
 	}
 	.songsheetdesc {

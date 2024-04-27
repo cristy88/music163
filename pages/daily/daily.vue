@@ -88,14 +88,14 @@
 		</view>
 		<swiper class="swiper-box" :current="curIndex">
 			<swiper-item
-				v-for="(item, index) in title"
+				v-for="(item, index) in 2"
 				:key="item"
 				@change="curIndex = index"
-				@touchmove="move(index)"
 			>
+			<!-- @touchmove="move(index)" -->
 				<view class="swiper-item" :class="'swiper-item' + index">
 					<!-- 每日推荐歌单 -->
-					<Recommend :goPlayer="goPlayer" :musicList="recommendList" :moreDetail="moreDetail" :toSelected="toSelected"/>
+					<Recommend v-if="curIndex === 0" :goPlayer="goPlayer" :musicList="recommendList" :moreDetail="moreDetail" :toSelected="toSelected"/>
 				</view>
 			</swiper-item>
 		</swiper>

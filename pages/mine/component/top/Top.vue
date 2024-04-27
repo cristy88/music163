@@ -1,6 +1,7 @@
 
 <script setup>
 import { defineEmits } from 'vue';
+import 'animate.css'
 
 const $emit = () => {
 	// console.log('点击父组件');

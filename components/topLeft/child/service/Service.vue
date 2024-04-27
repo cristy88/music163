@@ -4,74 +4,73 @@
 
 <template>
 	<view class="centre">
+		<view class="con">音乐服务</view>
 		<view class="list">
-			<view class="icon"></view>
+			<view class="icon">
+				<img src="" alt="" />
+			</view>
 			<view class="tit-o">
-				<view class="tit">我的订单</view>
+				<view class="tit">趣测</view>
 				<view class="tit-son">
+					<view class="small">点击查看今日运势</view>
 					<view class="icon_1">></view>
 				</view>
 			</view>
 		</view>
 		<view class="list">
-			<view class="icon"></view>
+			<view class="icon">
+				<img src="" alt="" />
+			</view>
 			<view class="tit-o">
-					<view class="tit">优惠券</view>
+					<view class="tit">云村有票</view>
 					<view class="tit-son">
 						<view class="icon_1">></view>
 					</view>
 			</view>
 		</view>
 		<view class="list">
-			<view class="icon"></view>
+			<view class="icon">
+				<img src="" alt="" />
+			</view>
 			<view class="tit-o">
-					<view class="tit">我的客服</view>
+					<view class="tit">商城</view>
 					<view class="tit-son">
 						<view class="icon_1">></view>
 					</view>
 			</view>
 		</view>
 		<view class="list">
-			<view class="icon"></view>
+			<view class="icon">
+				<img src="" alt="" />
+			</view>
 			<view class="tit-o">
-				<view class="tit">分享网易云音乐</view>
+				<view class="tit">Beat专区</view>
 				<view class="tit-son">
+					<view class="small">投稿Beat瓜分万元推歌金</view>
 					<view class="icon_1">></view>
 				</view>
 			</view>
 		</view>
 		<view class="list">
-			<view class="icon"></view>
+			<view class="icon">
+				<img src="" alt="" />
+			</view>
 			<view class="tit-o">
-				<view class="tit">个人信息收集与使用清单</view>
+				<view class="tit">音乐收藏家</view>
 				<view class="tit-son">
+					<view class="small">与音乐人共享收益</view>
 					<view class="icon_1">></view>
 				</view>
 			</view>
 		</view>
 		<view class="list">
-			<view class="icon"></view>
-			<view class="tit-o">
-				<view class="tit">个人信息第三方共享清单</view>
-				<view class="tit-son">
-					<view class="icon_1">></view>
-				</view>
+			<view class="icon">
+				<img src="" alt="" />
 			</view>
-		</view>
-		<view class="list">
-			<view class="icon"></view>
 			<view class="tit-o">
-				<view class="tit">个人信息与隐私保护</view>
+				<view class="tit">彩铃专区</view>
 				<view class="tit-son">
-					<view class="icon_1">></view>
-				</view>
-			</view>
-		</view>
-		<view class="list">
-			<view class="icon"></view>
-			<view class="tit-o">
-				<view class="tit">关于</view>
-				<view class="tit-son">
+					<view class="small">pick你的音乐彩铃</view>
 					<view class="icon_1">></view>
 				</view>
 			</view>
@@ -100,6 +99,10 @@
 				height: 30rpx;
 				background: #BA4E47;
 				margin-right: 20rpx;
+				img{
+					width: 40rpx;
+					height: 40rpx;
+				}
 			}
 			.tit-o{
 				width: 100%;
@@ -107,12 +110,12 @@
 				justify-content: space-between;
 			}
 			.tit-son{
-				width: 100rpx;
+				width: 250rpx;
 				display: flex;
 				justify-content: flex-end;
 				align-items: center;
 				.small{
-					font-size: 25rpx;
+					font-size: 23rpx;
 					margin-right: 20rpx;
 					color: #999999;
 				}

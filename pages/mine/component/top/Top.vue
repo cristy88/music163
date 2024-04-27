@@ -21,10 +21,10 @@ const changeMine = () => {
 	<view class="box" @click="$emit('handleClick')">
 		<view class="list">
 			<view class="list-tit">0616星</view>
-			<view class="list-one" @click="changeMine()"><view class="img"></view>编辑资料</view>
-			<view class="list-one"><view class="img"></view>更换封面</view>
-			<view class="list-one"><view class="img"></view>隐私设置</view>
-			<view class="list-one"><view class="img"></view>分享</view>
+			<view class="list-one" @click="changeMine()"><img src="./icon/icon_01.png" alt="" />编辑资料</view>
+			<view class="list-one"><img src="./icon/icon_02.png" alt="" />更换封面</view>
+			<view class="list-one"><img src="./icon/icon_03.png" alt="" style="width: 35rpx;"/>隐私设置</view>
+			<view class="list-one"><img src="./icon/icon_04.png" alt="" />分享</view>
 		</view>
 	</view>
 	
@@ -56,11 +56,10 @@ const changeMine = () => {
 				font-size: 35rpx;
 				margin: 0 30rpx;
 				font-size: 33rpx;
-				.img{
-					width: 50rpx;
-					height: 50rpx;
-					background: #BA4E47;
-					margin-right: 30rpx;
+				img{
+					width: 38rpx;
+					height: 38rpx;
+					margin-right: 20rpx;
 				}
 			}
 		}

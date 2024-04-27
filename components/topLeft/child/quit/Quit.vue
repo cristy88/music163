@@ -14,14 +14,18 @@ const clickLogin = () => {
 <template>
 	<view class="centre">
 		<view class="list">
-			<view class="icon"></view>
+			<view class="icon">
+				<img src="../../icon/icon_02.png" alt="" />
+			</view>
 			<view class="tit-o">
 				<view class="tit">切换账号</view>
 				<view class="icon_1">></view>
 			</view>
 		</view>
 		<view class="list">
-			<view class="icon"></view>
+			<view class="icon">
+				<img src="../../icon/icon_01.png" alt="" />
+			</view>
 			<view class="tit-o">
 					<view class="tits" @click="clickLogin()">退出登录/关闭</view>
 			</view>
@@ -44,11 +48,12 @@ const clickLogin = () => {
 			height: 80rpx;
 			display: flex;
 			align-items: center;
-			.icon{
-				width: 30rpx;
-				height: 30rpx;
-				background: #BA4E47;
+			.icon{			
 				margin-right: 20rpx;
+				img{
+					width: 40rpx;
+					height: 40rpx;
+				}
 			}
 			.tit-o{
 				width: 100%;

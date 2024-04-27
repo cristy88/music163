@@ -11,9 +11,14 @@ export const useUserInfo = defineStore('useUserInfo', () => {
 		const userId = Number(uni.getStorageSync('id'))
 		console.log('获取用户xinxi')
 		const res = await getUserSUMApi()
-		musicSum.value = res
-		const res1 = await getUserInfoApi(userId)
-		profile.value = res1.profile
+		musicSum.value = res;
+		const res1 = await getUserInfoApi(musicSum.value.userId)
+		profile.value = {
+			...res.profile,
+			level: res.level,
+			listenSongs: res.listenSongs,
+			createDays: res.createDays,
+		}
 	}
 
 	return {

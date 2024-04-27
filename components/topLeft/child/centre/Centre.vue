@@ -5,7 +5,9 @@
 <template>
 	<view class="centre">
 		<view class="list">
-			<view class="icon"></view>
+			<view class="icon">
+				<img src="../../icon/icon_11.png" alt="" />
+			</view>
 			<view class="tit-o">
 				<view class="tit">我的消息</view>
 				<view class="tit-son">
@@ -15,7 +17,9 @@
 			</view>
 		</view>
 		<view class="list">
-			<view class="icon"></view>
+			<view class="icon">
+				<img src="../../icon/icon_22.png" alt="" />
+			</view>
 			<view class="tit-o">
 					<view class="tit">云贝中心</view>
 					<view class="tit-son">
@@ -25,14 +29,18 @@
 			</view>
 		</view>
 		<view class="list">
-			<view class="icon"></view>
+			<view class="icon">
+				<img src="../../icon/icon_33.png" alt="" />
+			</view>
 			<view class="tit-o">
 					<view class="tit">徽章中心</view>
 					<view class="icon_1">></view>
 			</view>
 		</view>
 		<view class="list">
-			<view class="icon"></view>
+			<view class="icon">
+				<img src="../../icon/icon_44.png" alt="" />
+			</view>
 			<view class="tit-o">
 					<view class="tit">创作者中心</view>
 					<view class="icon_1">></view>
@@ -54,10 +62,11 @@
 			align-items: center;
 			border-bottom: 1px solid #eeeeee;
 			.icon{
-				width: 30rpx;
-				height: 30rpx;
-				background: #BA4E47;
 				margin-right: 20rpx;
+				img{
+					width: 40rpx;
+					height: 40rpx;
+				}
 			}
 			.tit-o{
 				width: 100%;

@@ -1,5 +1,10 @@
 <script setup>
 import { ref } from 'vue'
+import { useUserInfo } from '@/store/userInfo'
+// import { getUserSongSheetApi } from '@/services/userApi'
+
+const userInfo = useUserInfo()
+// const playList = res([])
 
 const changeAddress = () => {
 	uni.navigateTo({
@@ -12,15 +17,15 @@ const changeAddress = () => {
 <template>
 	<view class="main">
 		<view class="ava"></view>
-		<view class="name">0616星</view>
+		<view class="name" ></view>
 		<view class="address" @click="changeAddress()">
 			<view class="badge">0枚徽章</view>
-			<view class="age">00后</view>
-			<view class="province">~河北 唐山~</view>
-			<view class="cun">村龄4年</view>
+			<view class="age"></view>
+			<view class="province">~  ~</view>
+			<view class="cun">村龄年</view>
 		</view>
 		<view class="detail">
-			<view class="GZ">关注</view>
+			<view class="GZ">{{userInfo.profile?.followeds}}</view>关注
 			<view class="FS">粉丝</view>
 			<view class="DJ">等级</view>
 			<view class="TG">听歌</view>
@@ -28,7 +33,7 @@ const changeAddress = () => {
 		<view class="store">
 			<view class="zj">最近</view>
 			<view class="zj">本地</view>
-			<view class="zj">云盘</view>
+			<view class="zj">云盘</view> 
 			<view class="zj">已购</view>
 			<view class="zj">更多</view>
 		</view>
@@ -53,8 +58,9 @@ const changeAddress = () => {
 		.ava{
 			width: 150rpx;
 			height: 150rpx;
-			background: url(../../icon/icon_05.jpg) no-repeat;
-			background-size:150rpx;
+			background: orange;
+			// background: url(../../icon/icon_05.jpg) no-repeat;
+			// background-size:150rpx;
 			border-radius: 50%;
 			margin-top: 20rpx;
 		}

@@ -15,7 +15,6 @@ import { getUserSongSheetApi } from '@/services/userApi.js'
 		try {  
 			const res = await getPlaylistCreateApi(playList.value)
 			if (res && res.playlist && res.playlist.name) {
-				dataList.value = res.playlist.name;
 				console.log('新建歌单成功', res.playlist.name);
 			} else {
 				console.error('新建歌单失败');
@@ -25,6 +24,7 @@ import { getUserSongSheetApi } from '@/services/userApi.js'
 		}
 	}
 	
+	// 
 	
 	// 点击加号 出现新命名的歌单
 	// const newList = ref(false)
@@ -51,7 +51,7 @@ import { getUserSongSheetApi } from '@/services/userApi.js'
 			<view class="heart" @click="clickHeart()">心动模式</view>
 		</view>
 	
-		<view class="newList" v-for="item in dataList" :key="item.id">
+		<view class="newList" v-for="item in res.playlist" :key="item.id">
 			<view class="ILike">
 				<view class="img"></view>
 				<view class="title">

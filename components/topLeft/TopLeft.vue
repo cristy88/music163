@@ -20,7 +20,9 @@ const $emit = () => {
 					<view class="name">0616星</view>
 					<view class="">></view>
 				</view>
-				<view class="sweep"></view>
+				<view class="sweep">
+					<img src="./icon/icon_1.png" alt="" />
+				</view>
 			</view>
 			<view class="list-VIP">
 				<view class="vip-top">
@@ -64,6 +66,7 @@ const $emit = () => {
 			overflow-y: auto;
 			flex-direction: column;
 			.list-header{
+				width: 100%;
 				font-size: 36rpx;
 				padding: 20rpx 0;
 				display: flex;
@@ -82,10 +85,14 @@ const $emit = () => {
 					}
 				}
 				.sweep{
-					width: 50rpx;
-					height: 80rpx;
-					background: url(./icon/icon_1.png) no-repeat center;
-					background-size: 50rpx;
+					width: 100rpx;
+					height: 100rpx;
+					text-align: center;
+					line-height: 130rpx;
+					img{
+						width: 60rpx;
+						height: 60rpx;
+					}
 				}
 			}
 			.list-VIP{

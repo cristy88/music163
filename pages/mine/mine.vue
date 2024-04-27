@@ -3,8 +3,13 @@
 	import Main from './component/main/Main.vue'
 	import Music from './component/music/Music.vue'
 	import Top from './component/top/Top.vue'
-	import TopLeft from '../topLeft/TopLeft.vue'	
-
+	import TopLeft from '../../components/topLeft/TopLeft.vue'	
+	import { useUserInfo } from '@/store/userInfo'
+	
+	const userInfo = useUserInfo()
+	// const playList = res([])
+	// console.log(userInfo);
+	
 	const search = ()=> {
 		uni.navigateTo({
 			url:'/pages/search/search'
@@ -23,7 +28,7 @@
 </script>
 
 <template>
-	<view class="App">
+	<view class="App" :style="{ backgroundImage: `url(${userInfo.profile?.backgroundUrl})` }">
 		<TopLeft v-if="showLeft" @click="handlClick()"/>
 		<Top v-if="showPoint" @click="handleClick()"/>
 		<view class="header">
@@ -52,8 +57,8 @@
 .App{
 	width: 100vw;
 	height: 100%;
-	background: url(./icon/004.webp) no-repeat;
-	background-size: 750rpx;
+	// background: url(./icon/004.webp) no-repeat;
+	// background-size: 750rpx;
 	display: flex;
 	flex-direction: column;
 	.con{

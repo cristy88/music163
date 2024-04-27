@@ -23,7 +23,9 @@
 				@click="changeTab(index)"
 				>{{item}}</view>
 			</view>
-			<view class="all"></view>
+			<view class="all">
+				<img src="" alt="" />
+			</view>
 		</view>
 		<One v-if="currIndex === 0"/>
 		<Two v-else="currindex === 1"/>		
@@ -53,8 +55,9 @@
 			.all{
 				width: 40rpx;
 				height: 40rpx;
-				background: url(../../../icon/icon_03.png) no-repeat;
-				background-size: 50rpx;
+				background: #666666;
+				// background: url(../../../icon/icon_03.png) no-repeat;
+				// background-size: 50rpx;
 			}
 		}
 		.restrict{

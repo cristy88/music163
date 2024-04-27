@@ -25,7 +25,9 @@
 		<view class="top">
 			<view class="topTit">单曲</view>
 			<view class="topAll">
-				<view class="allPlayer"></view>
+				<view class="allPlayer">
+					<img src="../../icon/icon_01.png" alt="" />
+				</view>
 				<view class="all">播放全部</view>
 			</view>
 		</view>
@@ -36,8 +38,12 @@
 				<view class="songSinger"><view class="singer">歌手</view>{{item.al && item.ar[0]?.name}}</view>
 			</view>
 			<view class="icons">
-				<view class="sPlayer" @click.stop="clickAdd(item.id)"></view>
-				<view class="point"></view>
+				<view class="sPlayer" @click.stop="clickAdd(item.id)">
+					<img src="../../icon/icon_02.png" alt="" />
+				</view>
+				<view class="point">
+					<img src="../../icon/icon_003.png" alt="" />
+				</view>
 			</view>
 		</view>
 		<view class="much" @click="$emit('toDetail', 1)" v-if="moreText">{{moreText}} ></view>
@@ -68,10 +74,13 @@
 				display: flex;
 				align-items: center;
 				.allPlayer{
-					width: 50rpx;
-					height: 50rpx;
-					background: url(../../icon/icon_01.png) no-repeat center;
-					background-size: 26rpx;
+					width: 40rpx;
+					height: 40rpx;
+					margin-left: 4rpx;
+					img{
+						width: 28rpx;
+						height: 28rpx;
+					}
 				}
 				.all{
 					font-size: 22rpx;
@@ -127,17 +136,22 @@
 				.sPlayer{
 					width: 50rpx;
 					height: 50rpx;
-					background: url(../../icon/icon_02.png) no-repeat center;
-					background-size: 40rpx;
+					text-align: center;
+					img{
+						width: 40rpx;
+						height: 40rpx;
+					}
 				}
 				.point{
 					width: 50rpx;
 					height: 50rpx;
-					background: url(../../icon/icon_003.png) no-repeat center;
-					background-size: 50rpx;
+					text-align: center;
+					img{
+						width: 40rpx;
+						height: 40rpx;
+					}
 				}
 			}
-			
 		}
 		.much{
 			color: #959595;

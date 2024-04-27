@@ -13,7 +13,10 @@ if (!Math) {
   "./pages/search/search.js";
   "./pages/toplist/toplist.js";
   "./pages/songlist/songlist.js";
+  "./pages/mvplayer/mvplayer.js";
+  "./pages/address/address.js";
   "./pages/songs/songs.js";
+  "./pages/songTags/songTags.js";
 }
 const _sfc_main = {
   onLaunch: function() {
@@ -27,7 +30,7 @@ const _sfc_main = {
     console.log("App Hide");
   }
 };
-const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/2-前端工程化/weixinxcx/Uni_music/newMusic/App.vue"]]);
+const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/day1前端/前端练习/day35 uni.app/music163/App.vue"]]);
 function createApp() {
   const app = common_vendor.createSSRApp(App);
   app.use(common_vendor.createPinia());

@@ -98,6 +98,7 @@ const _sfc_main = {
         d: common_vendor.o(($event) => valiFormData.value.password = $event),
         e: common_vendor.p({
           placeholder: "请输入密码",
+          type: "password",
           modelValue: valiFormData.value.password
         }),
         f: common_vendor.p({
@@ -117,5 +118,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-e4e4508d"], ["__file", "D:/2-前端工程化/weixinxcx/Uni_music/newMusic/pages/login/login.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-e4e4508d"], ["__file", "E:/day1前端/前端练习/day35 uni.app/music163/pages/login/login.vue"]]);
 wx.createPage(MiniProgramPage);

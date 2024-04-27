@@ -11,7 +11,10 @@
     "pages/search/search",
     "pages/toplist/toplist",
     "pages/songlist/songlist",
-    "pages/songs/songs"
+    "pages/mvplayer/mvplayer",
+    "pages/address/address",
+    "pages/songs/songs",
+    "pages/songTags/songTags"
   ],
   "window": {
     "navigationBarTextStyle": "black",

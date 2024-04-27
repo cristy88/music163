@@ -14,7 +14,12 @@ export const useUserInfo = defineStore('useUserInfo', () => {
 		const res = await getUserSUMApi()
 		musicSum.value = res
 		const res1 = await getUserInfoApi(userId)
-		profile.value = res1.profile
+		// profile.value = res1.profile
+		profile.value = {
+			...res1.profile,
+			level: res1.level,
+			listenSongs: res1.listenSongs
+		}
 		console.log('用户信息profile',  profile.value)
 	}
 	

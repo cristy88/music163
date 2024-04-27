@@ -5,6 +5,7 @@ import { useUserInfo } from '@/store/userInfo'
 
 const userInfo = useUserInfo()
 // const playList = res([])
+console.log(userInfo.profile);
 
 const changeAddress = () => {
 	uni.navigateTo({
@@ -16,19 +17,15 @@ const changeAddress = () => {
 
 <template>
 	<view class="main">
-		<view class="ava"></view>
-		<view class="name" ></view>
-		<view class="address" @click="changeAddress()">
-			<view class="badge">0枚徽章</view>
-			<view class="age"></view>
-			<view class="province">~  ~</view>
-			<view class="cun">村龄年</view>
+		<view class="ava">
+			<image :src="userInfo.profile?.avatarUrl" mode="widthFix"></image>
 		</view>
+		<view class="name" @click="changeAddress()">{{userInfo.profile?.nickname}}</view>
 		<view class="detail">
-			<view class="GZ">{{userInfo.profile?.followeds}}</view>关注
-			<view class="FS">粉丝</view>
-			<view class="DJ">等级</view>
-			<view class="TG">听歌</view>
+			<view class="GZ">{{userInfo.profile?.follows}} 关注</view>
+			<view class="FS">{{userInfo.profile?.followeds}} 粉丝</view>
+			<view class="DJ">Lv.{{userInfo.profile?.level}} 等级</view>
+			<view class="TG">共听 {{userInfo.profile?.listenSongs}} 首歌</view>
 		</view>
 		<view class="store">
 			<view class="zj">最近</view>
@@ -49,7 +46,7 @@ const changeAddress = () => {
 
 <style lang="scss" scoped>
 	.main{
-		height: 535rpx;
+		height: 524rpx;
 		color: white;
 		display: flex;
 		flex-direction: column;
@@ -58,24 +55,17 @@ const changeAddress = () => {
 		.ava{
 			width: 150rpx;
 			height: 150rpx;
-			background: orange;
-			// background: url(../../icon/icon_05.jpg) no-repeat;
-			// background-size:150rpx;
-			border-radius: 50%;
-			margin-top: 20rpx;
+			margin-top: 35rpx;
+			image{
+				width: 150rpx;
+				height: 150rpx;
+				border-radius: 50%;
+			}
 		}
 		.name{
 			padding: 10rpx;
 			font-size: 40rpx;
 			font-weight: 900;
-		}
-		.address{
-			display: flex;
-			font-size: 22rpx;
-			color: #eeeeee;
-			.badge{
-				margin-right: 20rpx;
-			}
 		}
 		.detail{
 			display: flex;

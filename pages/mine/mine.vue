@@ -8,7 +8,7 @@
 	
 	const userInfo = useUserInfo()
 	// const playList = res([])
-	// console.log(userInfo);
+	// console.log(userInfo.profile);
 	
 	const search = ()=> {
 		uni.navigateTo({
@@ -55,10 +55,8 @@
 
 <style lang="scss" scoped>
 .App{
-	width: 100vw;
+	width: 100%;
 	height: 100%;
-	// background: url(./icon/004.webp) no-repeat;
-	// background-size: 750rpx;
 	display: flex;
 	flex-direction: column;
 	.con{

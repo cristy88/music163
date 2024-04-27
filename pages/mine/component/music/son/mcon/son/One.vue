@@ -3,9 +3,11 @@ import { onMounted, ref } from 'vue'
 import { getPlaylistCreateApi } from '@/services/index.js'
 import { getUserSongSheetApi } from '@/services/userApi.js'
 
+
+	const playList = ref([])   //初始数据
+	console.log(playList.value.Handler);
 	// 新建歌单名称
-	const playList = ref('丞星')
-	const res = ref([])   //初始数据
+	const res = ref('')   
 	const createNewPlaylist = async () => {
 		// 歌单名字不能为空
 		if (playList.value.trim() === '') {
@@ -14,8 +16,8 @@ import { getUserSongSheetApi } from '@/services/userApi.js'
 		} 
 		try {  
 			const res = await getPlaylistCreateApi(playList.value)
-			if (res && res.playlist && res.playlist.name) {
-				console.log('新建歌单成功', res.playlist.name);
+			if (res && res.playList && res.playList.name) {
+				console.log('新建歌单成功', res.playList.name);
 			} else {
 				console.error('新建歌单失败');
 			}
@@ -23,8 +25,6 @@ import { getUserSongSheetApi } from '@/services/userApi.js'
 			console.log(e);
 		}
 	}
-	
-	// 
 	
 	// 点击加号 出现新命名的歌单
 	// const newList = ref(false)
@@ -37,15 +37,17 @@ import { getUserSongSheetApi } from '@/services/userApi.js'
 	}
 
 </script>
-
+ 
 <template> 
 	<view class="list">		
 		<view class="list-one">
 			<view class="ILike">
-				<view class="img"></view>
-				<view class="title">
+				<view class="img">
+					<image src="" mode=""></image>
+				</view>
+				<view class="title" v-for="item in playList" :key="item.id">
 					<view class="iSongs">我喜欢的音乐</view>
-					<view class="shou">首~次</view>
+					<!-- <view class="shou">`${item.trackCount} 首 ~ ${item.playCount} 次播放`</view> -->
 				</view>
 			</view>
 			<view class="heart" @click="clickHeart()">心动模式</view>

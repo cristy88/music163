@@ -1,16 +1,22 @@
 <script setup>
 	import { ref } from 'vue'
+	import { onLoad } from '@dcloudio/uni-app'
 	import { getAlbumConApi, getAlbumDynamic } from '@/services/index.js'
-	
+	// 专辑描述
 	const descCon = ref({})
 	
 	const getAlbum = async (id) => {
 		const res = await getAlbumConApi(id)
-		descCon.value = res[showType[numid].nickname]
+		descCon.value = res.album
 		console.log(res)
 		const res1 = await getAlbumDynamic(id)
 		console.log(res1)
 	}
+	
+	onLoad((opt) => {
+		getAlbum(opt.id)
+	})
+	
 </script>
 
 <template>
@@ -23,7 +29,7 @@
 		<view class="albumCon">
 			<view class="title">
 				<view class="img">
-					<image src="descCon.picUrl" mode=""></image>
+					<image :src="descCon?.picUrl" mode=""></image>
 				</view>
 				<view class="rightTit">
 					<view class="">{{descCon.name}}</view>

@@ -4,6 +4,11 @@ const services_index = require("../../services/index.js");
 const store_userInfo = require("../../store/userInfo.js");
 require("../../services/request.js");
 require("../../services/userApi.js");
+if (!Math) {
+  (HomeSearch + SongSheet)();
+}
+const SongSheet = () => "./componets/songSheet.js";
+const HomeSearch = () => "./componets/HomeSearch.js";
 const _sfc_main = {
   __name: "index",
   setup(__props) {
@@ -14,6 +19,8 @@ const _sfc_main = {
     }
     const icons = common_vendor.ref([]);
     const banners = common_vendor.ref([]);
+    const recommends = common_vendor.ref([]);
+    const firstCommand = common_vendor.ref([]);
     const getBanner = async () => {
       try {
         const res = await services_index.getBannerApi();
@@ -24,15 +31,38 @@ const _sfc_main = {
         if (resIcon.code === 200) {
           icons.value = resIcon.data;
         }
-        const command = await services_index.getRrecommendApi();
-        console.log("获得每日推荐歌单", command);
       } catch (e) {
         console.log(e);
       }
     };
+    const getSongSheet = async () => {
+      const res = await services_index.getRrecommendApi();
+      console.log("获得每日推荐歌单", res);
+      if (res.code === 200) {
+        const shuffled = res.recommend.slice().sort(() => Math.random() - 0.5);
+        recommends.value = shuffled.slice(0, 5);
+        firstCommand.value = shuffled.slice(5);
+      }
+    };
+    const getSong = async () => {
+      const res = await services_index.getCommitSongApi();
+      console.log("获得每日推荐歌曲", res);
+    };
     getBanner();
+    getSongSheet();
+    getSong();
     const clickIcon = (name) => {
       console.log("跳转到icon", name, "界面");
+      let url = "";
+      if (name === "每日推荐") {
+        url = "/pages/daily/daily";
+      } else if (name === "排行榜") {
+        url = "/pages/toplist/toplist";
+      }
+      console.log(url);
+      common_vendor.index.navigateTo({
+        url
+      });
     };
     return (_ctx, _cache) => {
       return {
@@ -49,10 +79,15 @@ const _sfc_main = {
             c: item.id,
             d: common_vendor.o(($event) => clickIcon(item.name), item.id)
           };
+        }),
+        c: common_vendor.p({
+          title: "推荐歌单",
+          firstCommand: firstCommand.value,
+          recommends: recommends.value
         })
       };
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "D:/2-前端工程化/weixinxcx/Uni_music/newMusic/pages/index/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "E:/day1前端/前端练习/day35 uni.app/music163/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

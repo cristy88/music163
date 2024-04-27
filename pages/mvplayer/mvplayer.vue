@@ -3,7 +3,9 @@
 	import {onLoad} from "@dcloudio/uni-app"
 	import { allmvlistApi,getMvUrlApi,getMvDataApi,getSimilarMvApi,getVideoUrlApi } from '../../services';
 	import Comment from "../../components/comment.vue"
+	import { useCommentStore } from '../../store/comment';
 	
+	const commentStore = useCommentStore()
 	const mvlist =ref([])
 	const id=ref('')
 	const mvurl=ref({})
@@ -13,7 +15,7 @@
 	const commentShow=ref(false)
 	
 	allmvlistApi().then(res=>{
-		console.log(res.data)
+		// console.log(res.data)
 		mvlist.value=res.data
 	})
 	
@@ -29,7 +31,7 @@
 		mvurl.value=res1.data
 		mv.value=res2.data
 		sMvList.value = res3.mvs
-		console.log(res4)
+		console.log(mv.value.id)
 	}
 	
 	onLoad((options)=>{
@@ -46,6 +48,11 @@
 		});
 	}
 
+const comment = (type,id) =>{
+	commentStore.getComments(type,id)
+	commentShow.value=true
+	console.log(id)
+}
 	
 </script>
 
@@ -75,7 +82,7 @@
 					<text>{{mv.shareCount}}</text>
 				</view>
 				<!-- 评论 -->
-				<view class="btn-item" @click="commentShow=true">
+				<view class="btn-item" @click="comment(mv,mv.id)">
 					<uni-icons type="chat-filled" size="26"></uni-icons>
 					<text>{{mv.commentCount}}</text>
 				</view>
@@ -89,7 +96,7 @@
 	</view>
 	
 	<view class="mv-list">
-		<view class="mv-item" v-for="(item,index) in sMvList" :key="item.id" @click="playmv(item.id)">
+		<view class="mv-item" v-for="(item,index) in mvlist" :key="item.id" @click="playmv(item.id)">
 			<view class="image">
 				<image :src="item.cover" style="width: 100px; height: 60px;" mode="aspectFill"></image>
 			</view>

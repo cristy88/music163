@@ -127,9 +127,9 @@ export const getSongDetailApi = (ids) => {
 	return request({url:'/song/detail', data:{ids}})
 }
 //歌单评论
-export const commentApi = (type,id) =>{
+export const commentApi = (id) =>{
 	return request({
-		url:`/comment/${type}`,
+		url:`/comment/playlist`,
 		data:{id}
 	})
 }
@@ -289,9 +289,9 @@ export const careAlbumSubApi = (id) => {
 }
 
 //mv评论
-export const getMvCommentApi = (tyep,id) =>{
+export const getMvCommentApi = (id) =>{
 	return request({
-		url:`/comment/${type}`,
+		url:`/comment/mv`,
 		data:{id} ,
 	})
 }

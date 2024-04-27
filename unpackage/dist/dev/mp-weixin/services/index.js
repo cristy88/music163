@@ -24,21 +24,20 @@ const getHomeIconApi = () => {
 const getRrecommendApi = () => {
   return services_request.request({ "url": "/recommend/resource" });
 };
-<<<<<<< HEAD
 const getCommitSongApi = () => {
   return services_request.request({ url: "/recommend/songs" });
 };
-=======
->>>>>>> wbh
 const toplistApi = () => {
   return services_request.request({ url: "/toplist/detail" });
 };
 const playlistDetailApi = (id) => {
   return services_request.request({ url: "/playlist/detail", data: { id } });
 };
-<<<<<<< HEAD
 const getDailySongsApi = () => {
   return services_request.request({ url: "/recommend/songs" });
+};
+const getSongDetailApi = (ids) => {
+  return services_request.request({ url: "/song/detail", data: { ids } });
 };
 const commentApi = (type, id) => {
   return services_request.request({
@@ -93,13 +92,36 @@ const getMvUrlApi = (id) => {
 const getMvDataApi = (mvid) => {
   return services_request.request({ url: "/mv/detail", data: { mvid } });
 };
-exports.allmvlistApi = allmvlistApi;
-exports.commentApi = commentApi;
-=======
+const allTagsApi = () => {
+  return services_request.request({ url: "/playlist/catlist" });
+};
 const playlisthotApi = () => {
   return services_request.request({ url: "/playlist/hot" });
 };
->>>>>>> wbh
+const topPlaylistApi = () => {
+  return services_request.request({ url: "/top/playlist" });
+};
+const getAlbumConApi = (id) => {
+  return services_request.request({
+    url: "/album",
+    data: {
+      id
+    }
+  });
+};
+const getSimilarMvApi = (mvid) => {
+  return services_request.request({
+    url: "/simi/mv",
+    data: { mvid }
+  });
+};
+const getVideoUrlApi = (id) => {
+  return services_request.request({ url: "/video/url", data: { id } });
+};
+exports.allTagsApi = allTagsApi;
+exports.allmvlistApi = allmvlistApi;
+exports.commentApi = commentApi;
+exports.getAlbumConApi = getAlbumConApi;
 exports.getBannerApi = getBannerApi;
 exports.getCommitSongApi = getCommitSongApi;
 exports.getDailySongsApi = getDailySongsApi;
@@ -108,16 +130,17 @@ exports.getMusicUrlApi = getMusicUrlApi;
 exports.getMvDataApi = getMvDataApi;
 exports.getMvUrlApi = getMvUrlApi;
 exports.getRrecommendApi = getRrecommendApi;
+exports.getSimilarMvApi = getSimilarMvApi;
+exports.getSongDetailApi = getSongDetailApi;
+exports.getVideoUrlApi = getVideoUrlApi;
 exports.hotUpApi = hotUpApi;
 exports.loginApi = loginApi;
 exports.loginStatusApi = loginStatusApi;
 exports.playlistDetailApi = playlistDetailApi;
-<<<<<<< HEAD
+exports.playlisthotApi = playlisthotApi;
 exports.searchDefaultApi = searchDefaultApi;
 exports.searchHotApi = searchHotApi;
 exports.searchKeywordApi = searchKeywordApi;
 exports.searchSuggestApi = searchSuggestApi;
-=======
-exports.playlisthotApi = playlisthotApi;
->>>>>>> wbh
+exports.topPlaylistApi = topPlaylistApi;
 exports.toplistApi = toplistApi;

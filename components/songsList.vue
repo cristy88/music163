@@ -11,7 +11,7 @@
 	const getDetail = async (id)=>{
 		const res= await playlistDetailApi(id)
 		playlist.value=res.playlist
-		console.log(res.playlist)
+		// console.log(res.playlist)
 	}	
 	
 	onLoad((options)=>{

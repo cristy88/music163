@@ -81,8 +81,8 @@
 				</view>
 			</view>
 		</view>
+		<Selected v-if="showSeletMenu" @toSelected="toSelected" :musicList="musicList"/>
 	</view>
-	<Selected v-if="showSeletMenu" @toSelected="toSelected" :musicList="musicList"/>
 </template>
 
 <style lang="scss" scoped>

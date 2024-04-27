@@ -7,7 +7,7 @@
 	import useMusicStore from '../../store/music.js'
 
 	// 获取音乐实例
-	const musicStor = useMusicStore()
+	const musicStore = useMusicStore()
 	// 展示分享
 	const showShare = ref(false)
 	// 展示歌曲列表
@@ -15,9 +15,9 @@
 	const showPlayList = ref(false)
 	
 	// 当前播放歌曲详情
-	musicStor.songDetail(musicStor.curMusic.id)
+	musicStore.songDetail(musicStore.curMusic.id)
 	
-	console.log(musicStor.order)
+	console.log(musicStore.duration)
 	
 	// 返回上一页
 	const changePage = () => {
@@ -42,17 +42,24 @@
 		popup.value.open('bottom')
 	}
 	
+	// 时间格式化
+	const formatTime = (time) => {
+	  const m = Math.floor(time / 60);
+	  const s = Math.floor(time % 60);
+	  return `${m}:${s < 10 ? '0' : ''}${s}`;
+	};
+	
 </script>
 
 <template>
 	<view class="playerPage">
 		<view class="bg">
-			<view class="bg-color" :style="{backgroundImage: `url(${musicStor.curMusic.al?.picUrl})`}"></view>
+			<view class="bg-color" :style="{backgroundImage: `url(${musicStore.curMusic.al?.picUrl})`}"></view>
 		</view>
 		<view class="player">
 			<view class="header">
 				<uni-icons class="down" type="right" size="28" color="#efefef" @click="changePage"></uni-icons>
-				<view class="tit">{{musicStor.curMusic.al?.name}}</view>
+				<view class="tit">{{musicStore.curMusic.al?.name}}</view>
 				<uni-icons class="redo" type="redo" size="28" color="#efefef" @click="changeShare"></uni-icons>
 			</view>
 			<view class="main">
@@ -60,7 +67,7 @@
 				<view class="circle">
 					<view class="circle-ring">
 						<view class="img">
-							<image :src="musicStor.curMusic.al?.picUrl"></image>
+							<image :src="musicStore.curMusic.al?.picUrl"></image>
 						</view>
 					</view>
 				</view>
@@ -70,11 +77,11 @@
 				<view class="songTitle">
 					<view class="songName">
 						<view class="song">
-							{{musicStor.curMusic.name}}
+							{{musicStore.curMusic.name}}
 						</view>
 						<view class="singer">
-							<view class="singer-item" v-for="singer in musicStor.curMusic.ar" :key="singer.id">
-								{{singer.name}}<span v-if="singer !== musicStor.curMusic.ar[musicStor.curMusic.ar.length - 1]">/</span>
+							<view class="singer-item" v-for="singer in musicStore.curMusic.ar" :key="singer.id">
+								{{singer.name}}<span v-if="singer !== musicStore.curMusic.ar[musicStore.curMusic.ar.length - 1]">/</span>
 							</view>
 						</view>
 					</view>
@@ -83,29 +90,29 @@
 				</view>
 				<!-- 进度条 -->
 				<view class="control">
-					<slider class="slider" block-size="8" active-color="#ffffff"/>
+					<slider class="slider" block-size="8" active-color="#ffffff" :value="musicStore.currentTime" @change="e => musicStore.onSliderChange(e.detail.value)" :max="musicStore.duration"/>
 					<view class="time">
 						<view class="begin">
-							00:00
+							{{formatTime(musicStore.currentTime)}}
 						</view>
 						<view class="end">
-							00:00
+							{{formatTime(musicStore.duration)}}
 						</view>
 					</view>
 				</view>
 				<!-- 按键 -->
 				<view class="playBar">
 					<view class="xunxu-btn">
-						<image class="xunhuan" v-if="musicStor.order === 0" src="../../static/shunxubofang.png" mode="widthFix" @click="musicStor.playOrder(1)"></image>
-						<image class="xunhuan" v-if="musicStor.order === 1" src="../../static/danquxunhuan.png" mode="widthFix" @click="musicStor.playOrder(2)"></image>
-						<image class="xunhuan" v-if="musicStor.order === 2" src="../../static/suijibofang.png" mode="widthFix" @click="musicStor.playOrder(0)"></image>
+						<image class="xunhuan" v-if="musicStore.order === 0" src="../../static/shunxubofang.png" mode="widthFix" @click="musicStore.playOrder(1)"></image>
+						<image class="xunhuan" v-if="musicStore.order === 1" src="../../static/danquxunhuan.png" mode="widthFix" @click="musicStore.playOrder(2)"></image>
+						<image class="xunhuan" v-if="musicStore.order === 2" src="../../static/suijibofang.png" mode="widthFix" @click="musicStore.playOrder(0)"></image>
 					</view>
-					<image class="shang" src="../../static/shang.png" mode="widthFix" @click="musicStor.cutSong(-1)"></image>
-					<view class="play-btn" @click="musicStor.playing">
-						<image class="bofang" v-if="musicStor.isPlay" src="../../static/zanting.png" mode="widthFix"></image>
+					<image class="shang" src="../../static/shang.png" mode="widthFix" @click="musicStore.cutSong(-1)"></image>
+					<view class="play-btn" @click="musicStore.playing">
+						<image class="bofang" v-if="musicStore.isPlay" src="../../static/zanting.png" mode="widthFix"></image>
 						<image class="bofang" v-else src="../../static/bofang.png" mode="widthFix"></image>
 					</view>
-					<image class="xia" src="../../static/shang.png" mode="widthFix" @click="musicStor.cutSong(1)"></image>
+					<image class="xia" src="../../static/shang.png" mode="widthFix" @click="musicStore.cutSong(1)"></image>
 					<image class="caidan" src="../../static/caidan.png" mode="widthFix" @click="changePlayList"></image>
 				</view>
 				<view class="info">
@@ -116,7 +123,7 @@
 		</view>
 		<Share v-if="showShare" @click="changeShare" :share="showShare" :changeShare="changeShare"></Share>
 		<uni-popup ref="popup" type="bottom" border-radius="10px 10px 0 0">
-			<PlayList :curPlayList="musicStor.curPlayList"></PlayList>
+			<PlayList :curPlayList="musicStore.curPlayList"></PlayList>
 		</uni-popup>
 	</view>
 </template>

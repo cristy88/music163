@@ -2,8 +2,8 @@
 	import { ref } from 'vue';
 	import {onLoad} from "@dcloudio/uni-app"
 	import { allmvlistApi,getMvUrlApi,getMvDataApi,getSimilarMvApi,getVideoUrlApi } from '../../services';
-	import Comment from "../../components/comment.vue"
 	import { useCommentStore } from '../../store/comment';
+	import Comment from "../../components/comments/Comment.vue"
 	
 	const commentStore = useCommentStore()
 	const mvlist =ref([])

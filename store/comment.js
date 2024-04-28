@@ -4,7 +4,7 @@ import { commentApi,getMvCommentApi } from '../services'
 
 export const useCommentStore = defineStore('comment',()=>{
 	const comments =ref([])
-	const mvComment =ref([])
+	const hotcomments=ref([])
 	
 	//歌单的评论
 	const getComments= async (type,id)=>{
@@ -16,23 +16,24 @@ export const useCommentStore = defineStore('comment',()=>{
 		console.log(res1)
 		if(res1.comments.length>0){
 			comments.value=res1.comments
+			hotcomments.value=res1.hotComments
+
 		}else{
 			comments.value=res2.comments
+			hotcomments.value=res2.hotComments
 		}
 		
-		console.log(res1.comments)
-		console.log(res2.comments)
+		console.log(res1)
+		console.log(res2)
 		console.log(comments)
-			// const res = await getMvCommentApi(id)
-			// comments.value =res.content
-			// console.log(res.content)
-			// return comments
+		console.log((hotcomments))
 	
 	}
 console.log(comments)
 	return {
 		getComments,
-		comments
+		comments,
+		hotcomments
 	}
 	
 })

@@ -353,3 +353,12 @@ export const playlistCountApi = () => {
 	})
 }
 
+// 相关歌单推荐
+export const relatePlaylistApi = (id) => {
+	return request({
+		url: '/related/playlist',
+		data: {
+			id
+		}
+	})
+}

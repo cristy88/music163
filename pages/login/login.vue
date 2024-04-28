@@ -1,6 +1,6 @@
 <script setup>
 	import { ref } from 'vue'
-	import { loginApi, loginStatusApi } from '../../services'
+	import { loginApi, loginStatusApi } from '../../services/index.js'
 	import { useUserInfo } from '@/store/userInfo'
 	
 	const userInfo = useUserInfo()
@@ -108,12 +108,8 @@
 		padding-top: rpx(150);
 	}
 	.example {
-		// position: fixed;
 		width: rpx(273);
 		height: rpx(296);
-		// left: 50%;
-		// top: 50%;
-		// transform:translate(-50%, -50%);
 		margin: 0 auto;
 	}
 </style>

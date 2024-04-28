@@ -7,8 +7,8 @@
 		playlistDetailApi,
 		playlistDunamicApi,
 		playlistCountApi,
+		relatePlaylistApi
 	} from '@/services/index.js'
-
 	
 	const descCon = ref({})
 	const songs = ref([])
@@ -19,18 +19,32 @@
 			const res = await playlistAllApi(id)
 			console.log('歌单内所有歌曲', res)
 			songs.value = res.songs
-			const res1 = await playlistDetailApi(id)
-			console.log('歌单详情', res1)
-			descCon.value = res1.playlist
-			const res2 = await playlistDunamicApi(id)
-			songsheetInfo.value = res2
-			console.log('获取 歌单动态数据', res2)
 		} catch(e) {}
+	}
+	
+	const getDatail = async (id) => {
+		const res1 = await playlistDetailApi(id)
+		console.log('歌单详情', res1)
+		descCon.value = res1.playlist
+	}
+	
+	const getDunmic = async (id) => {
+		const res2 = await playlistDunamicApi(id)
+		songsheetInfo.value = res2
+		console.log('获取 歌单动态数据', res2)
+	}
+	
+	const getSxSheet = async (id) => {
+		const res = await relatePlaylistApi(id)
+		console.log('相似歌单',res);
 	}
 	
 	onLoad((options) => {
 		console.log(options)
 		getPlayAll(options.id)
+		getDatail(options.id)
+		getDunmic(options.id)
+		getSxSheet(options.id)
 	})
 	
 	const goBack = () => {
@@ -38,34 +52,34 @@
 	}
 	
 	const myImg = ref(null)
-	const isLoad = () => {
-		const img = myImg.value; // 通过ref属性获取到图片元素
-		const canvas = document.createElement('canvas'); // 创建画布对象
-		const context = canvas.getContext('2d'); // 获取上下文
+	// const isLoad = () => {
+	// 	const img = myImg.value; // 通过ref属性获取到图片元素
+	// 	const canvas = document.createElement('canvas'); // 创建画布对象
+	// 	const context = canvas.getContext('2d'); // 获取上下文
 		
-		canvas.width = img.naturalWidth || img.clientWidth; // 设置画布大小为图片原始宽度或者客户区域宽度（如果未定义）
-		canvas.height = img.naturalHeight || img.clientHeight; // 设置画布高度为图片原始高度或者客户区域高度（如果未定义）
+	// 	canvas.width = img.naturalWidth || img.clientWidth; // 设置画布大小为图片原始宽度或者客户区域宽度（如果未定义）
+	// 	canvas.height = img.naturalHeight || img.clientHeight; // 设置画布高度为图片原始高度或者客户区域高度（如果未定义）
 		
-		context.drawImage(img, 0, 0); // 将图片绘制到画布上
-		img.crossOrigin = ''//防止跨域报错不能使用，但依然会报错
-		const imageData = context.getImageData(0, 0, canvas.width, canvas.height).data; // 获取图像数据
+	// 	context.drawImage(img, 0, 0); // 将图片绘制到画布上
+	// 	img.crossOrigin = ''//防止跨域报错不能使用，但依然会报错
+	// 	const imageData = context.getImageData(0, 0, canvas.width, canvas.height).data; // 获取图像数据
 		
-		let rTotal = 0;
-		let gTotal = 0;
-		let bTotal = 0;
-		for (let i = 0; i < imageData.length; i += 4) {
-			rTotal += imageData[i];
-			gTotal += imageData[i + 1];
-			bTotal += imageData[i + 2];
-		}
+	// 	let rTotal = 0;
+	// 	let gTotal = 0;
+	// 	let bTotal = 0;
+	// 	for (let i = 0; i < imageData.length; i += 4) {
+	// 		rTotal += imageData[i];
+	// 		gTotal += imageData[i + 1];
+	// 		bTotal += imageData[i + 2];
+	// 	}
 		
-		const totalPixels = imageData.length / 4;
-		const avgR = Math.round(rTotal / totalPixels);
-		const avgG = Math.round(gTotal / totalPixels);
-		const avgB = Math.round(bTotal / totalPixels);
+	// 	const totalPixels = imageData.length / 4;
+	// 	const avgR = Math.round(rTotal / totalPixels);
+	// 	const avgG = Math.round(gTotal / totalPixels);
+	// 	const avgB = Math.round(bTotal / totalPixels);
 		
-		console.log(`Average RGB color of the image is (${avgR}, ${avgG}, ${avgB})`);
-	}
+	// 	console.log(`Average RGB color of the image is (${avgR}, ${avgG}, ${avgB})`);
+	// }
 	
 	
 </script>
@@ -81,7 +95,7 @@
 			<view class="albumCon">
 				<view class="title">
 					<view class="img">
-						<image ref="myImg" :src="descCon?.coverImgUrl" mode="widthFix" @load="isLoad"></image>
+						<image ref="myImg" :src="descCon?.coverImgUrl" mode="widthFix"></image>
 					</view>
 					<view class="rightTit">
 						<view class="rightTop">

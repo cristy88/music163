@@ -27,7 +27,7 @@
 	// 查看登录状态
 	const getLoginStatus = async () => {
 		const status = await loginStatusApi()
-		if (status.data.account) {
+		if (status.data && status.data.account) {
 			uni.setStorageSync('id', String(status.data.account.id))
 			user.setId(status.data.account.id)
 		} else {   //没有登录使用游客身份登录

@@ -22,4 +22,3 @@ export const request = ({ url, method = 'GET', data = {}, header = {} }) => {
     })
   })
 }
-

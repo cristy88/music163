@@ -25,6 +25,8 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	const progress = ref(0)
 	// 播放顺序
 	const order = ref(0)  // 0：顺序 1：单曲 2：随机
+	// 下一首下标
+	const nextIndex = ref(0)
 	
 	
 	// 获取播放歌曲的详情
@@ -39,13 +41,19 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	
 	// 获取音乐播放时长
 	audio.onCanplay(() => {
-		console.log('%c 歌曲时长：','color:pink', audio.duration)
+		// console.log('%c 歌曲时长：','color:pink', audio.duration)
 		duration.value =  audio.duration
 	})
 	
 	// 更新播放时间
 	audio.onTimeUpdate(() => {
 		currentTime.value = audio.currentTime
+		if(currentTime.value === audio.duration){
+			console.log('音乐放完了')
+			isPlay.value = false
+			// playOrder()
+			// isPlay.value = true
+		}
 	})
 	
 	// 进度条改变时更新播放位置
@@ -59,7 +67,7 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	const setCurPlayList = (item,list) => {
 		// console.log(list)
 		const index = list.findIndex((v) => v.id === item.id)
-		console.log(`%c 点击歌曲下标`,"color:red", curPlayIndex.value)
+		// console.log(`%c 点击歌曲下标`,"color:red", curPlayIndex.value)
 		curPlayList.value = list
 		if(index >= 0) {
 			curPlayIndex.value = index
@@ -100,7 +108,7 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	}
 
 	// 监听歌曲改变
-	watch(() => curMusic.value, () => {
+	watch(() => curPlayIndex.value, () => {
 		songDetail(curMusic.value.id)
 	})
 	
@@ -128,31 +136,30 @@ export const useMusicStore = defineStore('useMusicStore', () => {
 	}
 	
 	// 播放顺序
-	const playOrder = (r) => {
-		order.value = r
-		console.log(r)
+	const playOrder = () => {
+		order.value = order.value + 1 > 2 ? 0 : order.value + 1
+		nextIndex.value = curPlayIndex.value + 1
+		console.log(order.value)
+		// console.log('音乐播放结束',audio.ended())
 		if(order.value === 0) {
-			console.log('按顺序播放')
-			// if(curPlayIndex.value < 0) {
-			// 	curPlayIndex.value = curPlayList.value.length - 1
-			// } else if(curPlayIndex.value >= curPlayList.value.length) {
-			// 	curPlayIndex.value = 0
-			// }
-			// curMusic.value = curPlayList.value[curPlayIndex.value + 1]
-			// songDetail(curPlayIndex.value)
+			nextIndex.value = (nextIndex.value >= curPlayList.value.length) ? 0 : nextIndex.value;
+			// cutSong(nextIndex.value)
+			console.log('按顺序播放', nextIndex.value)
 		} else if(order.value === 1) {
-			// curMusic.value = curPlayList.value[curPlayIndex.value]
-			// songDetail(curPlayIndex.value)
-			console.log('单曲循环')
+			curMusic.value = curPlayList.value[curPlayIndex.value]
+			console.log('单曲循环',nextIndex.value)
 			audio.loop = true;
 		} else {
-			console.log('随机播放')
-			curPlayIndex.value = Math.floor(Math.random() * curPlayList.value.length)
-			curMusic.value = curPlayList.value[curPlayIndex.value]
-			songDetail(curPlayIndex.value)
+			nextIndex.value = Math.floor(Math.random() * curPlayList.value.length)
+			// cutSong(nextIndex.value)
+			console.log('随机播放',nextIndex.value)
+			// curMusic.value = curPlayList.value[nextIndex.value]
 		}
+		// curPlayIndex.value = nextIndex.value;
+		// curMusic.value = curPlayList.value[curPlayIndex.value]
+		// cutSong(nextIndex.value)
 	}
-	
+	playOrder()
 	
 	return {
 		// musicPlayList,

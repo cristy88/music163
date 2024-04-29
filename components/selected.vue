@@ -21,7 +21,7 @@ import { ref, defineProps } from 'vue';
 		// 	}
 		// }
 		props.musicList.forEach( item => {
-			console.log(item)
+			// console.log(item)
 			
 		})
 		// console.log(list.value)

@@ -2,7 +2,7 @@
 	import { playlistDetailApi } from '../../services';
 	import { ref } from 'vue';
 	import { onLoad } from '@dcloudio/uni-app';
-	import Comment from "../../components/comment.vue"
+	import Comment from "../../components/comments/Comment.vue"
 	import PlaylistCover from "../../components/playlistCover.vue"
 	import SongsList from "../../components/songsList.vue"
 	import { useMusicStore } from '../../store/music';

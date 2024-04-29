@@ -3,15 +3,13 @@
 	import Main from './component/main/Main.vue'
 	import Music from './component/music/Music.vue'
 	import Top from './component/top/Top.vue'
-	import TopLeft from '../topLeft/TopLeft.vue'
+	import TopLeft from '../topLeft/TopLeft.vue'	
 
-		
 	const search = ()=> {
 		uni.navigateTo({
 			url:'/pages/search/search'
 		})
 	}
-
 
 	const showLeft = ref(false)
 	const showPoint = ref(false)
@@ -30,7 +28,7 @@
 		<Top v-if="showPoint" @click="handleClick()"/>
 		<view class="header">
 			<view class="s">
-				<uni-badge class="uni-badge-left-margin" :text="2" absolute="rightTop"
+				<uni-badge class="uni-badge-left-margin" :text="1" absolute="rightTop"
 				:offset="[-7, 8]" size="small">
 					<view class="icon1" @click="showLeft = !showLeft"></view>
 				</uni-badge>

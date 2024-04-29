@@ -20,7 +20,11 @@
 			<view class="song-item" v-for="item in nowList" :key="item.id">
 				<view class="song-info">
 					<view class="songName">{{item.name}}</view>
-					<view class="singer" v-for="ar in item.ar" :key="ar.id">{{ar.name}}<span></span></view>
+					<view class="singer">
+						<view class="singer-item"  v-for="ar in item.ar" :key="ar.id">
+							{{ar.name}}<span v-if="ar !== item.ar[item.ar.length - 1]">/</span>
+						</view>
+					</view>
 				</view>
 				<view class="delete">X</view>
 			</view>
@@ -57,20 +61,28 @@
 			.song-item{
 				height: rpx(55);
 				border-bottom: rpx(1) #eeeeee dashed;
+				// overflow: hidden;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
 				.song-info{
-					flex: 1;
+					height: 100%;
 					display: flex;
+					overflow: hidden;
 					align-items: center;
+					margin-right: rpx(10);
 					.songName{
-						padding-right: rpx(10);
+						// margin-right: rpx(10);
+						flex-shrink: 0;
 					}
 					.singer{
+						// flex: 1;
+						flex-shrink: 0;
 						font-size: rpx(12);
 						color: #bbbbbb;
-						padding: rpx(4) rpx(10) 0;
+						margin: rpx(4) 0 0 rpx(10);
+						white-space: nowrap;
+						display: flex;
 					}
 				}
 				.delete{

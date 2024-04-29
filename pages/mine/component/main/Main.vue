@@ -1,17 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import { getUserFollowedsApi } from '@/services/index.js'
-
-
-// const UserFollowedsApi = async () => {
-// 	try {
-// 		const res = await getUserFollowedsApi();
-// 		console.log('粉丝列表' , res)
-// 	}catch (e) {
-// 		console.log();
-// 	}
-// }
-// UserFollowedsApi()
 
 const changeAddress = () => {
 	uni.navigateTo({
@@ -29,7 +17,7 @@ const changeAddress = () => {
 			<view class="badge">0枚徽章</view>
 			<view class="age">00后</view>
 			<view class="province">~河北 唐山~</view>
-			<view class="cun">村领4年</view>
+			<view class="cun">村龄4年</view>
 		</view>
 		<view class="detail">
 			<view class="GZ">关注</view>

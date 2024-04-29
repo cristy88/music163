@@ -63,9 +63,9 @@
 				<uni-icons class="redo" type="redo" size="28" color="#efefef" @click="changeShare"></uni-icons>
 			</view>
 			<view class="main">
-				<image class="needle" src="../../static/img/playneedle.png" mode="widthFix"></image>
+				<image :class="['needle',  musicStore.isPlay? 'play' : 'stop']" src="../../static/img/playneedle.png" mode="widthFix"></image>
 				<view class="circle">
-					<view class="circle-ring">
+					<view :class="['circle-ring', musicStore.isPlay? 'playing' : 'paused']">
 						<view class="img">
 							<image :src="musicStore.curMusic.al?.picUrl"></image>
 						</view>
@@ -103,9 +103,9 @@
 				<!-- 按键 -->
 				<view class="playBar">
 					<view class="xunxu-btn">
-						<image class="xunhuan" v-if="musicStore.order === 0" src="../../static/shunxubofang.png" mode="widthFix" @click="musicStore.playOrder(1)"></image>
-						<image class="xunhuan" v-if="musicStore.order === 1" src="../../static/danquxunhuan.png" mode="widthFix" @click="musicStore.playOrder(2)"></image>
-						<image class="xunhuan" v-if="musicStore.order === 2" src="../../static/suijibofang.png" mode="widthFix" @click="musicStore.playOrder(0)"></image>
+						<image class="xunhuan" v-if="musicStore.order === 0" src="../../static/shunxubofang.png" mode="widthFix" @click="musicStore.playOrder"></image>
+						<image class="xunhuan" v-if="musicStore.order === 1" src="../../static/danquxunhuan.png" mode="widthFix" @click="musicStore.playOrder"></image>
+						<image class="xunhuan" v-if="musicStore.order === 2" src="../../static/suijibofang.png" mode="widthFix" @click="musicStore.playOrder"></image>
 					</view>
 					<image class="shang" src="../../static/shang.png" mode="widthFix" @click="musicStore.cutSong(-1)"></image>
 					<view class="play-btn" @click="musicStore.playing">
@@ -130,7 +130,22 @@
 
 <style lang="scss" scoped>
 @import '../../uni.scss';
-
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+// @keyframes needle {
+// 	from {
+// 		transform: rotate(0deg);
+// 	}
+// 	to {
+// 		transform: rotate(90deg);
+// 	}
+// }
 .playerPage, .animate__animated{
 	width: 100%;
 	height: 100%;
@@ -189,9 +204,17 @@
 			position: absolute;
 			top: 0;
 			left: 50%;
-			transform-origin: rpx(10) rpx(130);
-			transform: rotate(-6deg);
+			// transform-origin: rpx(10) rpx(130);
+			// transform: rotate(-6deg);
 			z-index: 1;
+			&.play{
+				transform-origin: rpx(12) rpx(90);
+				transform: rotate(-6deg);
+			}
+			&.stop{
+				transform-origin: rpx(12) rpx(22);
+				transform: rotate(-46deg);
+			}
 		}
 		.circle{
 			width: rpx(280);
@@ -203,16 +226,23 @@
 			transform: translate(-50%, -50%);
 			background: rgba(225, 225, 225, .3);
 			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			.circle-ring{
 				width: rpx(250);
 				height: rpx(250);
 				background: green;
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
+				transform-origin: 0 ,0;
 				background: #202020;
 				border-radius: 50%;
+				animation: spin 5s linear infinite;
+				&.playing{
+					animation-play-state: running;
+				}
+				&.paused{
+					animation-play-state: paused;
+				}
 				.img{
 					width: rpx(160);
 					height: rpx(160);
